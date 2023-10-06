@@ -2,9 +2,9 @@
 export {};
 // const AFRAME = window.AFRAME;
 // const THREE = require('aframe/src/lib/three');
-AFRAME.registerComponent("dragger", {
+AFRAME.registerComponent("scene-dragger", {
   init: function () {
-    const graph = document.getElementById("deepgraph");
+    const graph = document.getElementById("content");
     const rightController = document.getElementById("right");
     const leftController = document.getElementById("left");
     this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started 

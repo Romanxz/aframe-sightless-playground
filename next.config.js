@@ -8,6 +8,8 @@ const withNextEnv = nextEnv();
 module.exports = withNextEnv({
   distDir: 'app',
   strictMode: false,
+  basePath:"/aframe-sightless-playground",
+  assetPrefix:"/aframe-sightless-playground",
   
   webpack: (config) => {
     config.resolve.fallback = {

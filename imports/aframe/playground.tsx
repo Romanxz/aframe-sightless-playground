@@ -1,5 +1,7 @@
 import 'aframe';
 import "aframe-environment-component";
+import './components/drag';
+import "./components/scene-dragger";
 import './components/node-sound';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
@@ -54,8 +56,9 @@ export default function Playground() {
         // }}
         renderer="logarithmicDepthBuffer: true"
       >
-        <Entity id="content" >
+        <Entity id="content" scene-dragger>
           <Entity
+            className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: "/playground-a.wav",
@@ -74,6 +77,7 @@ export default function Playground() {
             }}
           />
           <Entity
+            className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: "/playground-b.wav",
@@ -92,6 +96,7 @@ export default function Playground() {
             }}
           />
           <Entity
+            className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: "playground-c.wav",
@@ -128,18 +133,20 @@ export default function Playground() {
           </Entity>
           <Entity id="left"
             hand-tracking-controls={{ hand: 'left' }}
-            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .deepgraph-node;"
+            drag
+            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
             laser-controls={{ hand: 'left' }}
           />
           <Entity id="right"
             hand-tracking-controls={{ hand: 'right' }}
-            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .deepgraph-node;"
+            drag
+            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
             laser-controls={{ hand: 'right' }}
           />
         </Entity>
         <Entity id="cursor"
           cursor={{ rayOrigin: "mouse" }}
-          raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .deepgraph-node;"
+          raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
         />
         <Entity
           environment={{

@@ -9,7 +9,7 @@ import { useNodeDragger } from "./hooks/use-node-dragger";
 import "./components/scaler";
 import "./components/rotator";
 import "./components/node-sound";
-import "./components/dragger";
+import "./components/scene-dragger";
 import "./components/el-movement";
 import "./components/tick";
 import { useSpaceId } from "@deep-foundation/deepcase/imports/hooks";
@@ -116,7 +116,7 @@ return (<div style={{ height: "100wv", width: "100wh", }}>
     // }}
     renderer="logarithmicDepthBuffer: true" embedded
   >
-    <Entity id="deepgraph" className="deepgraph" scaler dragger rotator >
+    <Entity id="content" className="deepgraph" scaler scene-dragger rotator >
       {graphData?.nodes?.map((node) =>
         <Entity className="deepgraph-node"
           id={md5(node.id)}
