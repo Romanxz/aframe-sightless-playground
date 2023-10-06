@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",
-    "@deep-foundation/deepcase": "^0.0.86",
-    "@deep-foundation/deeplinks": "^0.0.302",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@ionic/pwa-elements": "^3.1.1",
