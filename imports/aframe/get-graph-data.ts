@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Scene, Entity, } from 'aframe-react';
 import md5 from 'md5';

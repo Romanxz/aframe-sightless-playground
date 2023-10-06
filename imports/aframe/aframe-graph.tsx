@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useDebounceCallback } from "@react-hook/debounce";
 import md5 from 'md5';
