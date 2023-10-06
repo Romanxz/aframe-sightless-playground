@@ -61,7 +61,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "/playground-a.wav",
+              src: "/aframe-sightless-playground/playground-a.wav",
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -80,7 +80,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "/playground-b.wav",
+              src: "/aframe-sightless-playground/playground-b.wav",
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -99,7 +99,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "playground-c.wav",
+              src: "/aframe-sightless-playground/playground-c.wav",
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
