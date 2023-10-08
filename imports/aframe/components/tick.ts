@@ -1,6 +1,5 @@
 // @ts-nocheck
-// const AFRAME = window.AFRAME;
-// const THREE = require('aframe/src/lib/three');
+export {};
 
 const parseFn = function (prop) {
   if (typeof prop === 'function') { return prop }

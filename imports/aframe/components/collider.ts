@@ -1,4 +1,5 @@
 // @ts-nocheck
+export {};
 
 import { getColorFromId } from "../methods/get-color-from-id";
 // import ThreeMeshUI from 'three-mesh-ui';

@@ -1,4 +1,5 @@
 // @ts-nocheck
+export {};
 
 AFRAME.registerComponent('node-sound', {
   schema: {

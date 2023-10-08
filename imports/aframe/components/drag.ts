@@ -1,3 +1,6 @@
+// @ts-nocheck
+export {};
+
 AFRAME.registerComponent('drag', {
   init: function () {
     this.intersectedObject = null; // Reference to the intersected object

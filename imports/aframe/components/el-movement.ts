@@ -1,3 +1,6 @@
+// @ts-nocheck
+export {};
+
 AFRAME.registerComponent('el-movement', {
   init: function () { },
   tick: function () {

@@ -1,7 +1,5 @@
 // @ts-nocheck
-// const AFRAME = window.AFRAME;
-// const THREE = require('aframe/src/lib/three');
-
+export {};
 
 AFRAME.registerComponent("scaler", {
   init: function () {
