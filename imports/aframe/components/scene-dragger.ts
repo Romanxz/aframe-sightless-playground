@@ -1,14 +1,12 @@
 // @ts-nocheck
-export {};
-// const AFRAME = window.AFRAME;
-// const THREE = require('aframe/src/lib/three');
+
 AFRAME.registerComponent("scene-dragger", {
   init: function () {
     const sceneContent = document.getElementById("content");
     const rightController = document.getElementById("right");
     const leftController = document.getElementById("left");
     this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started 
-
+    console.log("scene-dragger initialized: ", { sceneContent, rightController, leftController })
     // hands
 
     this.lGripPos = new THREE.Vector3();

@@ -2,7 +2,7 @@ import 'aframe';
 import "aframe-environment-component";
 import './components/drag';
 import "./components/scene-dragger";
-import './components/node-sound';
+import './components/el-movement';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -62,7 +62,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-a.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -81,7 +81,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-b.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -100,7 +100,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-c.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -134,12 +134,14 @@ export default function Playground() {
           </Entity>
           <Entity id="left"
             hand-tracking-controls={{ hand: 'left' }}
+            el-movement
             drag
             raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
             laser-controls={{ hand: 'left' }}
           />
           <Entity id="right"
             hand-tracking-controls={{ hand: 'right' }}
+            el-movement
             drag
             raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
             laser-controls={{ hand: 'right' }}

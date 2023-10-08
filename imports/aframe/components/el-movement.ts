@@ -1,8 +1,3 @@
-// @ts-nocheck
-export { };
-// const AFRAME = window.AFRAME;
-// const THREE = require('aframe/src/lib/three');
-
 AFRAME.registerComponent('el-movement', {
   init: function () { },
   tick: function () {

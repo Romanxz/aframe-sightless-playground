@@ -1,7 +1,4 @@
 // @ts-nocheck
-export { };
-// const AFRAME = window.AFRAME;
-// const THREE = require('aframe/src/lib/three');
 
 import { getColorFromId } from "../methods/get-color-from-id";
 // import ThreeMeshUI from 'three-mesh-ui';
