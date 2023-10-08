@@ -6,6 +6,6 @@
 
 tasks:
   - init: npm install
-    command: npm run dev
+    command: npm run dev -- -p 4000
 
 

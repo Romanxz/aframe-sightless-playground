@@ -1,5 +1,5 @@
+// @ts-nocheck
 export { };
-import * as THREE from 'three';
 
 AFRAME.registerComponent('drag', {
   init: function () {
