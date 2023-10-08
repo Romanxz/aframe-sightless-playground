@@ -8,8 +8,8 @@ const withNextEnv = nextEnv();
 module.exports = withNextEnv({
   distDir: 'app',
   reactStrictMode: false,
-  basePath: process.env.GH_PAGES_PATH_PREFIX ? process.env.GH_PAGES_PATH_PREFIX : undefined,
-  assetPrefix: process.env.GH_PAGES_PATH_PREFIX ? process.env.GH_PAGES_PATH_PREFIX : undefined,
+  basePath: process.env.GH_PAGES_PATH_PREFIX || undefined,
+  assetPrefix: process.env.GH_PAGES_PATH_PREFIX || undefined,
   
   webpack: (config) => {
     config.resolve.fallback = {
