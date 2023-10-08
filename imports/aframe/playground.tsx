@@ -62,7 +62,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-a.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -81,7 +81,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-b.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -100,7 +100,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-c.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
