@@ -42,14 +42,11 @@ AFRAME.registerComponent('drag', {
 
   tick: function () {
     if (this.intersectedObject !== null && this.isDrag) {
-      const currentPosition = this.intersectedObject.getAttribute("position");
-      const deltaPosition = currentPosition
-        .clone()
-        .sub(this.startPosition)
-        .multiplyScalar(this.el.object3D.position.distanceTo(currentPosition))
-        .add(this.startPosition);
-      console.log({ deltaPosition });
-      this.intersectedObject.setAttribute("position", deltaPosition);
+      const intersection = this.el.components.raycaster.getIntersection(this.intersectedObject);
+      if (intersection) {
+        const intersectionPosition = intersection.point;
+        this.intersectedObject.setAttribute("position", intersectionPosition);
+      }
     }
   },
 });
