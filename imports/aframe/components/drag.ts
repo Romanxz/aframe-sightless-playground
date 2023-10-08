@@ -5,9 +5,11 @@ AFRAME.registerComponent('drag', {
   init: function () {
     this.intersectedObject = null; // Reference to the intersected object
     this.startPosition = new THREE.Vector3(); // Initial position of the object
+    this.isDrag = false; // Drag activation flag
     this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerup', this.onTriggerUp.bind(this)); // Listen for triggerup event
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
+    this.el.addEventListener('raycaster-intersection-cleared', this.onRaycasterIntersectionCleared.bind(this)); // Listen for raycaster-intersection-cleared event
     console.log("drag initialized");
   },
 
@@ -17,8 +19,15 @@ AFRAME.registerComponent('drag', {
     console.log("raycster-intersection: ", this.intersectedObject);
   },
 
+  onRaycasterIntersectionCleared: function (event) {
+    if (!this.isDrag) {
+      this.intersectedObject = null; // Clear the intersected object
+      console.log("raycster-intersection-cleared: ", event);
+    }
+  },
+
   onTriggerDown: function (event) {
-    if (this.intersectedObject) {
+    if (this.intersectedObject !== null) {
       this.startPosition.copy(this.intersectedObject.getAttribute("position")); // Save the initial position of the object
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition);
@@ -32,17 +41,15 @@ AFRAME.registerComponent('drag', {
   },
 
   tick: function () {
-    if (this.intersectedObject && this.isDrag) {
-      // Calculate the new position of the object relative to the controller's movement
+    if (this.intersectedObject !== null && this.isDrag) {
       const currentPosition = this.intersectedObject.getAttribute("position");
       const deltaPosition = currentPosition
+        .clone()
         .sub(this.startPosition)
-        .projectOnVector(this.el.object3D.getWorldDirection(new THREE.Vector3()))
         .multiplyScalar(this.el.object3D.position.distanceTo(currentPosition))
-        .add(this.startPosition); // Calculate the new position by projecting the delta position on the controller direction
+        .add(this.startPosition);
       console.log({ deltaPosition });
-      // Move the object to the new position
-      this.intersectedObject.setAttribute("position", { ...deltaPosition });
+      this.intersectedObject.setAttribute("position", deltaPosition);
     }
   },
 });
