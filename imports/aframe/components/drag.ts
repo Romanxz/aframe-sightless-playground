@@ -44,7 +44,9 @@ AFRAME.registerComponent('drag', {
     if (this.intersectedObject !== null && this.isDrag) {
       const intersection = this.el.components.raycaster.getIntersection(this.intersectedObject);
       if (intersection) {
-        const intersectionPosition = intersection.point;
+        const intersectionPosition = intersection.point.clone();
+        const worldIntersectionPosition = new THREE.Vector3();
+        intersectionPosition.add(this.intersectedObject.object3D.getWorldPosition(worldIntersectionPosition));
         this.intersectedObject.setAttribute("position", intersectionPosition);
       }
     }
