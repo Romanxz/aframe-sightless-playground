@@ -54,9 +54,10 @@ export default function Playground() {
         //   onEngineTick: () => { },
         //   throttle: 68
         // }}
+        scene-dragger
         renderer="logarithmicDepthBuffer: true"
       >
-        <Entity id="content" scene-dragger>
+        <Entity id="content">
           <Entity
             className="draggable"
             events={{ loaded: () => { } }}
@@ -87,7 +88,7 @@ export default function Playground() {
               maxDistance: 40,
               rolloffFactor: 3,
             }}
-            geometry={{ primitive: "box", height: 0.1, width: 0.1, depth: 0.1, segmentsWidth: 16, segmentsHeight: 9 }}
+            geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2, segmentsWidth: 16, segmentsHeight: 9 }}
             position={{ x: 1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
@@ -106,7 +107,7 @@ export default function Playground() {
               maxDistance: 40,
               rolloffFactor: 3,
             }}
-            geometry={{ primitive: "cylinder", radius: 0.1, height: 0.1 }}
+            geometry={{ primitive: "cylinder", radius: 0.1, height: 0.2 }}
             position={{ x: 0, y: 1.2, z: -1 }}
             material={{
               shader: "standard",

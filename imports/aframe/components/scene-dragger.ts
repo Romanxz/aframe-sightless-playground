@@ -4,7 +4,7 @@ export {};
 // const THREE = require('aframe/src/lib/three');
 AFRAME.registerComponent("scene-dragger", {
   init: function () {
-    const graph = document.getElementById("content");
+    const sceneContent = document.getElementById("content");
     const rightController = document.getElementById("right");
     const leftController = document.getElementById("left");
     this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started 
@@ -26,15 +26,15 @@ AFRAME.registerComponent("scene-dragger", {
       if (this.lPinchActive) {
         const currentPos = evt.detail.position;
 
-        const graphX = graph.object3D.position.x;
-        const graphY = graph.object3D.position.y;
-        const graphZ = graph.object3D.position.z;
+        const sceneContentX = sceneContent.object3D.position.x;
+        const sceneContentY = sceneContent.object3D.position.y;
+        const sceneContentZ = sceneContent.object3D.position.z;
 
         const deltaX = this.lPinchPos.x - currentPos.x
         const deltaY = this.lPinchPos.y - currentPos.y
         const deltaZ = this.lPinchPos.z - currentPos.z
 
-        graph.object3D.position.set(graphX - deltaX * 2, graphY - deltaY * 2, graphZ - deltaZ * 2);
+        sceneContent.object3D.position.set(sceneContentX - deltaX * 2, sceneContentY - deltaY * 2, sceneContentZ - deltaZ * 2);
 
         this.lPinchPos.copy(currentPos)
       }
@@ -75,15 +75,15 @@ AFRAME.registerComponent("scene-dragger", {
       if (this.lGripActive) {
         const currentPos = evt.detail.position;
 
-        const graphX = graph.object3D.position.x;
-        const graphY = graph.object3D.position.y;
-        const graphZ = graph.object3D.position.z;
+        const sceneContentX = sceneContent.object3D.position.x;
+        const sceneContentY = sceneContent.object3D.position.y;
+        const sceneContentZ = sceneContent.object3D.position.z;
 
         const deltaX = this.lGripPos.x - currentPos.x
         const deltaY = this.lGripPos.y - currentPos.y
         const deltaZ = this.lGripPos.z - currentPos.z
 
-        graph.object3D.position.set(graphX - deltaX * 2, graphY - deltaY * 2, graphZ - deltaZ * 2);
+        sceneContent.object3D.position.set(sceneContentX - deltaX * 2, sceneContentY - deltaY * 2, sceneContentZ - deltaZ * 2);
 
         this.lGripPos.copy(currentPos);
       }
