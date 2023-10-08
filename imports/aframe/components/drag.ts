@@ -16,7 +16,7 @@ AFRAME.registerComponent('drag', {
 
   onTriggerDown: function (event) {
     if (this.intersectedObject) {
-      this.startPosition.copy(this.intersectedObject.object3D.position); // Save the initial position of the object
+      this.startPosition.copy(this.intersectedObject.getAttribute("position")); // Save the initial position of the object
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition);
     }
@@ -31,15 +31,15 @@ AFRAME.registerComponent('drag', {
   tick: function () {
     if (this.intersectedObject && this.isDrag) {
       // Calculate the new position of the object relative to the controller's movement
-      const currentPosition = this.intersectedObject.object3D.position.clone();
+      const currentPosition = this.intersectedObject.getAttribute("position");
       const deltaPosition = currentPosition
         .sub(this.startPosition)
         .projectOnVector(this.el.object3D.getWorldDirection(new THREE.Vector3()))
         .multiplyScalar(this.el.object3D.position.distanceTo(currentPosition))
         .add(this.startPosition); // Calculate the new position by projecting the delta position on the controller direction
-      console.log({deltaPosition});
+      console.log({ deltaPosition });
       // Move the object to the new position
-      this.intersectedObject.object3D.position.copy(deltaPosition);
+      this.intersectedObject.setAttribute("position", { ...deltaPosition });
     }
   },
 });
