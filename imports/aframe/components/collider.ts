@@ -3,7 +3,7 @@ export { };
 // const AFRAME = window.AFRAME;
 // const THREE = require('aframe/src/lib/three');
 
-import { getColorFromId } from "../get-color-from-id";
+import { getColorFromId } from "../methods/get-color-from-id";
 // import ThreeMeshUI from 'three-mesh-ui';
 
 import FontJSON from '../assets/Roboto-mdsf.json';

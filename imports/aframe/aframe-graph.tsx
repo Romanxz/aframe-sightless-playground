@@ -3,8 +3,8 @@ import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useDebounceCallback } from "@react-hook/debounce";
 import md5 from 'md5';
 import { Entity, Scene } from "aframe-react";
-import { getColorFromId } from "./get-color-from-id";
-import { getGraphData } from "./get-graph-data";
+import { getColorFromId } from "./methods/get-color-from-id";
+import { getGraphData } from "./methods/get-graph-data";
 import { useNodeDragger } from "./hooks/use-node-dragger";
 import "./components/scaler";
 import "./components/rotator";
@@ -14,8 +14,8 @@ import "./components/el-movement";
 import "./components/tick";
 import { useSpaceId } from "@deep-foundation/deepcase/imports/hooks";
 import { useNodeHover } from "./hooks/use-node-hover";
-import { initializeSimulation } from "./initialize-simulation";
-import { updateSimulation } from "./update-simulation";
+import { initializeSimulation } from "./methods/initialize-simulation";
+import { updateSimulation } from "./methods/update-simulation";
 
 function stopAllSounds() {
   const nodes = document.querySelectorAll('.deepgraph-node');

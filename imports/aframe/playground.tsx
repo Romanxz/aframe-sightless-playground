@@ -6,7 +6,7 @@ import './components/node-sound';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
-import { getColorFromId } from "./get-color-from-id";
+import { getColorFromId } from "./methods/get-color-from-id";
 
 export default function Playground() {
   const [startSounds, setStartSounds] = useState(false);
@@ -61,7 +61,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "/aframe-sightless-playground/playground-a.wav",
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-a.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -80,7 +80,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "/aframe-sightless-playground/playground-b.wav",
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-b.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
@@ -99,7 +99,7 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: "/aframe-sightless-playground/playground-c.wav",
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}/playground-c.wav`,
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
