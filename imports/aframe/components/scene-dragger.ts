@@ -116,13 +116,13 @@ AFRAME.registerComponent("scene-dragger", {
       // Update the position of the left grip
       this.lGripPos.copy(this.el.object3D.position);
 
-      // Update the local positions of the child entities
-      if (this.childEntities !== null) {
-        for (const childEntity of this.childEntities) {
-          const localPosition = newPosition.clone().sub(sceneContentPos);
-          childEntity.object3D.position.copy(localPosition);
-        }
-      }
+      // // Update the local positions of the child entities
+      // if (this.childEntities !== null) {
+      //   for (const childEntity of this.childEntities) {
+      //     const localPosition = newPosition.clone().sub(sceneContentPos);
+      //     childEntity.object3D.position.copy(localPosition);
+      //   }
+      // }
     }
 
     // Hand tracking drag
@@ -144,13 +144,13 @@ AFRAME.registerComponent("scene-dragger", {
       // Update the position of the left pinch gesture
       this.lPinchPos.copy(this.el.object3D.position);
 
-      // Update the local positions of the child entities
-      if (this.childEntities !== null) {
-        for (const childEntity of this.childEntities) {
-          const localPosition = newPosition.clone().sub(sceneContentPos);
-          childEntity.object3D.position.copy(localPosition);
-        }
-      }
+      // // Update the local positions of the child entities
+      // if (this.childEntities !== null) {
+      //   for (const childEntity of this.childEntities) {
+      //     const localPosition = newPosition.clone().sub(sceneContentPos);
+      //     childEntity.object3D.position.copy(localPosition);
+      //   }
+      // }
     }
   }
 });

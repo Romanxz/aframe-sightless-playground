@@ -138,7 +138,7 @@ export default function Playground() {
             drag
             thumb-controls={{ hand: 'left' }}
             hand-tracking-controls={{ hand: 'left' }}
-            laser-controls={{ hand: 'left' }}
+            oculus-touch-controls={{ hand: 'left' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
               direction: {x: 0, y: -0.5944043672340157, z: -0.7945567170519814}, 
@@ -153,7 +153,7 @@ export default function Playground() {
             drag
             thumb-controls={{ hand: 'right' }}
             hand-tracking-controls={{ hand: 'right' }}
-            laser-controls={{ hand: 'right' }}
+            oculus-touch-controls={{ hand: 'right' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
               direction: {x: 0, y: -0.5944043672340157, z: -0.7945567170519814}, 
