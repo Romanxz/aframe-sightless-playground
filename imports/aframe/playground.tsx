@@ -137,6 +137,9 @@ export default function Playground() {
           <Entity id="left"
             el-movement
             drag
+            thumb-controls={{ hand: 'right' }}
+            hand-tracking-controls={{ hand: 'right' }}
+            laser-controls={{ hand: 'right' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
               direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
@@ -145,13 +148,13 @@ export default function Playground() {
               lineOpacity: 0.85, 
               objects: ".draggable" 
             }}
-            laser-controls={{ hand: 'left' }}
-            thumb-controls={{ hand: 'left' }}
-            hand-tracking-controls={{ hand: 'left' }}
           />
           <Entity id="right"
             el-movement
             drag
+            thumb-controls={{ hand: 'right' }}
+            hand-tracking-controls={{ hand: 'right' }}
+            laser-controls={{ hand: 'right' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
               direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
@@ -160,9 +163,6 @@ export default function Playground() {
               lineOpacity: 0.85, 
               objects: ".draggable" 
             }}
-            laser-controls={{ hand: 'right' }}
-            thumb-controls={{ hand: 'right' }}
-            hand-tracking-controls={{ hand: 'right' }}
           />
         </Entity>
         <Entity id="cursor"

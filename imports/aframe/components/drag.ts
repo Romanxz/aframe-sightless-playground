@@ -43,8 +43,8 @@ AFRAME.registerComponent('drag', {
 
   onTriggerUp: function (event) {
     this.isDrag = false; // Flag to indicate that dragging has ended
-    // this.intersectedObject = null; // Clear the intersected object
-    // this.distanceToTarget = 0;
+    this.intersectedObject = null; // Clear the intersected object
+    this.distanceToTarget = 0;
     console.log("triggerup: ", event);
   },
 
