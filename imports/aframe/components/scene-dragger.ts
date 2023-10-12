@@ -112,7 +112,7 @@ AFRAME.registerComponent("scene-dragger", {
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
       // Update the position of the left grip
-      this.lGripPos.copy(this.el.object3D.position);
+      this.lGripPos.copy(this.leftController.object3D.position);
     }
     // Hand tracking drag
     if (this.rPinchActive || this.dragDisabled) return;
@@ -128,7 +128,7 @@ AFRAME.registerComponent("scene-dragger", {
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
       // Update the position of the left pinch gesture
-      this.lPinchPos.copy(this.el.object3D.position);
+      this.lPinchPos.copy(this.leftController.object3D.position);
     }
   }
 });
