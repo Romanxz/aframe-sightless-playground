@@ -99,44 +99,55 @@ AFRAME.registerComponent("scene-dragger", {
   tick: function () {
     // Controller drag
     if (this.rGripActive || this.dragDisabled) return;
+
     if (this.lGripActive) {
       const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
       const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
+
       // Calculate the distance moved
       const deltaX = gripX - this.el.object3D.position.x;
       const deltaY = gripY - this.el.object3D.position.y;
       const deltaZ = gripZ - this.el.object3D.position.z;
+
       // Calculate the new position by subtracting the distance moved
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+
       // Update the position of the left grip
       this.lGripPos.copy(this.el.object3D.position);
+
       // Update the local positions of the child entities
       if (this.childEntities !== null) {
         for (const childEntity of this.childEntities) {
-          const localPosition = childEntity.object3D.worldToLocal(newPosition.clone());
+          const localPosition = newPosition.clone().sub(childEntity.object3D.parent.position);
           childEntity.object3D.position.copy(localPosition);
         }
       }
     }
+
     // Hand tracking drag
     if (this.rPinchActive || this.dragDisabled) return;
+
     if (this.lPinchActive) {
       const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
       const { x: pinchX, y: pinchY, z: pinchZ } = this.lPinchPos; // Start position of the left pinch gesture
+
       // Calculate the distance moved
       const deltaX = pinchX - this.el.object3D.position.x;
       const deltaY = pinchY - this.el.object3D.position.y;
       const deltaZ = pinchZ - this.el.object3D.position.z;
+
       // Calculate the new position by subtracting the distance moved
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+
       // Update the position of the left pinch gesture
       this.lPinchPos.copy(this.el.object3D.position);
+
       // Update the local positions of the child entities
       if (this.childEntities !== null) {
         for (const childEntity of this.childEntities) {
-          const localPosition = childEntity.object3D.worldToLocal(newPosition.clone());
+          const localPosition = newPosition.clone().sub(childEntity.object3D.parent.position);
           childEntity.object3D.position.copy(localPosition);
         }
       }
