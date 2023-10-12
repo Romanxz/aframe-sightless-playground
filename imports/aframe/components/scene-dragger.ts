@@ -101,7 +101,7 @@ AFRAME.registerComponent("scene-dragger", {
     if (this.rGripActive || this.dragDisabled) return;
 
     if (this.lGripActive) {
-      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const { x, y, z } = sceneContentPos = this.sceneContent.object3D.position; // Current position of the scene content
       const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
 
       // Calculate the distance moved
@@ -119,7 +119,7 @@ AFRAME.registerComponent("scene-dragger", {
       // Update the local positions of the child entities
       if (this.childEntities !== null) {
         for (const childEntity of this.childEntities) {
-          const localPosition = newPosition.clone().sub(childEntity.object3D.parent.position);
+          const localPosition = newPosition.clone().sub(sceneContentPos);
           childEntity.object3D.position.copy(localPosition);
         }
       }
@@ -129,7 +129,7 @@ AFRAME.registerComponent("scene-dragger", {
     if (this.rPinchActive || this.dragDisabled) return;
 
     if (this.lPinchActive) {
-      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const { x, y, z } = sceneContentPos = this.sceneContent.object3D.position; // Current position of the scene content
       const { x: pinchX, y: pinchY, z: pinchZ } = this.lPinchPos; // Start position of the left pinch gesture
 
       // Calculate the distance moved
@@ -147,7 +147,7 @@ AFRAME.registerComponent("scene-dragger", {
       // Update the local positions of the child entities
       if (this.childEntities !== null) {
         for (const childEntity of this.childEntities) {
-          const localPosition = newPosition.clone().sub(childEntity.object3D.parent.position);
+          const localPosition = newPosition.clone().sub(sceneContentPos);
           childEntity.object3D.position.copy(localPosition);
         }
       }
