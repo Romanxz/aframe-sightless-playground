@@ -5,7 +5,7 @@ AFRAME.registerComponent('drag', {
   init: function () {
     this.intersectedObject = null; // Reference to the intersected object
     this.distanceToTarget = 0;
-    this.distanceOffset = -38; // Set the desired distance offset in degrees
+    this.distanceOffset = -37; // Set the desired distance offset in degrees
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
     this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this)); // Listen for triggerdown event
@@ -17,8 +17,8 @@ AFRAME.registerComponent('drag', {
 
   onRaycasterIntersection: function (event) {
     if (this.intersectedObject === null) {
-      this.intersectedObject = event.detail.els[0]; // Set the intersected object
-      this.distanceToTarget = event.detail.intersections[0].distance;
+      const intersectedObject = event.detail.els[0]
+      this.intersectedObject = intersectedObject // Set the intersected object
       console.log("raycaster-intersection: ", event);
     }
   },
@@ -35,6 +35,7 @@ AFRAME.registerComponent('drag', {
     if (this.intersectedObject !== null) {
       // this.startPosition.copy(this.el.object3D.position); // Save the initial position of the object
       // this.startRotation.copy(this.el.object3D.quaternion); // Save the initial rotation of the controller
+      this.distanceToTarget = this.intersectedObject.object3D.position.distanceTo(this.el.object3D.position);
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition, this.startRotation);
     }
@@ -42,8 +43,8 @@ AFRAME.registerComponent('drag', {
 
   onTriggerUp: function (event) {
     this.isDrag = false; // Flag to indicate that dragging has ended
-    this.intersectedObject = null; // Clear the intersected object
-    this.distanceToTarget = 0;
+    // this.intersectedObject = null; // Clear the intersected object
+    // this.distanceToTarget = 0;
     console.log("triggerup: ", event);
   },
 
@@ -55,12 +56,9 @@ AFRAME.registerComponent('drag', {
       const currentControllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
 
       // Calculate the offset in the controller's local space based on the initial distance to the target
-      const localOffset = new THREE.Vector3(0, 0, -this.distanceToTarget).applyAxisAngle(
-        new THREE.Vector3(1, 0, 0),
-        THREE.MathUtils.degToRad(this.distanceOffset)
-      );
-
-      // Apply the rotation offset to the local offset
+      const localOffset = new THREE.Vector3(0, 0, -this.distanceToTarget)
+        // Apply the rotation offset to the local offset
+        .applyAxisAngle(new THREE.Vector3(1, 0, 0), THREE.MathUtils.degToRad(this.distanceOffset));
 
       // Rotate the local offset to match the controller's current rotation
       localOffset.applyQuaternion(currentControllerRotation);

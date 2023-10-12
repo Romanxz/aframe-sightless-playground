@@ -1,12 +1,13 @@
 // @ts-nocheck
-export {};
+export { };
 
 AFRAME.registerComponent("scene-dragger", {
   init: function () {
     const sceneContent = document.getElementById("content");
     const rightController = document.getElementById("right");
     const leftController = document.getElementById("left");
-    this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started 
+    this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started
+    this.childEntities = null
     console.log("scene-dragger initialized: ", { sceneContent, rightController, leftController })
     // hands
 
@@ -65,30 +66,46 @@ AFRAME.registerComponent("scene-dragger", {
     leftController.addEventListener("gripdown", evt => {
       this.lGripActive = true;
       this.lGripPos.copy(leftController.object3D.position);
+      this.childEntities = Array.from(document.querySelectorAll(".draggable"));
       if (this.rGripActive) {
         this.dragDisabled = true; // Disable drag when both grips are pressed
       }
     })
     leftController.addEventListener("el-moved", evt => {
       if (this.rGripActive || this.dragDisabled) return;
+
       if (this.lGripActive) {
-        const currentPos = evt.detail.position;
+        const { x, y, z } = sceneContent.object3D.position;
+        const { x: currentX, y: currentY, z: currentZ } = evt.detail.position;
+        const { x: gripX, y: gripY, z: gripZ } = this.lGripPos;
 
-        const sceneContentX = sceneContent.object3D.position.x;
-        const sceneContentY = sceneContent.object3D.position.y;
-        const sceneContentZ = sceneContent.object3D.position.z;
+        const deltaX = gripX - currentX;
+        const deltaY = gripY - currentY;
+        const deltaZ = gripZ - currentZ;
 
-        const deltaX = this.lGripPos.x - currentPos.x
-        const deltaY = this.lGripPos.y - currentPos.y
-        const deltaZ = this.lGripPos.z - currentPos.z
+        const newSceneContentPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
+        sceneContent.object3D.position.copy(newSceneContentPosition);
 
-        sceneContent.object3D.position.set(sceneContentX - deltaX * 2, sceneContentY - deltaY * 2, sceneContentZ - deltaZ * 2);
+        this.lGripPos.copy(evt.detail.position);
 
-        this.lGripPos.copy(currentPos);
+        if (this.childEntities !== null) {
+          // Loop through each child entity
+          this.childEntities.forEach(childEntity => {
+            const oldPosition = childEntity.object3D.position.clone(); // Store the old position
+
+            // Compute the offset between the new parent position and the old child position
+            const newPosition = childEntity.object3D.position.clone(); // Get the new position
+            const offset = sceneContent.object3D.worldToLocal(newPosition).sub(sceneContent.object3D.worldToLocal(oldPosition));
+
+            // Update the position of the child entity by applying the offset
+            childEntity.object3D.position.add(offset);
+          });
+        }
       }
-    })
+    });
     leftController.addEventListener("gripup", evt => {
       this.lGripActive = false;
+      this.childEntities = null;
       if (!this.rGripActive) {
         this.dragDisabled = false; // Enable drag when both grips are released
       }

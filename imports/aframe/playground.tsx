@@ -1,8 +1,9 @@
-import 'aframe';
+import "aframe";
 import "aframe-environment-component";
-import './components/drag';
+import "aframe-thumb-controls-component";
+import "./components/drag";
 import "./components/scene-dragger";
-import './components/el-movement';
+import "./components/el-movement";
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -70,7 +71,8 @@ export default function Playground() {
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "sphere", radius: 0.1 }}
-            position={{ x: -1, y: 1.2, z: -1 }}
+            // position={{ x: -1, y: 1.2, z: -1 }}
+            position={{ x: 0, y: 0, z: 0 }}
             material={{
               shader: "standard",
               color: getColorFromId(666),
@@ -133,18 +135,34 @@ export default function Playground() {
           >
           </Entity>
           <Entity id="left"
-            hand-tracking-controls={{ hand: 'left' }}
             el-movement
             drag
-            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
+            raycaster={{ 
+              origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
+              direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
+              showLine: true, 
+              lineColor: "red", 
+              lineOpacity: 0.85, 
+              objects: ".draggable" 
+            }}
             laser-controls={{ hand: 'left' }}
+            thumb-controls={{ hand: 'left' }}
+            hand-tracking-controls={{ hand: 'left' }}
           />
           <Entity id="right"
-            hand-tracking-controls={{ hand: 'right' }}
             el-movement
             drag
-            raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
+            raycaster={{ 
+              origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
+              direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
+              showLine: true, 
+              lineColor: "red", 
+              lineOpacity: 0.85, 
+              objects: ".draggable" 
+            }}
             laser-controls={{ hand: 'right' }}
+            thumb-controls={{ hand: 'right' }}
+            hand-tracking-controls={{ hand: 'right' }}
           />
         </Entity>
         <Entity id="cursor"
