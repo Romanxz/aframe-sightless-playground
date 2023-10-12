@@ -101,7 +101,7 @@ AFRAME.registerComponent("scene-dragger", {
     if (this.rGripActive || this.dragDisabled) return;
     if (this.lGripActive) {
       const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
-      const { x: currentX, y: currentY, z: currentZ } = evt.detail.position; // Current position of the controller
+      const { x: currentX, y: currentY, z: currentZ } = this.el.object3D.position; // Current position of the controller
       const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
       // Calculate the distance moved
       const deltaX = gripX - currentX;
@@ -111,7 +111,7 @@ AFRAME.registerComponent("scene-dragger", {
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
       // Update the position of the left grip
-      this.lGripPos.copy(evt.detail.position);
+      this.lGripPos.copy(this.el.object3D.position);
     }
     // Hand tracking drag
     if (this.rPinchActive || this.dragDisabled) return;
