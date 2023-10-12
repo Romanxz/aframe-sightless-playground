@@ -3,124 +3,129 @@ export { };
 
 AFRAME.registerComponent("scene-dragger", {
   init: function () {
-    const sceneContent = document.getElementById("content");
+    // Input devices
     const rightController = document.getElementById("right");
     const leftController = document.getElementById("left");
+    // Scene content to be dragged
+    this.sceneContent = document.getElementById("content");
+    // Flags and variables
     this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started
-    this.childEntities = null
-    console.log("scene-dragger initialized: ", { sceneContent, rightController, leftController })
-    // hands
-
-    this.lGripPos = new THREE.Vector3();
-    this.lPinchPos = new THREE.Vector3();
-
-    leftController.addEventListener("pinchstarted", evt => {
-      this.lPinchActive = true;
-      this.lPinchPos.copy(evt.detail.position)
-      if (this.rPinchActive) {
-        this.dragDisabled = true; // Disable drag when both pinches are started
-      }
-    })
-    leftController.addEventListener("pinchmoved", evt => {
-      if (this.rPinchActive || this.dragDisabled) return;
-      if (this.lPinchActive) {
-        const currentPos = evt.detail.position;
-
-        const sceneContentX = sceneContent.object3D.position.x;
-        const sceneContentY = sceneContent.object3D.position.y;
-        const sceneContentZ = sceneContent.object3D.position.z;
-
-        const deltaX = this.lPinchPos.x - currentPos.x
-        const deltaY = this.lPinchPos.y - currentPos.y
-        const deltaZ = this.lPinchPos.z - currentPos.z
-
-        sceneContent.object3D.position.set(sceneContentX - deltaX * 2, sceneContentY - deltaY * 2, sceneContentZ - deltaZ * 2);
-
-        this.lPinchPos.copy(currentPos)
-      }
-    })
-    leftController.addEventListener("pinchended", evt => {
-      this.lPinchActive = false;
-      if (!this.rPinchActive) {
-        this.dragDisabled = false; // Enable drag when both pinches are ended
-      }
-    })
-    rightController.addEventListener("pinchstarted", evt => {
-      this.rPinchActive = true;
-      if (this.lPinchActive) {
-        this.dragDisabled = true; // Disable drag when both pinches are started
-      }
-    })
-    rightController.addEventListener("pinchended", evt => {
-      this.rPinchActive = false;
-      if (!this.lPinchActive) {
-        this.dragDisabled = false; // Enable drag when both pinches are ended
-      }
-    })
-
-    // controllers
-
+    this.childEntities = null;
     this.lGripActive = false;
     this.rGripActive = false;
-
-    leftController.addEventListener("gripdown", evt => {
-      this.lGripActive = true;
-      this.lGripPos.copy(leftController.object3D.position);
-      this.childEntities = Array.from(document.querySelectorAll(".draggable"));
-      if (this.rGripActive) {
-        this.dragDisabled = true; // Disable drag when both grips are pressed
-      }
-    })
-    leftController.addEventListener("el-moved", evt => {
-      if (this.rGripActive || this.dragDisabled) return;
-
-      if (this.lGripActive) {
-        const { x, y, z } = sceneContent.object3D.position;
-        const { x: currentX, y: currentY, z: currentZ } = evt.detail.position;
-        const { x: gripX, y: gripY, z: gripZ } = this.lGripPos;
-
-        const deltaX = gripX - currentX;
-        const deltaY = gripY - currentY;
-        const deltaZ = gripZ - currentZ;
-
-        const newSceneContentPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
-        sceneContent.object3D.position.copy(newSceneContentPosition);
-
-        this.lGripPos.copy(evt.detail.position);
-
-        if (this.childEntities !== null) {
-          // Loop through each child entity
-          this.childEntities.forEach(childEntity => {
-            const oldPosition = childEntity.object3D.position.clone(); // Store the old position
-
-            // Compute the offset between the new parent position and the old child position
-            const newPosition = childEntity.object3D.position.clone(); // Get the new position
-            const offset = sceneContent.object3D.worldToLocal(newPosition).sub(sceneContent.object3D.worldToLocal(oldPosition));
-
-            // Update the position of the child entity by applying the offset
-            childEntity.object3D.position.add(offset);
-          });
-        }
-      }
+    this.lPinchActive = false;
+    this.rPinchActive = false;
+    this.lGripPos = new THREE.Vector3();
+    this.lPinchPos = new THREE.Vector3();
+    // Event listeners for left controller
+    leftController.addEventListener("gripdown", this.onLeftGripDown.bind(this));
+    leftController.addEventListener("gripup", this.onLeftGripUp.bind(this));
+    leftController.addEventListener("pinchstarted", this.onLeftPinchStart.bind(this));
+    leftController.addEventListener("pinchended", this.onLeftPinchEnd.bind(this));
+    // Event listeners for right controller
+    rightController.addEventListener("gripdown", this.onRightGripDown.bind(this));
+    rightController.addEventListener("gripup", this.onRightGripUp.bind(this));
+    rightController.addEventListener("pinchstarted", this.onRightPinchStart.bind(this));
+    rightController.addEventListener("pinchended", this.onRightPinchEnd.bind(this));
+    // Component init log
+    console.log("scene-dragger initialized:", {
+      sceneContent: this.sceneContent,
+      rightController: rightController,
+      leftController: leftController,
     });
-    leftController.addEventListener("gripup", evt => {
-      this.lGripActive = false;
-      this.childEntities = null;
-      if (!this.rGripActive) {
-        this.dragDisabled = false; // Enable drag when both grips are released
-      }
-    })
-    rightController.addEventListener("gripdown", evt => {
-      this.rGripActive = true;
-      if (this.lGripActive) {
-        this.dragDisabled = true; // Disable drag when both grips are pressed
-      }
-    })
-    rightController.addEventListener("gripup", evt => {
-      this.rGripActive = false;
-      if (!this.lGripActive) {
-        this.dragDisabled = false; // Enable drag when both grips are released
-      }
-    })
+  },
+  // Left grip button is pressed
+  onLeftGripDown: function (evt) {
+    this.lGripActive = true;
+    this.lGripPos.copy(evt.target.object3D.position); // Store position of left grip
+    this.childEntities = Array.from(document.querySelectorAll(".draggable")); // Get child entities to enable dragging
+    if (this.rGripActive) {
+      this.dragDisabled = true; // Disable drag when both grips are pressed
+    }
+  },
+  // Left grip button is released
+  onLeftGripUp: function (evt) {
+    this.lGripActive = false;
+    this.childEntities = null;
+    if (!this.rGripActive) {
+      this.dragDisabled = false; // Enable drag when both grips are released
+    }
+  },
+  // Right grip button is pressed
+  onRightGripDown: function (evt) {
+    this.rGripActive = true;
+    if (this.lGripActive) {
+      this.dragDisabled = true; // Disable drag when both grips are pressed
+    }
+  },
+  // Right grip button is released
+  onRightGripUp: function (evt) {
+    this.rGripActive = false;
+    if (!this.lGripActive) {
+      this.dragDisabled = false; // Enable drag when both grips are released
+    }
+  },
+  // Left pinch gesture started
+  onLeftPinchStart: function (evt) {
+    this.lPinchActive = true;
+    this.lPinchPos.copy(evt.detail.position); // Store position of left pinch gesture
+    if (this.rPinchActive) {
+      this.dragDisabled = true; // Disable drag when both pinches are started
+    }
+  },
+  // Left pinch gesture ended
+  onLeftPinchEnd: function (evt) {
+    this.lPinchActive = false;
+    if (!this.rPinchActive) {
+      this.dragDisabled = false; // Enable drag when both pinches are ended
+    }
+  },
+  // Right pinch gesture started
+  onRightPinchStart: function (evt) {
+    this.rPinchActive = true;
+    if (this.lPinchActive) {
+      this.dragDisabled = true; // Disable drag when both pinches are started
+    }
+  },
+  // Right pinch gesture ended
+  onRightPinchEnd: function (evt) {
+    this.rPinchActive = false;
+    if (!this.lPinchActive) {
+      this.dragDisabled = false; // Enable drag when both pinches are ended
+    }
+  },
+  tick: function () {
+    // Controller drag
+    if (this.rGripActive || this.dragDisabled) return;
+    if (this.lGripActive) {
+      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const { x: currentX, y: currentY, z: currentZ } = evt.detail.position; // Current position of the controller
+      const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
+      // Calculate the distance moved
+      const deltaX = gripX - currentX;
+      const deltaY = gripY - currentY;
+      const deltaZ = gripZ - currentZ;
+      // Calculate the new position by subtracting the distance moved
+      const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
+      this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+      // Update the position of the left grip
+      this.lGripPos.copy(evt.detail.position);
+    }
+    // Hand tracking drag
+    if (this.rPinchActive || this.dragDisabled) return;
+    if (this.lPinchActive) {
+      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const { x: currentX, y: currentY, z: currentZ } = this.el.object3D.position; // Current position of the controller
+      const { x: pinchX, y: pinchY, z: pinchZ } = this.lPinchPos; // Start position of the left pinch gesture
+      // Calculate the distance moved
+      const deltaX = pinchX - currentX;
+      const deltaY = pinchY - currentY;
+      const deltaZ = pinchZ - currentZ;
+      // Calculate the new position by subtracting the distance moved
+      const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
+      this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+      // Update the position of the left pinch gesture
+      this.lPinchPos.copy(this.el.object3D.position);
+    }
   }
-})
+});

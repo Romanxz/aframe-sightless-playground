@@ -51,21 +51,16 @@ AFRAME.registerComponent('drag', {
   tick: function () {
     if (this.intersectedObject !== null && this.isDrag) {
       // Get the position and rotation of the controller
-
-      const currentControllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
-      const currentControllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
-
+      const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
+      const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
       // Calculate the offset in the controller's local space based on the initial distance to the target
       const localOffset = new THREE.Vector3(0, 0, -this.distanceToTarget)
         // Apply the rotation offset to the local offset
         .applyAxisAngle(new THREE.Vector3(1, 0, 0), THREE.MathUtils.degToRad(this.distanceOffset));
-
       // Rotate the local offset to match the controller's current rotation
-      localOffset.applyQuaternion(currentControllerRotation);
-
+      localOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity by adding the rotated offset to the current controller's position
-      const newPosition = currentControllerPosition.add(localOffset);
-
+      const newPosition = controllerPosition.add(localOffset);
       // Update the position of the target entity
       this.intersectedObject.object3D.position.copy(newPosition);
     }
