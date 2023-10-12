@@ -17,6 +17,7 @@ AFRAME.registerComponent("scene-dragger", {
     this.rPinchActive = false;
     this.lGripPos = new THREE.Vector3();
     this.lPinchPos = new THREE.Vector3();
+    this.leftController = leftController;
     // Event listeners for left controller
     leftController.addEventListener("gripdown", this.onLeftGripDown.bind(this));
     leftController.addEventListener("gripup", this.onLeftGripUp.bind(this));
@@ -101,7 +102,7 @@ AFRAME.registerComponent("scene-dragger", {
     if (this.rGripActive || this.dragDisabled) return;
     if (this.lGripActive) {
       const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
-      const { x: currentX, y: currentY, z: currentZ } = this.el.object3D.position; // Current position of the controller
+      const { x: currentX, y: currentY, z: currentZ } = this.leftController.object3D.position; // Current position of the controller
       const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
       // Calculate the distance moved
       const deltaX = gripX - currentX;
@@ -117,7 +118,7 @@ AFRAME.registerComponent("scene-dragger", {
     if (this.rPinchActive || this.dragDisabled) return;
     if (this.lPinchActive) {
       const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
-      const { x: currentX, y: currentY, z: currentZ } = this.el.object3D.position; // Current position of the controller
+      const { x: currentX, y: currentY, z: currentZ } = this.leftController.object3D.position; // Current position of the controller
       const { x: pinchX, y: pinchY, z: pinchZ } = this.lPinchPos; // Start position of the left pinch gesture
       // Calculate the distance moved
       const deltaX = pinchX - currentX;
