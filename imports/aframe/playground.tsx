@@ -71,8 +71,7 @@ export default function Playground() {
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "sphere", radius: 0.1 }}
-            // position={{ x: -1, y: 1.2, z: -1 }}
-            position={{ x: 0, y: 0, z: 0 }}
+            position={{ x: -1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
               color: getColorFromId(666),
@@ -137,12 +136,12 @@ export default function Playground() {
           <Entity id="left"
             el-movement
             drag
-            thumb-controls={{ hand: 'right' }}
-            hand-tracking-controls={{ hand: 'right' }}
-            laser-controls={{ hand: 'right' }}
+            thumb-controls={{ hand: 'left' }}
+            hand-tracking-controls={{ hand: 'left' }}
+            laser-controls={{ hand: 'left' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
-              direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
+              direction: {x: 0, y: -0.5944043672340157, z: -0.7945567170519814}, 
               showLine: true, 
               lineColor: "red", 
               lineOpacity: 0.85, 
@@ -157,7 +156,7 @@ export default function Playground() {
             laser-controls={{ hand: 'right' }}
             raycaster={{ 
               origin: {x: 0.0065, y: -0.0186, z: -0.05}, 
-              direction: {x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814}, 
+              direction: {x: 0, y: -0.5944043672340157, z: -0.7945567170519814}, 
               showLine: true, 
               lineColor: "red", 
               lineOpacity: 0.85, 
