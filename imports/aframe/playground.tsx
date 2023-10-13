@@ -137,9 +137,10 @@ export default function Playground() {
             drag
             hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
+            thumb-controls="hand: left"
             raycaster={{
               origin: { x: 0.0065, y: -0.0186, z: -0.05 },
-              direction: { x: 0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814 },
+              direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
               lineColor: "red",
               lineOpacity: 0.85,
               objects: ".draggable"
@@ -147,11 +148,12 @@ export default function Playground() {
           />
           <Entity id="right"
             drag
-            // hand-tracking-controls={{ hand: 'right' }}
+            hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
+            thumb-controls="hand: right"
             raycaster={{
               origin: { x: -0.0065, y: -0.0186, z: -0.05 },
-              direction: { x: -0.12394785839500175, y: -0.5944043672340157, z: -0.7945567170519814 },
+              direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
               showLine: true,
               lineColor: "red",
               lineOpacity: 0.85,
