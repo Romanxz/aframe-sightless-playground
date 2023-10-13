@@ -36,8 +36,9 @@ AFRAME.registerComponent('drag', {
     if (this.intersectedObject !== null) {
       // this.startPosition.copy(this.el.object3D.position); // Save the initial position of the object
       // this.startRotation.copy(this.el.object3D.quaternion); // Save the initial rotation of the controller
-      this.distanceToTarget = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3())
-      .distanceTo(this.el.object3D.getWorldPosition(new THREE.Vector3()));
+      const targetWorldPosition = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3());
+      const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
+      this.distanceToTarget = targetWorldPosition.distanceTo(controllerWorldPosition);
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition, this.startRotation);
     }
@@ -62,7 +63,7 @@ AFRAME.registerComponent('drag', {
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity by adding the rotated offset to the current controller's position
-      const newPosition = controllerPosition.add(raduisOffset);
+      const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
       // Update the position of the target entity
       this.intersectedObject.object3D.position.copy(newPosition);
     }
