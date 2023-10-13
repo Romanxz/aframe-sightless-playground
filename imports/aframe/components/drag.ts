@@ -56,7 +56,7 @@ AFRAME.registerComponent('drag', {
   },
 
   onThumbStickMoved: function (evt) {
-    const direction = evt.detail.axis[1]; // Assuming evt.detail.axis[1] gives thumbstick Y-axis
+    const direction = evt.detail.y;
     // direction ranges from -1 to 1, so it will increment or decrement depending on thumbstick up or down movement
     this.distanceToTarget += direction * this.speedFactor;
     console.log("onThumbStickMoved: ", { evt });
