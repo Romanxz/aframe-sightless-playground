@@ -97,6 +97,9 @@ AFRAME.registerComponent("scene-dragger", {
       this.dragDisabled = false; // Enable drag when both pinches are ended
     }
   },
+  onThumbUpStart: function (evt) {
+    console.log("onThumbUpStart: ", {evt});
+  },
   tick: function () {
     // Controller drag
     if (this.rGripActive || this.dragDisabled) return;
