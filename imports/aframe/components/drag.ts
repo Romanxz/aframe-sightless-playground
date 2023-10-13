@@ -6,7 +6,7 @@ AFRAME.registerComponent('drag', {
     this.sceneContent = document.getElementById("content");
     this.intersectedObject = null; // Reference to the intersected object
     this.distanceToTarget = 0;
-    this.axisAngleOffset = -37; // Set the desired distance offset in degrees
+    this.axisAngleOffset = -37; // Set the desired angle offset in degrees
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
     this.el.addEventListener('thumbupstart', this.onThumbUpStart.bind(this)); // Listen for triggerdown event
