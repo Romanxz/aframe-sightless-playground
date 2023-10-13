@@ -5,8 +5,8 @@ AFRAME.registerComponent('drag', {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.intersectedObject = null; // Reference to the intersected object
-    this.distanceToTarget = 0; // Distance from controller to the intersected object
-    this.speedFactor = 0.1; // Adjust fishing rod extension speed factor to taste
+    this.distanceToTarget = 0.1; // Distance from controller to the intersected object
+    this.speedFactor = 0.05; // Adjust fishing rod extension speed factor to taste
     this.axisAngleOffset = -37; // Set the desired angle offset in degrees
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
@@ -49,14 +49,14 @@ AFRAME.registerComponent('drag', {
   onTriggerUp: function (event) {
     this.isDrag = false; // Flag to indicate that dragging has ended
     this.intersectedObject = null; // Clear the intersected object
-    this.distanceToTarget = 0;
     console.log("triggerup: ", event);
   },
 
   onThumbStickMoved: function (evt) {
     const direction = evt.detail.y;
     // direction ranges from -1 to 1, so it will increment or decrement depending on thumbstick up or down movement
-    this.distanceToTarget += direction * this.speedFactor;
+    this.distanceToTarget += -direction * this.speedFactor;
+    this.distanceToTarget = Math.max(0.1, this.distanceToTarget);
     console.log("onThumbStickMoved: ", { evt });
     console.log("distanceToTarget: ", this.distanceToTarget);
   },
@@ -72,7 +72,7 @@ AFRAME.registerComponent('drag', {
         .applyAxisAngle(new THREE.Vector3(1, 0, 0), THREE.MathUtils.degToRad(this.axisAngleOffset));
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
-      // Compute the new position of the target entity by adding the rotated offset to the current controller's position
+      // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
       const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
       // Update the position of the target entity
       this.intersectedObject.object3D.position.copy(newPosition);
