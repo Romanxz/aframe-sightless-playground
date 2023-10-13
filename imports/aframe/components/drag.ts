@@ -3,6 +3,7 @@ export { };
 
 AFRAME.registerComponent('drag', {
   init: function () {
+    this.sceneContent = document.getElementById("content");
     this.intersectedObject = null; // Reference to the intersected object
     this.distanceToTarget = 0;
     this.axisAngleOffset = -37; // Set the desired distance offset in degrees
@@ -35,7 +36,8 @@ AFRAME.registerComponent('drag', {
     if (this.intersectedObject !== null) {
       // this.startPosition.copy(this.el.object3D.position); // Save the initial position of the object
       // this.startRotation.copy(this.el.object3D.quaternion); // Save the initial rotation of the controller
-      this.distanceToTarget = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3()).distanceTo(this.el.object3D.position);
+      this.distanceToTarget = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3())
+      .distanceTo(this.el.object3D.getWorldPosition(new THREE.Vector3()));
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition, this.startRotation);
     }

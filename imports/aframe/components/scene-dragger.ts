@@ -127,6 +127,7 @@ AFRAME.registerComponent("scene-dragger", {
       // Calculate the new position by subtracting the distance moved
       const newPosition = new THREE.Vector3(x - deltaX * 2, y - deltaY * 2, z - deltaZ * 2);
       this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+      this.sceneContent.object3D.updateMatrixWorld(force = true);
       // Update the position of the left pinch gesture
       this.lPinchPos.copy(this.leftController.object3D.position);
     }
