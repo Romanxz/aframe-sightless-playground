@@ -11,8 +11,6 @@ AFRAME.registerComponent('drag', {
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
     this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this)); // Listen for thumbupstart event
-    this.el.addEventListener('thumbupstart', this.onThumbUpStart.bind(this)); // Listen for thumbupstart event
-    this.el.addEventListener('thumbupend', this.onThumbUpEnd.bind(this)); // Listen for thumbupstart event
     this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerup', this.onTriggerUp.bind(this)); // Listen for triggerup event
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
