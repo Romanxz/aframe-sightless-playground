@@ -135,7 +135,6 @@ export default function Playground() {
           </Entity>
           <Entity id="left"
             drag
-            thumb-controls={{ hand: 'left' }}
             hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
             raycaster={{ 
@@ -149,8 +148,6 @@ export default function Playground() {
           />
           <Entity id="right"
             drag
-            thumb-controls="hand: right"
-            thumb-controls-debug="enabled: true; controllerType: oculus"
             // hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
             raycaster={{ 

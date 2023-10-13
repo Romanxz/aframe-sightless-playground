@@ -9,6 +9,7 @@ AFRAME.registerComponent('drag', {
     this.axisAngleOffset = -37; // Set the desired distance offset in degrees
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
+    this.el.addEventListener('thumbupstart', this.onThumbUpStart.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerup', this.onTriggerUp.bind(this)); // Listen for triggerup event
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
@@ -49,6 +50,10 @@ AFRAME.registerComponent('drag', {
     this.intersectedObject = null; // Clear the intersected object
     this.distanceToTarget = 0;
     console.log("triggerup: ", event);
+  },
+
+  onThumbUpStart: function (evt) {
+    console.log("onThumbUpStart: ", {evt});
   },
 
   tick: function () {
