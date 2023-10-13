@@ -5,7 +5,8 @@ AFRAME.registerComponent('drag', {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.intersectedObject = null; // Reference to the intersected object
-    this.distanceToTarget = 0;
+    this.distanceToTarget = 0; // Distance from controller to the intersected object
+    this.speedFactor = 0.1; // Adjust fishing rod extension speed factor to taste
     this.axisAngleOffset = -37; // Set the desired angle offset in degrees
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
@@ -54,16 +55,12 @@ AFRAME.registerComponent('drag', {
     console.log("triggerup: ", event);
   },
 
-  onThumbUpStart: function (evt) {
-    console.log("onThumbUpStart: ", {evt});
-  },
-
-  onThumbUpEnd: function (evt) {
-    console.log("onThumbUpEnd: ", {evt});
-  },
-
   onThumbStickMoved: function (evt) {
-    console.log("onThumbStickMoved: ", {evt});
+    const direction = evt.detail.axis[1]; // Assuming evt.detail.axis[1] gives thumbstick Y-axis
+    // direction ranges from -1 to 1, so it will increment or decrement depending on thumbstick up or down movement
+    this.distanceToTarget += direction * this.speedFactor;
+    console.log("onThumbStickMoved: ", { evt });
+    console.log("distanceToTarget: ", this.distanceToTarget);
   },
 
   tick: function () {

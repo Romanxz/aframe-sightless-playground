@@ -141,6 +141,7 @@ export default function Playground() {
             raycaster={{
               origin: { x: 0.0065, y: -0.0186, z: -0.05 },
               direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
+              showLine: true,
               lineColor: "red",
               lineOpacity: 0.85,
               objects: ".draggable"
