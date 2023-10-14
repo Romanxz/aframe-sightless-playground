@@ -53,13 +53,13 @@ AFRAME.registerComponent("geometry-generator", {
     if (this.isDrag && this.generatedGeometry !== null) {
       // Get world position of the controller
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
-      // Calculate the new geometry position in the local coordinates of the content entity
+      // Calculate the new geometry position in the local coordinates of the content entity with desired offset
       const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-        controllerPosition.clone().add(this.offset),
+        controllerPosition.add(this.offset),
         new THREE.Vector3()
       );
       // Update the position of the sphere entity
-      generatedGeometry.setAttribute("position", geometryLocalPosition);
+      this.generatedGeometry.setAttribute("position", geometryLocalPosition);
     }
   },
 });
