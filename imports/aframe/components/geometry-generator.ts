@@ -5,7 +5,7 @@ AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
-    this.offset = { x: 0, y: 0.3, z: -0.3 } // Offset between the controller and the sphere entity
+    this.offset = new THREE.Vector3({ x: 0, y: 0.3, z: -0.3 }) // Offset between the controller and the sphere entity
     this.generatedGeometry = null; // Reference to the generatedGeometry entity
     // Event listeners for Oculus Touch A button
     this.el.addEventListener("abuttondown", this.onAButtonDown.bind(this));
@@ -56,8 +56,9 @@ AFRAME.registerComponent("geometry-generator", {
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
       // Calculate the new geometry position in the local coordinates of the content entity with desired offset
+      const newPosition = controllerPosition.add(this.offset.applyQuaternion(controllerRotation));
       const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-        controllerPosition.add(this.offset).applyQuaternion(controllerRotation),
+        newPosition,
         new THREE.Vector3()
       );
       // Update the position of the sphere entity
