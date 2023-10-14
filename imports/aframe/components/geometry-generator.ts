@@ -21,7 +21,7 @@ AFRAME.registerComponent("geometry-generator", {
     // Specify required properties
     const geometryProps = {
       geometry: "primitive: sphere; radius: 0.1",
-      position: geometryLocalPosition,y: 0.3,
+      position: geometryLocalPosition,
       sound: {
         src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
         autoplay: true,
