@@ -5,7 +5,7 @@ AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
-    this.offset = new THREE.Vector3(0, 0, -0.3) // Offset between the controller and the sphere entity
+    this.distanceToTarget = -0.3 // Distance between the controller and the sphere entity
     this.generatedGeometry = null; // Reference to the generatedGeometry entity
     // Event listeners for Oculus Touch A button
     this.el.addEventListener("abuttondown", this.onAButtonDown.bind(this));
@@ -55,14 +55,14 @@ AFRAME.registerComponent("geometry-generator", {
       // Get the position and rotation of the controller
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
-      // Calculate the new geometry position in the local coordinates of the content entity with desired offset
-      const newPosition = controllerPosition.add(this.offset.applyQuaternion(controllerRotation));
-      const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-        newPosition,
-        new THREE.Vector3()
-      );
+      // Calculate the offset in the controller's world space based on the initial distance to the target
+      const raduisOffset = new THREE.Vector3(0, 0, -this.distanceToTarget);
+      // Rotate the local offset to match the controller's current rotation
+      raduisOffset.applyQuaternion(controllerRotation);
+      // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
+      const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(this.raduisOffset), new THREE.Vector3());
       // Update the position of the sphere entity
-      this.generatedGeometry.object3D.position.copy(geometryLocalPosition);
+      this.generatedGeometry.object3D.position.copy(newPosition);
     }
   },
 });
