@@ -4,7 +4,7 @@ import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "./components/drag";
 import "./components/scene-dragger";
-import "./components/el-movement";
+import "./components/geometry-generator";
 import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Stack } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -152,6 +152,7 @@ export default function Playground() {
           />
           <Entity id="right"
             drag
+            geometry-generator
             hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
             thumb-controls="hand: right"
