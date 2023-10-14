@@ -5,7 +5,7 @@ AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
-    this.offset = new THREE.Vector3({ x: 0, y: 0.3, z: -0.3 }) // Offset between the controller and the sphere entity
+    this.offset = new THREE.Vector3(0, 0, -0.3) // Offset between the controller and the sphere entity
     this.generatedGeometry = null; // Reference to the generatedGeometry entity
     // Event listeners for Oculus Touch A button
     this.el.addEventListener("abuttondown", this.onAButtonDown.bind(this));
