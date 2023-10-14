@@ -15,7 +15,7 @@ AFRAME.registerComponent("geometry-generator", {
   onAButtonDown: function (event) {
     // Calculate position of the geometry inside sceneContent local coords relative to controller's world position and offset
     const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-      this.el.object3D.getWorldPosition(new THREE.Vector3()).clone().add(new THREE.Vector3(0, 0, -this.distanceToTarget)),
+      this.el.object3D.getWorldPosition(new THREE.Vector3()).clone().add({x: 0, y: 0, z: this.distanceToTarget}),
       new THREE.Vector3()
     );
     // Specify required properties
@@ -56,7 +56,7 @@ AFRAME.registerComponent("geometry-generator", {
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
       // Calculate the offset in the controller's world space based on the initial distance to the target
-      const raduisOffset = new THREE.Vector3(0, 0, -this.distanceToTarget);
+      const raduisOffset = new THREE.Vector3(0, 0, this.distanceToTarget);
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
