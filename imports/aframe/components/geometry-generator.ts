@@ -14,14 +14,13 @@ AFRAME.registerComponent("geometry-generator", {
 
   onAButtonDown: function (event) {
     // Calculate position of the geometry inside sceneContent local coords relative to controller's world position and offset
-    const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-      this.el.object3D.getWorldPosition(new THREE.Vector3()).clone().add(this.offset),
-      new THREE.Vector3()
-    );
+    // const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
+    //   this.el.object3D.getWorldPosition(new THREE.Vector3()).clone().add(this.offset),
+    //   new THREE.Vector3()
+    // );
     // Specify required properties
     const geometryProps = {
       geometry: "primitive: sphere; radius: 0.1",
-      position: geometryLocalPosition,
       sound: {
         src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
         autoplay: true,
@@ -35,7 +34,6 @@ AFRAME.registerComponent("geometry-generator", {
     // Create the geometry entity with the specified properties
     this.generatedGeometry = document.createElement("a-entity");
     this.generatedGeometry.setAttribute("geometry", geometryProps.geometry);
-    this.generatedGeometry.setAttribute("position", geometryProps.position);
     this.generatedGeometry.setAttribute("sound", geometryProps.sound);
     this.generatedGeometry.classList.add("draggable"); // Add the .draggable class
     // Add the geometry entity as a child of the sceneContent entity
