@@ -63,7 +63,9 @@ AFRAME.registerComponent('drag', {
   },
 
   onGripDown: function (event) {
-    this.distanceToTarget = 0.3;
+    if (this.isDrag) {
+      this.distanceToTarget = 0.3;
+    }
     console.log("onGripDown: ", event);
   },
 

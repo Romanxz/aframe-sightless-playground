@@ -121,8 +121,10 @@ export default function Playground() {
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
-            controls: "gamepad"
+            controls: "gamepad",
+            speed: 0.2
           }}
+          gamepad-controls={{ rotationSensitivity: 0 }}
           // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
           // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
           // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
