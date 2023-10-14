@@ -8,8 +8,8 @@ AFRAME.registerComponent("geometry-generator", {
     this.offset = { x: 0, y: 0, z: -0.3 } // Offset between the controller and the sphere entity
     this.generatedGeometry = null; // Reference to the generatedGeometry entity
     // Event listeners for Oculus Touch A button
-    controller.addEventListener("abuttondown", this.onAButtonDown.bind(this));
-    controller.addEventListener("abuttonup", this.onAButtonUp.bind(this));
+    this.el.addEventListener("abuttondown", this.onAButtonDown.bind(this));
+    this.el.addEventListener("abuttonup", this.onAButtonUp.bind(this));
   },
 
   onAButtonDown: function (event) {
