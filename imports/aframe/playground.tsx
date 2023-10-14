@@ -1,4 +1,5 @@
 import "aframe";
+import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "./components/drag";
@@ -118,13 +119,13 @@ export default function Playground() {
           />
         </Entity>
         <Entity id="cameraRig"
-        // movement-controls={{
-        //   camera: "#camera",
-        //   controls: "gamepad, nipple"
-        // }}
-        // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
-        // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
-        // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
+          movement-controls={{
+            camera: "#camera",
+            controls: "gamepad"
+          }}
+          // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
+          // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
+          // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
         >
           <Entity id="camera"
             camera={{ active: true }}

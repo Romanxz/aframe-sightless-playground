@@ -11,6 +11,7 @@ AFRAME.registerComponent('drag', {
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
     this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this)); // Listen for thumbupstart event
+    this.el.addEventListener('gripdown', this.onGripDown.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerdown', this.onTriggerDown.bind(this)); // Listen for triggerdown event
     this.el.addEventListener('triggerup', this.onTriggerUp.bind(this)); // Listen for triggerup event
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
@@ -48,7 +49,7 @@ AFRAME.registerComponent('drag', {
 
   onTriggerUp: function (event) {
     this.isDrag = false; // Flag to indicate that dragging has ended
-    this.intersectedObject = null; // Clear the intersected object
+    // this.intersectedObject = null; // Clear the intersected object
     console.log("triggerup: ", event);
   },
 
@@ -56,9 +57,14 @@ AFRAME.registerComponent('drag', {
     const direction = evt.detail.y;
     // direction ranges from -1 to 1, so it will increment or decrement depending on thumbstick up or down movement
     this.distanceToTarget += -direction * this.speedFactor;
-    this.distanceToTarget = Math.max(0.1, this.distanceToTarget);
+    this.distanceToTarget = Math.max(0.3, this.distanceToTarget);
     console.log("onThumbStickMoved: ", { evt });
     console.log("distanceToTarget: ", this.distanceToTarget);
+  },
+
+  onGripDown: function (event) {
+    this.distanceToTarget = 0.3;
+    console.log("onGripDown: ", event);
   },
 
   tick: function () {
