@@ -60,7 +60,7 @@ AFRAME.registerComponent("geometry-generator", {
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
-      const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(this.raduisOffset), new THREE.Vector3());
+      const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
       // Update the position of the sphere entity
       this.generatedGeometry.object3D.position.copy(newPosition);
     }
