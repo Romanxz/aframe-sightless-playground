@@ -5,7 +5,7 @@ AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
-    this.offset = { x: 0, y: 0, z: -0.3 } // Offset between the controller and the sphere entity
+    this.offset = { x: 0, y: 0.3, z: -0.3 } // Offset between the controller and the sphere entity
     this.generatedGeometry = null; // Reference to the generatedGeometry entity
     // Event listeners for Oculus Touch A button
     this.el.addEventListener("abuttondown", this.onAButtonDown.bind(this));
@@ -20,10 +20,11 @@ AFRAME.registerComponent("geometry-generator", {
     );
     // Specify required properties
     const geometryProps = {
-      geometry: "primitive: sphere; radius: 0.2",
-      position: geometryLocalPosition,
+      geometry: "primitive: sphere; radius: 0.1",
+      position: geometryLocalPosition,y: 0.3,
       sound: {
-        src: "playground-a.wav",
+        src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
+        autoplay: true,
         loop: true,
         volume: 0.4,
         refDistance: 0.2,
@@ -51,15 +52,16 @@ AFRAME.registerComponent("geometry-generator", {
 
   tick: function () {
     if (this.isDrag && this.generatedGeometry !== null) {
-      // Get world position of the controller
+      // Get the position and rotation of the controller
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
+      const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
       // Calculate the new geometry position in the local coordinates of the content entity with desired offset
       const geometryLocalPosition = this.sceneContent.object3D.worldToLocal(
-        controllerPosition.add(this.offset),
+        controllerPosition.add(this.offset).applyQuaternion(controllerRotation),
         new THREE.Vector3()
       );
       // Update the position of the sphere entity
-      this.generatedGeometry.setAttribute("position", geometryLocalPosition);
+      this.generatedGeometry.object3D.position.copy(geometryLocalPosition);
     }
   },
 });
