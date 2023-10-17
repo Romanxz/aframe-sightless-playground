@@ -33,7 +33,7 @@ AFRAME.registerComponent("geometry-generator", {
         maxDistance: 60,
         rolloffFactor: 3,
       },
-      material={
+      material: {
         shader: "standard",
         opacity: 0.5,
       }
@@ -60,7 +60,7 @@ AFRAME.registerComponent("geometry-generator", {
   },
 
   onThumbStickMoved: function (evt) {
-    if (this.generatedEntity !== null && this.isDrag) {
+    if (this.isDrag && this.generatedEntity !== null) {
       const direction = evt.detail.x;
       // Check the direction of the thumbstick movement
       if (direction < -0.4) {
