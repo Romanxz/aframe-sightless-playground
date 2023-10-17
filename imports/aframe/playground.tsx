@@ -68,7 +68,7 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 40,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "sphere", radius: 0.1 }}
@@ -87,7 +87,7 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 40,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2, segmentsWidth: 16, segmentsHeight: 9 }}
@@ -106,7 +106,7 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 40,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "cylinder", radius: 0.1, height: 0.2 }}
