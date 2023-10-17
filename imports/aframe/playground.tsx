@@ -90,7 +90,7 @@ export default function Playground() {
               maxDistance: 60,
               rolloffFactor: 3,
             }}
-            geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2, segmentsWidth: 16, segmentsHeight: 9 }}
+            geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2 }}
             position={{ x: 1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
