@@ -74,7 +74,7 @@ AFRAME.registerComponent("geometry-generator", {
           this.cycleGeometryType(1);
           this.isThumbstickReleased = false;
         }
-      } else if (-0.2 < direction < 0.2) {
+      } else {
         // Reset the flags and direction when thumbstick is released to its default position
         this.isThumbstickReleased = true;
       }
