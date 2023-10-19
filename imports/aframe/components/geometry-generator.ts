@@ -5,6 +5,7 @@ AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
+    this.isThumbstickReleased = true; // Flag to track if the thumbstick is released
     this.distanceToTarget = 0.3 // Distance between the controller and the sphere entity
     this.generatedEntity = null; // Reference to the generatedEntity entity
     this.geometryType = "sphere"; // Type of the generated geometry
@@ -19,7 +20,7 @@ AFRAME.registerComponent("geometry-generator", {
     if (this.generatedEntity === null) {
       // Specify required properties
       const geometryProps = {
-        geometry: { primitive: this.geometryType, radius: 0.1 },
+        geometry: { primitive: "sphere", radius: 0.1 },
         // position: geometryLocalPosition,
         sound: {
           src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
@@ -61,24 +62,37 @@ AFRAME.registerComponent("geometry-generator", {
     if (this.isDrag && this.generatedEntity !== null) {
       const direction = evt.detail.x;
       // Check the direction of the thumbstick movement
-      if (direction !== 0) {
-        // Move to the next or previous geometry type
-        this.cycleGeometryType(direction);
+      if (direction < -0.2) {
+        // Move to the previous geometry type if thumbstick is released
+        if (this.isThumbstickReleased) {
+          this.cycleGeometryType(-1);
+          this.isThumbstickReleased = false;
+        }
+      } else if (direction > 0.2) {
+        // Move to the next geometry type if thumbstick is released
+        if (this.isThumbstickReleased) {
+          this.cycleGeometryType(1);
+          this.isThumbstickReleased = false;
+        }
+      } else if (-0.2 < direction < 0.2) {
+        // Reset the flags and direction when thumbstick is released to its default position
+        this.isThumbstickReleased = true;
       }
     }
   },
 
-  cycleGeometryType: function (direction) {
+  cycleGeometryType: function (step) {
     const geometryTypes = ["sphere", "cylinder", "box"];
+    // Get the current index of this.geometryType in the geometryTypes array
     const currentIndex = geometryTypes.indexOf(this.geometryType);
-    // Calculate the new index
-    let newIndex = currentIndex + Math.round(direction);
+    // Calculate the new index based on the step value
+    let newIndex = currentIndex + step;
     // Handle wrap-around if necessary
     if (newIndex < 0) {
       newIndex = geometryTypes.length - 1;
     } else if (newIndex >= geometryTypes.length) {
       newIndex = 0;
-    };
+    }
     // Update this.geometryType to the new value
     this.geometryType = geometryTypes[newIndex];
     // Update generatedEntity props
