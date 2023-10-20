@@ -4,6 +4,7 @@ export { };
 AFRAME.registerComponent("geometry-generator", {
   init: function () {
     this.sceneContent = document.getElementById("content");
+    this.cameraRig = document.getElementById("cameraRig");
     this.isDrag = false; // Flag to track if the button is pressed
     this.isThumbstickReleased = true; // Flag to track if the thumbstick is released
     this.distanceToTarget = 0.3 // Distance between the controller and the sphere entity

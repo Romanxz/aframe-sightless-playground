@@ -69,14 +69,14 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 60,
+              maxDistance: 100,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "sphere", radius: 0.1 }}
             position={{ x: -1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(666),
+              color: getColorFromId(6666),
             }}
           />
           <Entity
@@ -87,15 +87,14 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 60,
+              maxDistance: 100,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2 }}
             position={{ x: 1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(222),
-              // opacity: 0.3,
+              color: getColorFromId(1111),
             }}
           />
           <Entity
@@ -106,15 +105,14 @@ export default function Playground() {
               loop: true,
               volume: 0.4,
               refDistance: 0.2,
-              maxDistance: 60,
+              maxDistance: 100,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "cylinder", radius: 0.1, height: 0.2 }}
             position={{ x: 0, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(333),
-              // opacity: 0.3,
+              color: getColorFromId(3333),
             }}
           />
         </Entity>
@@ -125,9 +123,6 @@ export default function Playground() {
             speed: 0.2
           }}
           gamepad-controls={{ rotationSensitivity: 0 }}
-        // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
-        // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
-        // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
         >
           <Entity id="camera"
             camera={{ active: true }}
@@ -170,7 +165,6 @@ export default function Playground() {
         </Entity>
         <Entity id="cursor"
           cursor={{ rayOrigin: "mouse" }}
-          raycaster="show-line:true; lineColor: steelblue; lineOpacity: 0.85; objects: .draggable;"
         />
         <Entity
           environment={{
