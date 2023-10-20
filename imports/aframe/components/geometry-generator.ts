@@ -67,13 +67,13 @@ AFRAME.registerComponent("geometry-generator", {
     if (this.isDrag && this.generatedEntity !== null) {
       const direction = evt.detail.x;
       // Check the direction of the thumbstick movement
-      if (direction < -0.2) {
+      if (direction < -0.4) {
         // Move to the previous geometry type if thumbstick is released
         if (this.isThumbstickReleased) {
           this.cycleGeometryType(-1);
           this.isThumbstickReleased = false;
         }
-      } else if (direction > 0.2) {
+      } else if (direction > 0.4) {
         // Move to the next geometry type if thumbstick is released
         if (this.isThumbstickReleased) {
           this.cycleGeometryType(1);

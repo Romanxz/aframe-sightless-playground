@@ -71,10 +71,10 @@ AFRAME.registerComponent('drag', {
 
   onGripDown: function (event) {
     if (this.isDrag) {
+      this.el.components.haptics.pulse(0.6, 200);
       this.distanceToTarget = 0.3;
     };
     console.log("onGripDown: ", event);
-    this.el.components.haptics.pulse(0.6, 200);
   },
 
   tick: function () {
