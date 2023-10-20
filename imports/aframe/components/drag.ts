@@ -8,6 +8,7 @@ AFRAME.registerComponent('drag', {
     this.distanceToTarget = 0.1; // Distance from controller to the intersected object
     this.speedFactor = 0.05; // Adjust fishing rod extension speed factor to taste
     this.axisAngleOffset = -37; // Set the desired angle offset in degrees
+    this.isDrag = false; // Flag to track if drag is active
     // this.startPosition = new THREE.Vector3(); // Initial position of the controller
     // this.startRotation = new THREE.Quaternion(); // Initial rotation of the controller
     this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this)); // Listen for thumbupstart event
@@ -24,7 +25,7 @@ AFRAME.registerComponent('drag', {
       const intersectedObject = event.detail.els[0]
       this.intersectedObject = intersectedObject // Set the intersected object
       console.log("raycaster-intersection: ", event);
-    } else if (!this.isDrag) {
+    } else if (this.isDrag === false) {
       this.el.components.haptics.pulse(0.6, 200);
     }
   },
@@ -52,10 +53,13 @@ AFRAME.registerComponent('drag', {
   },
 
   onTriggerUp: function (event) {
+    if (this.intersectedObject) {
+      this.el.components.haptics.pulse(0.8, 80);
+    }
     this.isDrag = false; // Flag to indicate that dragging has ended
-    // this.intersectedObject = null; // Clear the intersected object
+    this.intersectedObject = null; // Clear the intersected object
     console.log("triggerup: ", event);
-    this.el.components.haptics.pulse(0.8, 80);
+    
   },
 
   onThumbStickMoved: function (evt) {

@@ -50,12 +50,11 @@ Current setup includes a virtual arena with three geometric elements: a sphere, 
 
 Haptic Feedback provides physical sensations to communicate information to the user, adding a new dimension of interactivity and immersion. In our 3D playground, haptic vibrations are triggered for various controller actions:
 
-- When creating new elements.
-- During the confirmation of geometry selection.
+- When raycasting existing objects with .draggable css class.
+- When creating new objects.
+- During the process of geometry selection.
 - While interacting with objects in the scene (dragging, rotating, etc).
 - When snapping an object to a closer distance.
-  
-These provide indications of actions from the controller, creating more engagement and a more natural interaction for the user.
 
 ## Navigation
 
