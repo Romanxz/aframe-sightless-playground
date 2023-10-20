@@ -24,7 +24,8 @@ AFRAME.registerComponent('drag', {
       const intersectedObject = event.detail.els[0]
       this.intersectedObject = intersectedObject // Set the intersected object
       console.log("raycaster-intersection: ", event);
-      this.el.components.haptics.pulse(0.5, 300);
+    } else if (!this.isDrag) {
+      this.el.components.haptics.pulse(0.6, 200);
     }
   },
 
@@ -33,7 +34,7 @@ AFRAME.registerComponent('drag', {
       this.intersectedObject = null; // Clear the intersected object
       this.distanceToTarget = 0;
       console.log("raycaster-intersection-cleared: ", event);
-      this.el.components.haptics.pulse(0.8, 100);
+      this.el.components.haptics.pulse(0.8, 80);
     }
   },
 
@@ -46,7 +47,7 @@ AFRAME.registerComponent('drag', {
       this.distanceToTarget = targetWorldPosition.distanceTo(controllerWorldPosition);
       this.isDrag = true; // Flag to indicate that dragging has started
       console.log("triggerdown: ", this.startPosition, this.startRotation);
-      this.el.components.haptics.pulse(0.8, 100);
+      this.el.components.haptics.pulse(0.8, 80);
     }
   },
 
@@ -54,7 +55,7 @@ AFRAME.registerComponent('drag', {
     this.isDrag = false; // Flag to indicate that dragging has ended
     // this.intersectedObject = null; // Clear the intersected object
     console.log("triggerup: ", event);
-    this.el.components.haptics.pulse(0.8, 100);
+    this.el.components.haptics.pulse(0.8, 80);
   },
 
   onThumbStickMoved: function (evt) {
@@ -72,7 +73,7 @@ AFRAME.registerComponent('drag', {
       this.distanceToTarget = 0.3;
     }
     console.log("onGripDown: ", event);
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);
   },
 
   tick: function () {

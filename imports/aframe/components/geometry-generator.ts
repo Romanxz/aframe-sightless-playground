@@ -46,7 +46,7 @@ AFRAME.registerComponent("geometry-generator", {
       this.sceneContent.appendChild(this.generatedEntity);
       // Set the flag to start dragging
       this.isDrag = true;
-      this.el.components.haptics.pulse(0.5, 300);
+      this.el.components.haptics.pulse(0.6, 200);
     }
   },
 
@@ -57,7 +57,7 @@ AFRAME.registerComponent("geometry-generator", {
     this.generatedEntity.setAttribute("sound", { volume: 0.4 })
     this.isDrag = false;
     this.generatedEntity = null;
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);
   },
 
   onThumbStickMoved: function (evt) {
@@ -113,7 +113,7 @@ AFRAME.registerComponent("geometry-generator", {
         break;
     };
     // Log the updated geometry type (You can replace this line with your desired logic)
-    this.el.components.haptics.pulse(0.8, 100);
+    this.el.components.haptics.pulse(0.8, 80);
     console.log("Geometry type changed:", this.geometryType);
   },
 

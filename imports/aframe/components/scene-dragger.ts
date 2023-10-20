@@ -40,7 +40,7 @@ AFRAME.registerComponent("scene-dragger", {
     this.lGripActive = true;
     this.lGripPos.copy(evt.target.object3D.position); // Store position of left grip
     this.childEntities = Array.from(document.querySelectorAll(".draggable")); // Get child entities
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);this.el.components.haptics.pulse(0.8, 80);
     if (this.rGripActive) {
       this.dragDisabled = true; // Disable drag when both grips are pressed
     }
@@ -49,7 +49,7 @@ AFRAME.registerComponent("scene-dragger", {
   onLeftGripUp: function (evt) {
     this.lGripActive = false;
     this.childEntities = null;
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);
     if (!this.rGripActive) {
       this.dragDisabled = false; // Enable drag when both grips are released
     }
@@ -73,7 +73,7 @@ AFRAME.registerComponent("scene-dragger", {
     this.lPinchActive = true;
     this.lPinchPos.copy(evt.detail.position); // Store position of left pinch gesture
     this.childEntities = Array.from(document.querySelectorAll(".draggable")); // Get child entities
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);
     if (this.rPinchActive) {
       this.dragDisabled = true; // Disable drag when both pinches are started
     }
@@ -82,7 +82,7 @@ AFRAME.registerComponent("scene-dragger", {
   onLeftPinchEnd: function (evt) {
     this.lPinchActive = false;
     this.childEntities = null;
-    this.el.components.haptics.pulse(0.5, 300);
+    this.el.components.haptics.pulse(0.6, 200);
     if (!this.rPinchActive) {
       this.dragDisabled = false; // Enable drag when both pinches are ended
     }
