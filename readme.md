@@ -1,5 +1,5 @@
 [![Gitpod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Romanxz/aframe-sightless-playground) 
-![Static Badge](https://img.shields.io/badge/Sightless%20Playground-lightblue?style=flat%20&logo=github&label=GH-pages&labelColor=darkviolet&link=https%3A%2F%2Fromanxz.github.io%2Faframe-sightless-playground%2F)
+[![Static Badge](https://img.shields.io/badge/Sightless%20Playground-lightblue?style=flat%20&logo=github&label=GH-pages&labelColor=darkviolet&link=https%3A%2F%2Fromanxz.github.io%2Faframe-sightless-playground%2F)](https://romanxz.github.io/aframe-sightless-playground/)
 
 
 # A-Frame 3D WebXR Sightless Playground
