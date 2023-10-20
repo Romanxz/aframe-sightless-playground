@@ -163,9 +163,6 @@ export default function Playground() {
             }}
           />
         </Entity>
-        <Entity id="cursor"
-          cursor={{ rayOrigin: "mouse" }}
-        />
         <Entity
           environment={{
             preset: "dream",
