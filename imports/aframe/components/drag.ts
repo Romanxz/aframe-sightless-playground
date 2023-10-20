@@ -17,7 +17,7 @@ AFRAME.registerComponent('drag', {
     this.el.addEventListener('triggerup', this.onTriggerUp.bind(this)); // Listen for triggerup event
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
     this.el.addEventListener('raycaster-intersection-cleared', this.onRaycasterIntersectionCleared.bind(this)); // Listen for raycaster-intersection-cleared event
-    console.log("drag initialized");
+    console.log("drag initialized ", this.el);
   },
 
   onRaycasterIntersection: function (event) {
@@ -31,7 +31,7 @@ AFRAME.registerComponent('drag', {
   },
 
   onRaycasterIntersectionCleared: function (event) {
-    if (!this.isDrag) {
+    if (this.isDrag === false) {
       this.intersectedObject = null; // Clear the intersected object
       this.distanceToTarget = 0;
       console.log("raycaster-intersection-cleared: ", event);
