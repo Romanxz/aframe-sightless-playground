@@ -2,6 +2,7 @@ import "aframe";
 import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
+import "aframe-haptics-component";
 import "./components/drag";
 import "./components/scene-dragger";
 import "./components/geometry-generator";
@@ -76,7 +77,6 @@ export default function Playground() {
             material={{
               shader: "standard",
               color: getColorFromId(666),
-              // opacity: 0.3,
             }}
           />
           <Entity
@@ -140,7 +140,7 @@ export default function Playground() {
             drag
             hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
-            thumb-controls="hand: left"
+            thumb-controls
             raycaster={{
               origin: { x: 0.0065, y: -0.0186, z: -0.05 },
               direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
@@ -155,7 +155,8 @@ export default function Playground() {
             geometry-generator
             hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
-            thumb-controls="hand: right"
+            thumb-controls
+            haptics="events: raycaster-intersection, raycaster-intersection-cleared; dur: 300; force: 0.5"
             raycaster={{
               origin: { x: -0.0065, y: -0.0186, z: -0.05 },
               direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
