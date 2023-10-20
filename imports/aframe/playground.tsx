@@ -157,7 +157,6 @@ export default function Playground() {
             hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
             thumb-controls
-            haptics
             raycaster={{
               origin: { x: -0.0065, y: -0.0186, z: -0.05 },
               direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
