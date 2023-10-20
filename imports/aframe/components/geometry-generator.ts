@@ -51,13 +51,15 @@ AFRAME.registerComponent("geometry-generator", {
   },
 
   onBButtonDown: function () {
+    if (this.isDrag && this.generatedEntity !== null) {
+      this.el.components.haptics.pulse(0.6, 200);
+    };
     // Set the flag to stop dragging
     this.generatedEntity.classList.add("draggable"); // Add the .draggable class
     this.generatedEntity.setAttribute("material", { opacity: 1 })
     this.generatedEntity.setAttribute("sound", { volume: 0.4 })
     this.isDrag = false;
     this.generatedEntity = null;
-    this.el.components.haptics.pulse(0.6, 200);
   },
 
   onThumbStickMoved: function (evt) {
