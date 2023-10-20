@@ -46,6 +46,17 @@ Current setup includes a virtual arena with three geometric elements: a sphere, 
 
 - You also have the option to quickly snap an object to the closest possible distance by pressing the grip while dragging the object. This will instantly reduce the `distanceToTarget` value to the minimum of 0.3.
 
+## Haptic Feedback
+
+Haptic Feedback provides physical sensations to communicate information to the user, adding a new dimension of interactivity and immersion. In our 3D playground, haptic vibrations are triggered for various controller actions:
+
+- When creating new elements.
+- During the confirmation of geometry selection.
+- While interacting with objects in the scene (dragging, rotating, etc).
+- When snapping an object to a closer distance.
+  
+These provide indications of actions from the controller, creating more engagement and a more natural interaction for the user.
+
 ## Navigation
 
 Finally, you can navigate the virtual environment in a typical fashion using the left thumbstick. Move it in any direction to smoothly traverse through the scene.

@@ -125,9 +125,9 @@ export default function Playground() {
             speed: 0.2
           }}
           gamepad-controls={{ rotationSensitivity: 0 }}
-          // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
-          // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
-          // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
+        // nipple-controls="mode: static; lookJoystickEnabled: false; moveJoystickPosition: right"
+        // navigator={{ cameraRig: '#camera', cameraHead: '#camera' }}
+        // position={{ x: 0, y: 1.6, z: 0 }} rotaton={{ x: 0, y: 0, z: 0 }}
         >
           <Entity id="camera"
             camera={{ active: true }}
@@ -141,7 +141,7 @@ export default function Playground() {
             hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
             thumb-controls
-            haptics
+            haptics={{ enabled: true }}
             raycaster={{
               origin: { x: 0.0065, y: -0.0186, z: -0.05 },
               direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
