@@ -3,11 +3,12 @@ import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
+import "./components/link";
 import "./components/drag";
 import "./components/scene-dragger";
 import "./components/geometry-generator";
-import React, { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Stack } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
 import { getColorFromId } from "./methods/get-color-from-id";
 
@@ -147,6 +148,7 @@ export default function Playground() {
             }}
           />
           <Entity id="right"
+            link
             drag
             geometry-generator
             hand-tracking-controls={{ hand: 'right' }}
