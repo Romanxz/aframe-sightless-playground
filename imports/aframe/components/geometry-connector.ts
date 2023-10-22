@@ -39,12 +39,12 @@ AFRAME.registerComponent("geometry-connector", {
     if (this.intersectedObject !== null) {
       // Create the link entity with the specified properties
       const linkId = uuid();
-      this.linkId = linkId;
-      this.links = { ...this.links, linkId: { entity: document.createElement("a-entity") } };
-      this.links[this.linkId].entity.setAttribute("geometry", { primitive: "cylinder", radius: 0.005, segmentsHeight: 6, openEnded: true });
+      this.links = { ...this.links, [linkId]: { entity: document.createElement("a-entity") } };
+      console.log("link created: ", linkId, this.links);
+      this.links[linkId].entity.setAttribute("geometry", { primitive: "cylinder", radius: 0.005, segmentsHeight: 6, openEnded: true });
       // Add the link entity as a child of the sceneContent entity
       this.sceneContent.appendChild(this.links[this.linkId].entity);
-      this.links[this.linkId].source = this.intersectedObject;
+      this.links[linkId].source = this.intersectedObject;
       const intersectedObjecttWorldPosition = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3());
       const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       this.distanceToTarget = intersectedObjecttWorldPosition.distanceTo(controllerWorldPosition);
