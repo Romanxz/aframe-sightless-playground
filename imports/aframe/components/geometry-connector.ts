@@ -36,7 +36,7 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onThumbStickDown: function (event) {
-    if (this.intersectedObject !== null && this.linkEntity === null) {
+    if (this.intersectedObject !== null) {
       // Create the link entity with the specified properties
       this.linkId = uuid();
       this.links[this.linkId].entity = document.createElement("a-entity");
@@ -49,6 +49,7 @@ AFRAME.registerComponent("geometry-connector", {
       this.distanceToTarget = intersectedObjecttWorldPosition.distanceTo(controllerWorldPosition);
       this.lastIntersectedObject = this.intersectedObject;
       this.el.components.haptics.pulse(0.8, 80);
+      console.log("onThumbStickDown: ", this.links[this.linkId]);
     };
   },
 

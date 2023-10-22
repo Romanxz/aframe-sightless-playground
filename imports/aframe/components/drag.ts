@@ -22,7 +22,6 @@ AFRAME.registerComponent('drag', {
     if (this.intersectedObject === null) {
       const intersectedObject = event.detail.els[0]
       this.intersectedObject = intersectedObject // Set the intersected object
-      console.log("raycaster-intersection: ", event);
     }
     if (this.isDrag === false) {
       this.el.components.haptics.pulse(0.6, 200);
@@ -33,7 +32,6 @@ AFRAME.registerComponent('drag', {
     if (this.isDrag === false) {
       this.intersectedObject = null; // Clear the intersected object
       this.distanceToTarget = 0;
-      console.log("raycaster-intersection-cleared: ", event);
       this.el.components.haptics.pulse(0.8, 80);
     };
   },
@@ -44,7 +42,6 @@ AFRAME.registerComponent('drag', {
       const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       this.distanceToTarget = targetWorldPosition.distanceTo(controllerWorldPosition);
       this.isDrag = true; // Flag to indicate that dragging has started
-      console.log("triggerdown: ", this.startPosition, this.startRotation);
       this.el.components.haptics.pulse(0.8, 80);
     };
   },
@@ -55,7 +52,6 @@ AFRAME.registerComponent('drag', {
     };
     this.isDrag = false; // Flag to indicate that dragging has ended
     this.intersectedObject = null; // Clear the intersected object
-    console.log("triggerup: ", event);
   },
 
   onThumbStickMoved: function (evt) {
@@ -63,8 +59,6 @@ AFRAME.registerComponent('drag', {
       const direction = evt.detail.y;
       this.distanceToTarget += -direction * this.speedFactor;
       this.distanceToTarget = Math.max(0.3, this.distanceToTarget);
-      console.log("onThumbStickMoved: ", { evt });
-      console.log("distanceToTarget: ", this.distanceToTarget);
       this.el.components.haptics.pulse(0.1, 10);
     };
   },
@@ -74,7 +68,6 @@ AFRAME.registerComponent('drag', {
       this.el.components.haptics.pulse(0.6, 200);
       this.distanceToTarget = 0.3;
     };
-    console.log("onGripDown: ", event);
   },
 
   tick: function () {
