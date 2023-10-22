@@ -53,7 +53,7 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onThumbStickUp: function () {
-    if ((this.intersectedObject !== this.lastIntersectedObject || null)) {
+    if (this.intersectedObject !== this.lastIntersectedObject && this.intersectedObject !== null) {
       this.links[this.linkId].target = this.intersectedObject;
       this.linkId = null;
       this.el.components.haptics.pulse(0.6, 200);
