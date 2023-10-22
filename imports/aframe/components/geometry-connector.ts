@@ -4,12 +4,13 @@ export { };
 AFRAME.registerComponent("geometry-connector", {
   init: function () {
     this.sceneContent = document.getElementById("content");
-    this.isDrag = false; // Flag to track if the button is pressed
     this.isThumbstickReleased = true; // Flag to track if the thumbstick is released
     this.distanceToTarget = 0.3 // Distance between the controller and the sphere entity
     this.axisAngleOffset = -37; // Set the desired angle offset in degrees
     this.linkEntity = null; // Reference to the linkEntity entity
     this.intersectedObject = null; // Reference to the intersected object
+    this.lastIntersectedObject = null; // Reference to the last intersected object
+    this.linkTargetPosition = null; 
     // Event listeners for Oculus Touch controller
     // this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this));
     this.el.addEventListener("thumbstickdown", this.onThumbStickDown.bind(this));
@@ -20,74 +21,49 @@ AFRAME.registerComponent("geometry-connector", {
 
   onRaycasterIntersection: function (event) {
     if (this.intersectedObject === null) {
-      const intersectedObject = event.detail.els[0]
+      const intersectedObject = event.detail.els[0];
       this.intersectedObject = intersectedObject // Set the intersected object
       console.log("raycaster-intersection: ", event);
     }
-    if (this.isDrag === false) {
-      this.el.components.haptics.pulse(0.6, 200);
-    };
   },
 
   onRaycasterIntersectionCleared: function (event) {
-    if (this.isDrag === false) {
+    if (this.linkEntity === false) {
       this.intersectedObject = null; // Clear the intersected object
       this.distanceToTarget = 0;
       console.log("raycaster-intersection-cleared: ", event);
-      this.el.components.haptics.pulse(0.8, 80);
     };
   },
 
   onThumbStickDown: function (event) {
     if (this.intersectedObject !== null && this.linkEntity === null) {
-      // Specify required properties
-      const geometryProps = {
-        geometry: { primitive: "cylinder", radius: 0.01, segmentsHeight: 3, openEnded: true },
-        // position: geometryLocalPosition,
-        sound: {
-          src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
-          autoplay: true,
-          loop: true,
-          volume: 0.6,
-          refDistance: 0.2,
-          maxDistance: 60,
-          rolloffFactor: 3,
-        },
-        material: {
-          shader: "standard",
-          opacity: 0.5,
-        }
-      };
       // Create the geometry entity with the specified properties
       this.linkEntity = document.createElement("a-entity");
-      this.linkEntity.setAttribute("geometry", geometryProps.geometry);
-      // this.linkEntity.setAttribute("sound", geometryProps.sound);
-      // this.linkEntity.setAttribute("material", geometryProps.material);
+      this.linkEntity.setAttribute("geometry", { primitive: "cylinder", radius: 0.005, segmentsHeight: 6, openEnded: true });
       // Add the geometry entity as a child of the sceneContent entity
       this.sceneContent.appendChild(this.linkEntity);
       const targetWorldPosition = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3());
       const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       this.distanceToTarget = targetWorldPosition.distanceTo(controllerWorldPosition);
-      this.isDrag = true; // Flag to indicate that dragging has started
+      this.lastIntersectedObject = this.intersectedObject;
       this.el.components.haptics.pulse(0.8, 80);
-      console.log("ThumbStickDown: ", this.linkEntity);
     };
   },
 
   onThumbStickUp: function () {
-    if (this.isDrag && this.linkEntity !== null && this.intersectedObject !== null) {
-      this.isDrag = false;
+    if ((this.intersectedObject !== this.lastIntersectedObject || null) && this.linkEntity !== null) {
+      this.linkTargetPosition = this.intersectedObject.object3D.position;
+      this.el.components.haptics.pulse(0.6, 200);
+    } else {
       this.sceneContent.removeChild(this.linkEntity);
       this.linkEntity = null;
-      this.el.components.haptics.pulse(0.6, 200);
-      console.log("ThumbStickUp");
-    };
+      this.el.components.haptics.pulse(0.8, 80);
+    }
   },
 
-
   tick: function () {
-    if (this.isDrag && this.linkEntity !== null && this.intersectedObject !== null) {
-      const linkSourcePosition = this.intersectedObject.object3D.position;
+    if (this.linkEntity !== null && this.lastIntersectedObject !== null) {
+      const linkSourcePosition = this.lastIntersectedObject.object3D.position;
       // Get the position and rotation of the controller
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
@@ -98,7 +74,9 @@ AFRAME.registerComponent("geometry-connector", {
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
-      const linkTargetPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
+      const linkTargetPosition = this.linkTargetPosition !== null 
+      ? this.linkTargetPosition 
+      : this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
 
       const linkMidpoint = new THREE.Vector3().addVectors(linkSourcePosition, linkTargetPosition).multiplyScalar(0.5);
 
