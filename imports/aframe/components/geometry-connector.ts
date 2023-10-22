@@ -1,7 +1,7 @@
 // @ts-nocheck
 export { };
 
-AFRAME.registerComponent("link", {
+AFRAME.registerComponent("geometry-connector", {
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.isDrag = false; // Flag to track if the button is pressed
@@ -11,7 +11,7 @@ AFRAME.registerComponent("link", {
     this.linkEntity = null; // Reference to the linkEntity entity
     this.intersectedObject = null; // Reference to the intersected object
     // Event listeners for Oculus Touch controller
-    this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this));
+    // this.el.addEventListener('thumbstickmoved', this.onThumbStickMoved.bind(this));
     this.el.addEventListener("thumbstickdown", this.onThumbStickDown.bind(this));
     this.el.addEventListener("thumbstickup", this.onThumbStickUp.bind(this));
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event

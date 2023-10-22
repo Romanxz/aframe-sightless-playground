@@ -3,7 +3,7 @@ import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
-import "./components/link";
+import "./components/geometry-connector";
 import "./components/drag";
 import "./components/scene-dragger";
 import "./components/geometry-generator";
@@ -148,8 +148,8 @@ export default function Playground() {
             }}
           />
           <Entity id="right"
-            link
             drag
+            geometry-connector
             geometry-generator
             hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
