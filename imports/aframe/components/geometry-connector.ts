@@ -67,10 +67,10 @@ AFRAME.registerComponent("geometry-connector", {
 
   tick: function () {
     if (Object.keys(this.links).length > 0) {
-      for (const link in this.links) {
-        const linkSourcePosition = link.source.object3D.position;
+      for (const linkId in this.links) {
+        const linkSourcePosition = this.links[linkId].source.object3D.position;
         let linkTargetPosition;
-        if (!link.target) {
+        if (!this.links[linkId].target) {
           // Get the position and rotation of the controller
           const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
           const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());
@@ -82,8 +82,8 @@ AFRAME.registerComponent("geometry-connector", {
           raduisOffset.applyQuaternion(controllerRotation);
           // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
           linkTargetPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
-        } else linkTargetPosition = link.target.object3D.position;
-        
+        } else linkTargetPosition = this.links[linkId].target.object3D.position;
+
         const linkMidpoint = new THREE.Vector3().addVectors(linkSourcePosition, linkTargetPosition).multiplyScalar(0.5);
 
         const linkHeight = linkSourcePosition.distanceTo(linkTargetPosition);
@@ -93,9 +93,9 @@ AFRAME.registerComponent("geometry-connector", {
           new THREE.Vector3().subVectors(linkTargetPosition, linkSourcePosition).normalize()
         );
         // Update the coordinates of the link entity
-        link.entity.object3D.position.copy(linkMidpoint);
-        link.entity.object3D.setRotationFromQuaternion(linkOrientation);
-        link.entity.setAttribute('geometry', { height: linkHeight });
+        this.links[linkId].entity.object3D.position.copy(linkMidpoint);
+        this.links[linkId].entity.object3D.setRotationFromQuaternion(linkOrientation);
+        this.links[linkId].entity.setAttribute('geometry', { height: linkHeight });
       }
     }
   },
