@@ -38,8 +38,9 @@ AFRAME.registerComponent("geometry-connector", {
   onThumbStickDown: function (event) {
     if (this.intersectedObject !== null) {
       // Create the link entity with the specified properties
-      this.linkId = uuid();
-      this.links[this.linkId].entity = document.createElement("a-entity");
+      const linkId = uuid();
+      this.linkId = linkId;
+      this.links = { ...this.links, linkId: { entity: document.createElement("a-entity") } };
       this.links[this.linkId].entity.setAttribute("geometry", { primitive: "cylinder", radius: 0.005, segmentsHeight: 6, openEnded: true });
       // Add the link entity as a child of the sceneContent entity
       this.sceneContent.appendChild(this.links[this.linkId].entity);
