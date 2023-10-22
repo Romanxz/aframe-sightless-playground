@@ -1,6 +1,6 @@
 // @ts-nocheck
 export { };
-import { uuid as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 AFRAME.registerComponent("geometry-connector", {
   init: function () {
@@ -49,7 +49,7 @@ AFRAME.registerComponent("geometry-connector", {
       this.distanceToTarget = intersectedObjecttWorldPosition.distanceTo(controllerWorldPosition);
       this.lastIntersectedObject = this.intersectedObject;
       this.el.components.haptics.pulse(0.8, 80);
-      console.log("onThumbStickDown: ", this.links[this.linkId]);
+      console.log("onThumbStickDown: ", this.links);
     };
   },
 
