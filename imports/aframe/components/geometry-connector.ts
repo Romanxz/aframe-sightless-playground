@@ -28,11 +28,8 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onRaycasterIntersectionCleared: function (event) {
-    if (this.linkEntity === false) {
       this.intersectedObject = null; // Clear the intersected object
-      this.distanceToTarget = 0;
       console.log("raycaster-intersection-cleared: ", event);
-    };
   },
 
   onThumbStickDown: function (event) {
@@ -56,7 +53,7 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onThumbStickUp: function () {
-    if ((this.intersectedObject !== this.lastIntersectedObject || null) && this.links[this.linkId] !== undefined) {
+    if ((this.intersectedObject !== this.lastIntersectedObject || null)) {
       this.links[this.linkId].target = this.intersectedObject;
       this.linkId = null;
       this.el.components.haptics.pulse(0.6, 200);
