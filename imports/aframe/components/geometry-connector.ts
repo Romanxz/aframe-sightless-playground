@@ -53,13 +53,15 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onThumbStickUp: function () {
-    if (this.intersectedObject !== this.lastIntersectedObject && this.intersectedObject !== null) {
+    if ((this.intersectedObject !== this.lastIntersectedObject) && (this.intersectedObject !== null)) {
       this.links[this.linkId].target = this.intersectedObject;
+      console.log("link created: ", this.links[this.linkId]);
       this.linkId = null;
       this.el.components.haptics.pulse(0.6, 200);
     } else {
       this.sceneContent.removeChild(this.links[this.linkId].entity);
-      this.links[this.linkId] = undefined;
+      console.log("link deleted: ", this.links[this.linkId]);
+      delete this.links[this.linkId];
       this.linkId = null;
       this.el.components.haptics.pulse(0.8, 80);
     }
