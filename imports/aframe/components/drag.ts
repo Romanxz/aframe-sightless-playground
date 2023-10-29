@@ -42,12 +42,14 @@ AFRAME.registerComponent('drag', {
       const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       this.distanceToTarget = targetWorldPosition.distanceTo(controllerWorldPosition);
       this.isDrag = true; // Flag to indicate that dragging has started
+      this.intersectedObject.setAttribute("sound", { volume: 0.8 })
       this.el.components.haptics.pulse(0.8, 80);
     };
   },
 
   onTriggerUp: function (event) {
     if (this.intersectedObject !== null) {
+      this.intersectedObject.setAttribute("sound", { volume: 0.5 })
       this.el.components.haptics.pulse(0.8, 80);
     };
     this.isDrag = false; // Flag to indicate that dragging has ended

@@ -4,10 +4,10 @@ import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
 // import "networked-aframe";
-import "./components/geometry-connector";
 import "./components/drag";
 import "./components/scene-dragger";
 import "./components/geometry-generator";
+import "./components/geometry-connector";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -89,7 +89,8 @@ export default function Playground() {
         renderer={{
           logarithmicDepthBuffer: true,
           colorManagement: true,
-          foveationLevel: 0
+          foveationLevel: 0,
+          highRefreshRate: true
         }}
       >
         <Entity id="content">
@@ -99,7 +100,7 @@ export default function Playground() {
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
               loop: true,
-              volume: 0.4,
+              volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
               rolloffFactor: 3,
@@ -117,7 +118,7 @@ export default function Playground() {
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav`,
               loop: true,
-              volume: 0.4,
+              volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
               rolloffFactor: 3,
@@ -135,7 +136,7 @@ export default function Playground() {
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav`,
               loop: true,
-              volume: 0.4,
+              volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
               rolloffFactor: 3,

@@ -27,7 +27,7 @@ AFRAME.registerComponent("geometry-generator", {
           src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
           autoplay: true,
           loop: true,
-          volume: 0.6,
+          volume: 0.8,
           refDistance: 0.2,
           maxDistance: 60,
           rolloffFactor: 3,
@@ -58,7 +58,7 @@ AFRAME.registerComponent("geometry-generator", {
     // Set the flag to stop dragging
     this.generatedEntity.classList.add("draggable"); // Add the .draggable class
     this.generatedEntity.setAttribute("material", { opacity: 1 })
-    this.generatedEntity.setAttribute("sound", { volume: 0.4 })
+    this.generatedEntity.setAttribute("sound", { volume: 0.5 })
     this.isDrag = false;
     this.generatedEntity = null;
   },
