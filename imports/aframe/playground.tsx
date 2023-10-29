@@ -223,7 +223,7 @@ export default function Playground() {
             groundColor2: "#3c6f91",
           }}
         /> */}
-        <Entitys
+        <Entity
           environment={{
             preset: "dream",
             seed: 1,
