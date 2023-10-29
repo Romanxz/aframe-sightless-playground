@@ -3,7 +3,7 @@ import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
-import "networked-aframe";
+// import "networked-aframe";
 import "./components/geometry-connector";
 import "./components/drag";
 import "./components/scene-dragger";
@@ -196,7 +196,7 @@ export default function Playground() {
             }}
           />
         </Entity>
-        <Entity
+        {/* <Entity
           environment={{
             active: true,
             preset: "contact",
@@ -210,7 +210,7 @@ export default function Playground() {
             fog: 0.6,
             dressing: "mushrooms",
             dressingAmount: 20,
-            dressingColor: "#657067",
+            dressingColor: "#3295ab",
             dressingScale: 20,
             dressingVariance: { x: 20, y: 20, z: 20 },
             dressingUniformScale: true,
@@ -222,8 +222,8 @@ export default function Playground() {
             groundColor: "#3c6f91",
             groundColor2: "#3c6f91",
           }}
-        />
-        {/* <Entity
+        /> */}
+        <Entitys
           environment={{
             preset: "dream",
             seed: 1,
@@ -236,7 +236,7 @@ export default function Playground() {
             groundColor: "#4f00d9",
             groundColor2: "#008f8f",
           }}
-        /> */}
+        />
       </Scene>
     </div>
   </>)
