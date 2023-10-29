@@ -3,6 +3,7 @@ import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
+import "networked-aframe";
 import "./components/geometry-connector";
 import "./components/drag";
 import "./components/scene-dragger";
@@ -48,18 +49,48 @@ export default function Playground() {
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
       <Scene
         id="scene"
-        // stats
+        stats
         events={{
           // "enter-vr": () => { setVr(true); console.log("entered VR"); },
           // "exit-vr": () => setVr(false),
-          // loaded: () => simulation.restart(),
+          loaded: () => {
+            console.log("scene loaded");
+            // @ts-ignore
+            //   NAF.schemas.add({
+            //     template: '#avatar-template',
+            //     components: [
+            //       'position',
+            //       'rotation',
+            //       {
+            //         selector: '.head',
+            //         component: 'material',
+            //         property: 'color'
+            //       }
+            //     ]
+            //   });
+          }
         }}
         // use-engine-tick={{
         //   onEngineTick: () => { },
         //   throttle: 68
         // }}
+        // networked-scene={{
+        //   serverURL: "https://8080-romanxz-aframesightless-r3l6wq0zpht.ws-eu105.gitpod.io",
+        //   app: "sightless-playground",
+        //   room: "playground",
+        //   connectOnLoad: true,
+        //   onConnect: () => { },
+        //   adapter: "socketio",
+        //   audio: false,
+        //   video: false,
+        //   debug: false,
+        // }}
         scene-dragger
-        renderer="logarithmicDepthBuffer: true"
+        renderer={{
+          logarithmicDepthBuffer: true,
+          colorManagement: true,
+          // foveationLevel: 0
+        }}
       >
         <Entity id="content">
           <Entity
@@ -134,9 +165,9 @@ export default function Playground() {
           </Entity>
           <Entity id="left"
             drag
-            hand-tracking-controls={{ hand: 'left' }}
+            // hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
-            thumb-controls
+            // networked-hand-controls={{ hand: 'left', handModelStyle: "controller" }}
             haptics={{ enabled: true }}
             raycaster={{
               origin: { x: 0.0065, y: -0.0186, z: -0.05 },
@@ -151,9 +182,9 @@ export default function Playground() {
             drag
             geometry-connector
             geometry-generator
-            hand-tracking-controls={{ hand: 'right' }}
+            // hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
-            thumb-controls
+            // networked-hand-controls={{ hand: 'right', handModelStyle: "controller" }}
             haptics={{ enabled: true }}
             raycaster={{
               origin: { x: -0.0065, y: -0.0186, z: -0.05 },
@@ -167,6 +198,33 @@ export default function Playground() {
         </Entity>
         <Entity
           environment={{
+            active: true,
+            preset: "contact",
+            seed: 14,
+            skyType: "gradient",
+            skyColor: "#46b87f",
+            horizonColor: "#9466bd",
+            lighting: "distant",
+            lightPosition: { x: 0, y: 2.1, z: -1 },
+            shadow: true,
+            fog: 0.6,
+            dressing: "mushrooms",
+            dressingAmount: 20,
+            dressingColor: "#657067",
+            dressingScale: 20,
+            dressingVariance: { x: 20, y: 20, z: 20 },
+            dressingUniformScale: true,
+            groundYScale: 5,
+            grid: "1x1",
+            gridColor: "#32e373",
+            ground: "spikes",
+            groundTexture: "none",
+            groundColor: "#3c6f91",
+            groundColor2: "#3c6f91",
+          }}
+        />
+        {/* <Entity
+          environment={{
             preset: "dream",
             seed: 1,
             lighting: "distant",
@@ -178,7 +236,7 @@ export default function Playground() {
             groundColor: "#4f00d9",
             groundColor2: "#008f8f",
           }}
-        />
+        /> */}
       </Scene>
     </div>
   </>)

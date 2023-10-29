@@ -7,7 +7,10 @@
     "export": "rm -rf out && next export",
     "build": "rm -rf app && next build",
     "start": "next start",
-    "dev": "next dev"
+    "dev": "next dev",
+    "mp": "node ./server/socketio-server.js",
+    "dev-easyrtc": "cross-env NODE_ENV=development node ./server/easyrtc-server.js",
+    "dev-socketio": "cross-env NODE_ENV=development node ./server/socketio-server.js"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.4.9",
@@ -29,10 +32,13 @@
     "events": "^3.3.0",
     "framer-motion": "^6.2.8",
     "md5": "^2.3.0",
+    "networked-aframe": "0.11.1",
     "next": "^13.5.4",
     "next-env": "^1.1.1",
+    "open-easyrtc": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "socket.io": "^4.7.2",
     "three": "^0.157.0",
     "uuid": "^9.0.1"
   },
@@ -40,6 +46,7 @@
     "@types/aframe": "^1.2.2",
     "@types/react": "^18.0.1",
     "buffer": "^6.0.3",
+    "cross-env": "^7.0.3",
     "jest": "^29.3.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"

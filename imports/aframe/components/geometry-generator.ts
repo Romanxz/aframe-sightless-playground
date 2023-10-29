@@ -115,7 +115,7 @@ AFRAME.registerComponent("geometry-generator", {
         this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav` })
         break;
     };
-    // Log the updated geometry type (You can replace this line with your desired logic)
+    // Log the updated geometry type
     this.el.components.haptics.pulse(0.8, 80);
     console.log("Geometry type changed:", this.geometryType);
   },

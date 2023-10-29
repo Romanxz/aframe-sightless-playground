@@ -42,9 +42,9 @@ AFRAME.registerComponent("geometry-connector", {
       // Add the link entity as a child of the sceneContent entity
       this.sceneContent.appendChild(this.links[linkId].entity);
       this.links[linkId].source = this.intersectedObject;
-      const intersectedObjecttWorldPosition = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3());
+      const intersectedObjectWorldPosition = this.intersectedObject.object3D.getWorldPosition(new THREE.Vector3());
       const controllerWorldPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
-      this.distanceToTarget = intersectedObjecttWorldPosition.distanceTo(controllerWorldPosition);
+      this.distanceToTarget = intersectedObjectWorldPosition.distanceTo(controllerWorldPosition);
       this.lastIntersectedObject = this.intersectedObject;
       this.linkId = linkId;
       this.el.components.haptics.pulse(0.8, 80);
