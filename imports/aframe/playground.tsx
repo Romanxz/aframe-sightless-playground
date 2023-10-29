@@ -89,7 +89,7 @@ export default function Playground() {
         renderer={{
           logarithmicDepthBuffer: true,
           colorManagement: true,
-          // foveationLevel: 0
+          foveationLevel: 0
         }}
       >
         <Entity id="content">
@@ -224,17 +224,29 @@ export default function Playground() {
           }}
         /> */}
         <Entity
+          light={{
+            type: 'ambient',
+            color: '#ddb8f2', // neon-retrowave-dark-violet
+            intensity: 1,
+            decay: 2, // by default in a-frame, the decay is set to 1 for 'ambient' type of light, but adjusted to any other value, can create effects similar to glow,
+          }}
+          position={{ x: 0, y: 15, z: 0 }}
+        />
+        <Entity
           environment={{
             preset: "dream",
             seed: 1,
             lighting: "distant",
             shadow: true,
             fog: 0.6,
-            ground: "hills",
-            groundYScale: 30,
-            groundTexture: "checkerboard",
-            groundColor: "#4f00d9",
+            ground: "flat",
+            dressing: "none",
+            groundYScale: 0,
+            groundTexture: "none",
+            groundColor: "#440e45",
             groundColor2: "#008f8f",
+            grid: "1x1",
+            gridColor: "#5605f7",
           }}
         />
       </Scene>
