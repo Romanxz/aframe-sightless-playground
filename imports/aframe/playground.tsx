@@ -224,7 +224,7 @@ export default function Playground() {
             groundColor2: "#3c6f91",
           }}
         /> */}
-        <Entity
+        {/* <Entity
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
@@ -232,14 +232,14 @@ export default function Playground() {
             decay: 2, // by default in a-frame, the decay is set to 1 for 'ambient' type of light, but adjusted to any other value, can create effects similar to glow,
           }}
           position={{ x: 0, y: 15, z: 0 }}
-        />
+        /> */}
         <Entity
           environment={{
             preset: "dream",
             seed: 1,
             lighting: "distant",
             shadow: true,
-            fog: 0.6,
+            fog: 0,
             ground: "flat",
             dressing: "none",
             groundYScale: 0,
