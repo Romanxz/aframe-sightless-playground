@@ -1,4 +1,5 @@
 import "aframe";
+import * as THREE from 'three';
 import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
@@ -8,6 +9,7 @@ import "./components/drag";
 import "./components/scene-dragger";
 import "./components/geometry-generator";
 import "./components/geometry-connector";
+import "./components/sound-playback";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -18,11 +20,50 @@ export default function Playground() {
 
   useEffect(() => {
     if (startSounds) {
-      const sounds = document.querySelectorAll('a-entity[sound]');
+      const sceneEl = document.querySelector("a-scene");
       // @ts-ignore
-      sounds.forEach(sound => sound.components.sound.playSound());
+      sceneEl.components["sound-playback"].playSounds();
     }
   }, [startSounds]);
+
+  // useEffect(() => {
+  //   if (startSounds) {
+  //     const recursivelyPlaySounds = (sounds, index = 0) => {
+  //       if (!sounds.length) return;
+
+  //       const sound = sounds[index];
+
+  //       // @ts-ignore
+  //       sound.components.sound.playSound();
+
+  //       const playNextSound = () => {
+  //         sound.removeEventListener("sound-ended", playNextSound);
+  //         // Start over when we reach the end of the array
+  //         recursivelyPlaySounds(sounds, (index + 1) % sounds.length);
+  //       };
+
+  //       sound.addEventListener("sound-ended", playNextSound);
+  //     }
+
+  //     let sounds = Array.from(document.querySelectorAll('a-entity[sound]'));
+
+  //     const cameraEl = document.getElementById("camera");
+  //     if (!cameraEl || !sounds.length) return;
+
+  //     // @ts-ignore
+  //     const cameraWorldPosition = cameraEl.object3D.getWorldPosition(new THREE.Vector3());
+
+  //     sounds.sort((a, b) => {
+  //       // @ts-ignore
+  //       const aPosition = a.object3D.getWorldPosition(new THREE.Vector3());
+  //       // @ts-ignore
+  //       const bPosition = b.object3D.getWorldPosition(new THREE.Vector3());
+  //       return cameraWorldPosition.distanceTo(aPosition) - cameraWorldPosition.distanceTo(bPosition);
+  //     });
+
+  //     recursivelyPlaySounds(sounds);
+  //   }
+  // }, [startSounds]);
 
   return (<>
     {!startSounds && (
@@ -85,6 +126,7 @@ export default function Playground() {
         //   video: false,
         //   debug: false,
         // }}
+        sound-playback
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
@@ -95,11 +137,13 @@ export default function Playground() {
       >
         <Entity id="content">
           <Entity
+            id="sphere"
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
-              loop: true,
+              autoplay: false,
+              // loop: true,
               volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
@@ -113,11 +157,13 @@ export default function Playground() {
             }}
           />
           <Entity
+            id="box"
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav`,
-              loop: true,
+              autoplay: false,
+              // loop: true,
               volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
@@ -131,11 +177,13 @@ export default function Playground() {
             }}
           />
           <Entity
+            id="cylinder"
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav`,
-              loop: true,
+              autoplay: false,
+              // loop: true,
               volume: 0.5,
               refDistance: 0.2,
               maxDistance: 100,
@@ -161,7 +209,7 @@ export default function Playground() {
             camera={{ active: true }}
             look-controls={{ pointerLockEnabled: false }}
             wasd-controls={{ enabled: true, fly: false }}
-            position={{ x: 0, y: 1.6, z: 0 }}
+            position={{ x: -1, y: 1.6, z: 0 }}
           >
           </Entity>
           <Entity id="left"
