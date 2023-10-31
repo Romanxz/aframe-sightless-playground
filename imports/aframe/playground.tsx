@@ -88,7 +88,7 @@ export default function Playground() {
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
-          colorManagement: true,
+          // colorManagement: true,
           foveationLevel: 0,
           highRefreshRate: true
         }}
@@ -199,12 +199,12 @@ export default function Playground() {
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
-            intensity: 1,
+            intensity: 0.5,
             decay: 2,
           }}
           position={{ x: 0, y: 15, z: 0 }}
-        />
-        <Entity
+        /> */}
+        {/* <Entity
           environment={{
             preset: "dream",
             seed: 1,
