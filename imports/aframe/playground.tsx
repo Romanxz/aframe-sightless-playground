@@ -88,7 +88,7 @@ export default function Playground() {
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
-          colorManagement: true,
+          // colorManagement: true,
           foveationLevel: 0,
           highRefreshRate: true
         }}
