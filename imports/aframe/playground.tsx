@@ -88,7 +88,7 @@ export default function Playground() {
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
-          // colorManagement: true,
+          colorManagement: true,
           foveationLevel: 0,
           highRefreshRate: true
         }}
@@ -195,7 +195,7 @@ export default function Playground() {
             }}
           />
         </Entity>
-        <Entity
+        {/* <Entity
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
@@ -220,7 +220,7 @@ export default function Playground() {
             grid: "1x1",
             gridColor: "#5605f7",
           }}
-        />
+        /> */}
         {/* <Entity
           environment={{
             preset: "dream",
@@ -229,7 +229,7 @@ export default function Playground() {
             groundColor2: "#008f8f",
           }}
         /> */}
-        {/* <Entity
+        <Entity
           environment={{
             active: true,
             preset: "contact",
@@ -255,7 +255,7 @@ export default function Playground() {
             groundColor: "#3c6f91",
             groundColor2: "#3c6f91",
           }}
-        /> */}
+        />
       </Scene>
     </div>
   </>)
