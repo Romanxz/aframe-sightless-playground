@@ -12,31 +12,46 @@ AFRAME.registerComponent('sound-playback', {
     console.log('[sound-playback] initialized');
   },
 
-  playNextSound: function() {
+  playNextSound: function () {
+    // Check that there are sound entities available and 
+    // the soundIndex points to a valid sound entity
     if (!this.soundEntities || this.soundEntities.length === 0 || this.soundIndex < 0) {
-        return;
+      console.log('[sound-playback] playNextSound: conditions not met');
+      return;
     }
 
-    const soundEntity = this.soundEntities[this.soundIndex];
-    soundEntity.components.sound.playSound();
-    
-    // console.log('[sound-playback] playing next sound:', soundEntity.getAttribute('id') || soundEntity.nodeName);
+    // Get the next sound entity
+    const nextSoundEntity = this.soundEntities[this.soundIndex];
 
-    const playNextSound = () => {
-      soundEntity.removeEventListener('sound-ended', playNextSound);
-      // console.log('[sound-playback] sound ended:', soundEntity.getAttribute('id') || soundEntity.nodeName);
+    // Check if this sound entity is already playing
+    if (this.currentSoundEntity === nextSoundEntity) {
+      // If so, we increment the sound index (and wrapp around if necessary)
       this.soundIndex = (this.soundIndex + 1) % this.soundEntities.length;
+      // Then we call this function again to get the next sound entity
       this.playNextSound();
-    };
+    } else {
+      // If the next sound entity is not currently playing, we play its sound
+      nextSoundEntity.components.sound.playSound();
 
-    soundEntity.addEventListener('sound-ended', playNextSound);
+      // console.log('[sound-playback] playing next sound:', nextSoundEntity.getAttribute('id') || nextSoundEntity.nodeName, `index: ${this.soundIndex}`);
+
+      const playNextSound = () => {
+        nextSoundEntity.removeEventListener('sound-ended', playNextSound);
+        // console.log('[sound-playback] sound ended:', nextSoundEntity.getAttribute('id') || nextSoundEntity.nodeName);
+        this.currentSoundEntity = null;
+        this.soundIndex = (this.soundIndex + 1) % this.soundEntities.length;
+        this.playNextSound();
+      };
+      nextSoundEntity.addEventListener('sound-ended', playNextSound);
+      this.currentSoundEntity = nextSoundEntity;
+    }
   },
 
-  stopSounds: function() {
+  stopSounds: function () {
     console.log('[sound-playback] stopping sounds');
-    
+
     if (!this.soundEntities) return;
-    
+
     this.soundEntities.forEach(entity => {
       if (entity.components.sound && entity.components.sound.isPlaying) {
         entity.components.sound.pauseSound();
@@ -46,7 +61,7 @@ AFRAME.registerComponent('sound-playback', {
     this.soundIndex = 0;
   },
 
-  playSounds: function() {
+  playSounds: function () {
     this.stopSounds();
     console.log('[sound-playback] playSounds');
     this.soundIndex = 0;
