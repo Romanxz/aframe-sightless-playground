@@ -9,6 +9,7 @@ import "./components/scene-dragger";
 import "./components/geometry-generator";
 import "./components/geometry-connector";
 import "./components/sound-playback";
+import "./components/reverb";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
@@ -98,6 +99,7 @@ export default function Playground() {
           highRefreshRate: true
         }}
       >
+        <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} />
         <Entity id="content">
           <Entity
             id="sphere"
