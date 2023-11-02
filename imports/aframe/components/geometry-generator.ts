@@ -1,5 +1,7 @@
 // @ts-nocheck
 export { };
+import randomInteger from 'random-int';
+import { getColorFromId } from '../methods/get-color-from-id';
 
 AFRAME.registerComponent("geometry-generator", {
   init: function () {
@@ -24,10 +26,8 @@ AFRAME.registerComponent("geometry-generator", {
         geometry: { primitive: "sphere", radius: 0.1 },
         // position: geometryLocalPosition,
         sound: {
-          src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
-          autoplay: true,
-          loop: true,
-          volume: 0.8,
+          src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sphere.wav`,
+          volume: 1,
           refDistance: 0.2,
           maxDistance: 60,
           rolloffFactor: 3,
@@ -35,6 +35,8 @@ AFRAME.registerComponent("geometry-generator", {
         material: {
           shader: "standard",
           opacity: 0.5,
+          // emissive: true,
+          color: getColorFromId(randomInteger(0, 10000))
         }
       };
       // Create the geometry entity with the specified properties
@@ -58,7 +60,7 @@ AFRAME.registerComponent("geometry-generator", {
     // Set the flag to stop dragging
     this.generatedEntity.classList.add("draggable"); // Add the .draggable class
     this.generatedEntity.setAttribute("material", { opacity: 1 })
-    this.generatedEntity.setAttribute("sound", { volume: 0.5 })
+    this.generatedEntity.setAttribute("sound", { volume: 0.8 })
     this.isDrag = false;
     this.generatedEntity = null;
   },
@@ -104,15 +106,15 @@ AFRAME.registerComponent("geometry-generator", {
     switch (this.geometryType) {
       case "sphere":
         this.generatedEntity.setAttribute("geometry", { primitive: this.geometryType, radius: 0.1 });
-        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav` })
+        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sphere.wav` })
         break;
       case "box":
         this.generatedEntity.setAttribute("geometry", { primitive: this.geometryType, height: 0.2, width: 0.2, depth: 0.2 });
-        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav` })
+        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}box.wav` })
         break;
       case "cylinder":
         this.generatedEntity.setAttribute("geometry", { primitive: this.geometryType, radius: 0.1, height: 0.2 });
-        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav` })
+        this.generatedEntity.setAttribute("sound", { src: `${process.env.GH_PAGES_PATH_PREFIX || ""}cylinder.wav` })
         break;
     };
     // Log the updated geometry type

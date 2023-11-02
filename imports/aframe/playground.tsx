@@ -1,5 +1,4 @@
 import "aframe";
-import * as THREE from 'three';
 import "aframe-extras";
 import "aframe-environment-component";
 import "aframe-thumb-controls-component";
@@ -13,7 +12,10 @@ import "./components/sound-playback";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
+import randomInteger from "random-int";
+
 import { getColorFromId } from "./methods/get-color-from-id";
+
 
 export default function Playground() {
   const [startSounds, setStartSounds] = useState(false);
@@ -25,45 +27,6 @@ export default function Playground() {
       sceneEl.components["sound-playback"].playSounds();
     }
   }, [startSounds]);
-
-  // useEffect(() => {
-  //   if (startSounds) {
-  //     const recursivelyPlaySounds = (sounds, index = 0) => {
-  //       if (!sounds.length) return;
-
-  //       const sound = sounds[index];
-
-  //       // @ts-ignore
-  //       sound.components.sound.playSound();
-
-  //       const playNextSound = () => {
-  //         sound.removeEventListener("sound-ended", playNextSound);
-  //         // Start over when we reach the end of the array
-  //         recursivelyPlaySounds(sounds, (index + 1) % sounds.length);
-  //       };
-
-  //       sound.addEventListener("sound-ended", playNextSound);
-  //     }
-
-  //     let sounds = Array.from(document.querySelectorAll('a-entity[sound]'));
-
-  //     const cameraEl = document.getElementById("camera");
-  //     if (!cameraEl || !sounds.length) return;
-
-  //     // @ts-ignore
-  //     const cameraWorldPosition = cameraEl.object3D.getWorldPosition(new THREE.Vector3());
-
-  //     sounds.sort((a, b) => {
-  //       // @ts-ignore
-  //       const aPosition = a.object3D.getWorldPosition(new THREE.Vector3());
-  //       // @ts-ignore
-  //       const bPosition = b.object3D.getWorldPosition(new THREE.Vector3());
-  //       return cameraWorldPosition.distanceTo(aPosition) - cameraWorldPosition.distanceTo(bPosition);
-  //     });
-
-  //     recursivelyPlaySounds(sounds);
-  //   }
-  // }, [startSounds]);
 
   return (<>
     {!startSounds && (
@@ -126,7 +89,7 @@ export default function Playground() {
         //   video: false,
         //   debug: false,
         // }}
-        sound-playback
+        sound-playback={{ throttle: 34 }}
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
@@ -141,19 +104,19 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-a.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sphere.wav`,
               autoplay: false,
               // loop: true,
-              volume: 0.5,
+              volume: 0.8,
               refDistance: 0.2,
-              maxDistance: 100,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "sphere", radius: 0.1 }}
             position={{ x: -1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(6666),
+              color: getColorFromId(randomInteger(0, 10000))
             }}
           />
           <Entity
@@ -161,19 +124,19 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-b.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}box.wav`,
               autoplay: false,
               // loop: true,
-              volume: 0.5,
+              volume: 0.8,
               refDistance: 0.2,
-              maxDistance: 100,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2 }}
             position={{ x: 1, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(1111),
+              color: getColorFromId(randomInteger(0, 10000))
             }}
           />
           <Entity
@@ -181,19 +144,19 @@ export default function Playground() {
             className="draggable"
             events={{ loaded: () => { } }}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}playground-c.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}cylinder.wav`,
               autoplay: false,
               // loop: true,
-              volume: 0.5,
+              volume: 0.8,
               refDistance: 0.2,
-              maxDistance: 100,
+              maxDistance: 60,
               rolloffFactor: 3,
             }}
             geometry={{ primitive: "cylinder", radius: 0.1, height: 0.2 }}
             position={{ x: 0, y: 1.2, z: -1 }}
             material={{
               shader: "standard",
-              color: getColorFromId(3333),
+              color: getColorFromId(randomInteger(0, 10000))
             }}
           />
         </Entity>
@@ -209,7 +172,7 @@ export default function Playground() {
             camera={{ active: true }}
             look-controls={{ pointerLockEnabled: false }}
             wasd-controls={{ enabled: true, fly: false }}
-            position={{ x: -1, y: 1.6, z: 0 }}
+            position={{ x: 0, y: 1.6, z: 0 }}
           >
           </Entity>
           <Entity id="left"

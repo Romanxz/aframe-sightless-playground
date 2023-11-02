@@ -35,6 +35,7 @@
     "networked-aframe": "0.11.1",
     "next": "^13.5.4",
     "next-env": "^1.1.1",
+    "random-int": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io": "^4.7.2",
