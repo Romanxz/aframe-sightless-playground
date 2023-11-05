@@ -4,18 +4,20 @@ import "aframe-environment-component";
 import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
 // import "networked-aframe";
-import "./components/drag";
-import "./components/scene-dragger";
-import "./components/geometry-generator";
-import "./components/geometry-connector";
-import "./components/sound-playback";
-import "./components/reverb";
+import "../../aframe/components/drag";
+import "../../aframe/components/scene-dragger";
+import "../../aframe/components/geometry-generator";
+import "../../aframe/components/geometry-connector";
+import "../../aframe/components/sound-playback";
+// import "../../aframe/components/reverb";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
 import randomInteger from "random-int";
 
-import { getColorFromId } from "./methods/get-color-from-id";
+import { getColorFromId } from "../../aframe/methods/get-color-from-id";
+import BoxGeometry from "./box";
+import Scene1 from "./scene1";
 
 
 export default function Playground() {
@@ -99,69 +101,8 @@ export default function Playground() {
           highRefreshRate: true
         }}
       >
-        <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} />
-        <Entity id="content">
-          <Entity
-            id="sphere"
-            className="draggable"
-            events={{ loaded: () => { } }}
-            sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sphere.wav`,
-              autoplay: false,
-              // loop: true,
-              volume: 0.8,
-              refDistance: 0.2,
-              maxDistance: 60,
-              rolloffFactor: 3,
-            }}
-            geometry={{ primitive: "sphere", radius: 0.1 }}
-            position={{ x: -1, y: 1.2, z: -1 }}
-            material={{
-              shader: "standard",
-              color: getColorFromId(randomInteger(0, 10000))
-            }}
-          />
-          <Entity
-            id="box"
-            className="draggable"
-            events={{ loaded: () => { } }}
-            sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}box.wav`,
-              autoplay: false,
-              // loop: true,
-              volume: 0.8,
-              refDistance: 0.2,
-              maxDistance: 60,
-              rolloffFactor: 3,
-            }}
-            geometry={{ primitive: "box", height: 0.2, width: 0.2, depth: 0.2 }}
-            position={{ x: 1, y: 1.2, z: -1 }}
-            material={{
-              shader: "standard",
-              color: getColorFromId(randomInteger(0, 10000))
-            }}
-          />
-          <Entity
-            id="cylinder"
-            className="draggable"
-            events={{ loaded: () => { } }}
-            sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}cylinder.wav`,
-              autoplay: false,
-              // loop: true,
-              volume: 0.8,
-              refDistance: 0.2,
-              maxDistance: 60,
-              rolloffFactor: 3,
-            }}
-            geometry={{ primitive: "cylinder", radius: 0.1, height: 0.2 }}
-            position={{ x: 0, y: 1.2, z: -1 }}
-            material={{
-              shader: "standard",
-              color: getColorFromId(randomInteger(0, 10000))
-            }}
-          />
-        </Entity>
+        {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
+        <Scene1 />
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
@@ -208,7 +149,7 @@ export default function Playground() {
             }}
           />
         </Entity>
-        {/* <Entity
+        <Entity
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
@@ -216,8 +157,8 @@ export default function Playground() {
             decay: 2,
           }}
           position={{ x: 0, y: 15, z: 0 }}
-        /> */}
-        {/* <Entity
+        />
+        <Entity
           environment={{
             preset: "dream",
             seed: 1,
@@ -233,7 +174,7 @@ export default function Playground() {
             grid: "1x1",
             gridColor: "#5605f7",
           }}
-        /> */}
+        />
         {/* <Entity
           environment={{
             preset: "dream",
@@ -242,7 +183,7 @@ export default function Playground() {
             groundColor2: "#008f8f",
           }}
         /> */}
-        <Entity
+        {/* <Entity
           environment={{
             active: true,
             preset: "contact",
@@ -268,7 +209,7 @@ export default function Playground() {
             groundColor: "#3c6f91",
             groundColor2: "#3c6f91",
           }}
-        />
+        /> */}
       </Scene>
     </div>
   </>)

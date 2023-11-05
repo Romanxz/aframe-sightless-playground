@@ -2,6 +2,8 @@
 export { };
 import { v4 as uuid } from 'uuid';
 
+// graph parcing algorhytm
+
 AFRAME.registerComponent("geometry-connector", {
   init: function () {
     this.sceneContent = document.getElementById("content");
@@ -18,6 +20,16 @@ AFRAME.registerComponent("geometry-connector", {
     this.el.addEventListener('raycaster-intersection', this.onRaycasterIntersection.bind(this)); // Listen for raycaster-intersection event
     this.el.addEventListener('raycaster-intersection-cleared', this.onRaycasterIntersectionCleared.bind(this)); // Listen for raycaster-intersection-cleared event
   },
+
+  // sortHash: function (nodeId) {
+  //   const findedLinks = [];
+  //   for (const link in this.links) {
+  //     if (this.links[link].source.id === nodeId) {
+  //       findedLinks.push(this.links[link]);
+  //     }
+  //   }
+  //   return findedLinks;
+  // },
 
   onRaycasterIntersection: function (event) {
     if (this.intersectedObject === null) {
