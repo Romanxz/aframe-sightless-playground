@@ -23,11 +23,19 @@ import Scene1 from "./scene1";
 export default function Playground() {
   const [startSounds, setStartSounds] = useState(false);
 
+  // useEffect(() => {
+  //   if (startSounds) {
+  //     const sceneEl = document.querySelector("a-scene");
+  //     // @ts-ignore
+  //     sceneEl.components["sound-playback"].playSounds();
+  //   }
+  // }, [startSounds]);
+
   useEffect(() => {
     if (startSounds) {
-      const sceneEl = document.querySelector("a-scene");
+      const sceneContent = document.getElementById("content");
       // @ts-ignore
-      sceneEl.components["sound-playback"].playSounds();
+      sceneContent.components["sound-sequence"].startSequence();
     }
   }, [startSounds]);
 
