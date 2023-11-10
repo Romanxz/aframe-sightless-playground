@@ -166,7 +166,7 @@ export default function Playground() {
           }}
           position={{ x: 0, y: 15, z: 0 }}
         />
-        <Entity
+        {/* <Entity
           environment={{
             preset: "dream",
             seed: 1,
@@ -182,7 +182,7 @@ export default function Playground() {
             grid: "1x1",
             gridColor: "#5605f7",
           }}
-        />
+        /> */}
         {/* <Entity
           environment={{
             preset: "dream",

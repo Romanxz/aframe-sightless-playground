@@ -18,6 +18,7 @@ const sceneContent = [
   },
   {
     id: 2,
+    soundId: uuid(),
     type: "edge",
     playbackQue: 2,
     sourceId: 1,
@@ -33,6 +34,7 @@ const sceneContent = [
   },
   {
     id: 4,
+    soundId: uuid(),
     type: "edge",
     playbackQue: 4,
     sourceId: 3,
@@ -48,6 +50,7 @@ const sceneContent = [
   },
   {
     id: 6,
+    soundId: uuid(),
     type: "edge",
     playbackQue: 6,
     sourceId: 5,
@@ -55,6 +58,7 @@ const sceneContent = [
   },
   {
     id: 7,
+    soundId: uuid(),
     type: "edge",
     playbackQue: 6,
     sourceId: 5,
@@ -62,6 +66,7 @@ const sceneContent = [
   },
   {
     id: 8,
+    soundId: uuid(),
     type: "edge",
     playbackQue: 6,
     sourceId: 5,
@@ -121,19 +126,20 @@ export default function Scene1() {
         return <Entity
           id={el.id}
           key={el.id}
-          sound={{
-            src: `${process.env.GH_PAGES_PATH_PREFIX || ""}edge.wav`,
-            autoplay: false,
-            // loop: true,
-            volume: 0.8,
-            refDistance: 0.1,
-            maxDistance: 60,
-            rolloffFactor: 3,
-          }}
+          // sound={{
+          //   src: `${process.env.GH_PAGES_PATH_PREFIX || ""}edge.wav`,
+          //   autoplay: false,
+          //   // loop: true,
+          //   volume: 0.8,
+          //   refDistance: 0.1,
+          //   maxDistance: 60,
+          //   rolloffFactor: 3,
+          // }}
           geometry={{ primitive: "cylinder", radius: 0.005, segmentsHeight: 3, openEnded: true, height: 1 }}
           material={{ shader: "standard", color: getColorFromId(randomInteger(0, 10000)), }}
         >
           <Entity
+            // id={el.id}
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}edge.wav`,
               autoplay: false,
@@ -143,7 +149,7 @@ export default function Scene1() {
               maxDistance: 60,
               rolloffFactor: 3,
             }}
-            animation={{ property: "position", }}
+            geometry={{ primitive: "sphere", radius: 0.1 }}
           />
         </Entity>
       }

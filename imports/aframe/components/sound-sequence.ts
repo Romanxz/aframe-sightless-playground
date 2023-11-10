@@ -7,17 +7,43 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   init: function () {
+    this.sceneContent = document.getElementById("content");
     this.soundIndex = 0;
     this.playSound = this.playSound.bind(this);
   },
 
   playSound: function () {
-    const soundEl = document.getElementById(`${this.data.sounds[this.soundIndex].id}`);
-    // Check if the sound component exists
-    if (soundEl.components.sound) {
-      soundEl.components.sound.stopSound();
-      soundEl.components.sound.playSound();
+    let soundEl;
+    const currentObj = this.data.sounds[this.soundIndex];
+
+    if (currentObj.type === "edge") {
+      const edgeEl = document.getElementById(`${currentObj.id}`);
+      soundEl = edgeEl.children[0];
+
+      const sourcePos = document.getElementById(`${currentObj.sourceId}`).object3D.getWorldPosition(new THREE.Vector3());
+      const targetPos = document.getElementById(`${currentObj.targetId}`).object3D.getWorldPosition(new THREE.Vector3());
+      // const sourcePosRot = sourcePos.applyQuaternion(edgeEl.object3D.quaternion)
+      // const targetPosRot = targetPos.applyQuaternion(edgeEl.object3D.quaternion)
+      const sourceLocalPos = edgeEl.object3D.worldToLocal(sourcePos, new THREE.Vector3());
+      const targetLocalPos = edgeEl.object3D.worldToLocal(targetPos, new THREE.Vector3());
+
+      // console.log("Positions: ", { sourceLocalPos, targetLocalPos })
+      soundEl.setAttribute("animation", {
+        property: "position",
+        from: { x: 0, y: sourceLocalPos.y, z: 0 },
+        to: { x: 0, y: targetLocalPos.y, z: 0 },
+        dur: 4000
+      });
+      setTimeout(() => {
+        soundEl.removeAttribute("animation");
+      }, 4003)
+      console.log("EdgeEl: ", { soundEl })
+    } else {
+      soundEl = document.getElementById(`${currentObj.id}`);
+      console.log("NodeEl: ", { soundEl })
     }
+
+    soundEl.components.sound.playSound();
 
     // Listen on the entity for the sound-ended event
     this.endListener = () => {
@@ -34,10 +60,15 @@ AFRAME.registerComponent('sound-sequence', {
 
   // Stop the current sound and end the sequence
   stopSequence: function () {
-    const soundEl = document.querySelector(`#${this.data.sounds[this.soundIndex].id}`);
-    if (soundEl.components.sound) {
-      soundEl.components.sound.stopSound();
-    }
+    let soundEl;
+    const currentObj = this.data.sounds[this.soundIndex];
+
+    if (currentObj.type === "edge") {
+      soundEl = document.getElementById(`${currentObj.id}`).children[0];
+    } else soundEl = document.getElementById(`${currentObj.id}`);
+
+    soundEl.components.sound.stopSound();
+
     soundEl.removeEventListener("sound-ended", this.endListener);
     this.soundIndex = 0;
   }
