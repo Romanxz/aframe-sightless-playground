@@ -18,6 +18,9 @@ import randomInteger from "random-int";
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 import BoxGeometry from "./box";
 import Scene1 from "./scene1";
+import Scene2 from "./scene2";
+import Scene3 from "./scene3";
+import Scene4 from "./scene4";
 
 
 export default function Playground() {
@@ -166,7 +169,7 @@ export default function Playground() {
           }}
           position={{ x: 0, y: 15, z: 0 }}
         />
-        {/* <Entity
+        <Entity
           environment={{
             preset: "dream",
             seed: 1,
@@ -182,7 +185,7 @@ export default function Playground() {
             grid: "1x1",
             gridColor: "#5605f7",
           }}
-        /> */}
+        />
         {/* <Entity
           environment={{
             preset: "dream",

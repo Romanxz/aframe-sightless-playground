@@ -4,6 +4,7 @@ export { };
 AFRAME.registerComponent('sound-sequence', {
   schema: {
     sounds: { type: 'array' },
+    edgeSoundSpeed: { type: "number" }
   },
 
   init: function () {
@@ -22,8 +23,6 @@ AFRAME.registerComponent('sound-sequence', {
 
       const sourcePos = document.getElementById(`${currentObj.sourceId}`).object3D.getWorldPosition(new THREE.Vector3());
       const targetPos = document.getElementById(`${currentObj.targetId}`).object3D.getWorldPosition(new THREE.Vector3());
-      // const sourcePosRot = sourcePos.applyQuaternion(edgeEl.object3D.quaternion)
-      // const targetPosRot = targetPos.applyQuaternion(edgeEl.object3D.quaternion)
       const sourceLocalPos = edgeEl.object3D.worldToLocal(sourcePos, new THREE.Vector3());
       const targetLocalPos = edgeEl.object3D.worldToLocal(targetPos, new THREE.Vector3());
 
@@ -32,14 +31,14 @@ AFRAME.registerComponent('sound-sequence', {
         property: "position",
         from: { x: 0, y: sourceLocalPos.y, z: 0 },
         to: { x: 0, y: targetLocalPos.y, z: 0 },
-        dur: 4000
+        dur: this.data.edgeSoundSpeed || 1000
       });
       setTimeout(() => {
         soundEl.removeAttribute("animation");
-      }, 4003)
+      }, this.data.edgeSoundSpeed + 3 || 1003)
       console.log("EdgeEl: ", { soundEl })
     } else {
-      soundEl = document.getElementById(`${currentObj.id}`);
+      soundEl = document.getElementById(`${currentObj.id}`).children[0];
       console.log("NodeEl: ", { soundEl })
     }
 
