@@ -109,7 +109,7 @@ export default function Playground() {
           logarithmicDepthBuffer: true,
           // colorManagement: true,
           foveationLevel: 0,
-          highRefreshRate: true
+          // highRefreshRate: true
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
