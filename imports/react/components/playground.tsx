@@ -1,19 +1,17 @@
 import "aframe";
 import "aframe-extras";
 import "aframe-environment-component";
-import "aframe-thumb-controls-component";
 import "aframe-haptics-component";
 // import "networked-aframe";
 import "../../aframe/components/drag";
 import "../../aframe/components/scene-dragger";
 import "../../aframe/components/geometry-generator";
 import "../../aframe/components/geometry-connector";
-import "../../aframe/components/sound-playback";
+// import "../../aframe/components/sound-playback";
 // import "../../aframe/components/reverb";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
-import randomInteger from "random-int";
 
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 import BoxGeometry from "./box";
@@ -103,7 +101,7 @@ export default function Playground() {
         //   video: false,
         //   debug: false,
         // }}
-        sound-playback={{ throttle: 34 }}
+        // sound-playback={{ throttle: 34 }}
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
@@ -131,7 +129,7 @@ export default function Playground() {
           </Entity>
           <Entity id="left"
             drag
-            // hand-tracking-controls={{ hand: 'left' }}
+            hand-tracking-controls={{ hand: 'left' }}
             oculus-touch-controls={{ hand: 'left' }}
             haptics={{ enabled: true }}
             raycaster={{
@@ -147,7 +145,7 @@ export default function Playground() {
             drag
             geometry-connector
             geometry-generator
-            // hand-tracking-controls={{ hand: 'right' }}
+            hand-tracking-controls={{ hand: 'right' }}
             oculus-touch-controls={{ hand: 'right' }}
             haptics={{ enabled: true }}
             raycaster={{
