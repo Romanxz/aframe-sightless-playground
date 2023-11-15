@@ -158,7 +158,7 @@ export default function Playground() {
             }}
           />
         </Entity>
-        <Entity
+        {/* <Entity
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
@@ -166,7 +166,7 @@ export default function Playground() {
             decay: 2,
           }}
           position={{ x: 0, y: 15, z: 0 }}
-        />
+        /> */}
         {/* <Entity
           environment={{
             preset: "dream",
