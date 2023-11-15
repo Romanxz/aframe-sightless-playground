@@ -106,7 +106,7 @@ export default function Playground() {
         renderer={{
           logarithmicDepthBuffer: true,
           // colorManagement: true,
-          foveationLevel: 0,
+          // foveationLevel: 0,
           // highRefreshRate: true
         }}
       >
