@@ -106,8 +106,8 @@ export default function Playground() {
         renderer={{
           logarithmicDepthBuffer: true,
           // colorManagement: true,
-          // foveationLevel: 0,
-          // highRefreshRate: true
+          foveationLevel: 0,
+          highRefreshRate: true
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
@@ -158,7 +158,7 @@ export default function Playground() {
             }}
           />
         </Entity>
-        {/* <Entity
+        <Entity
           light={{
             type: 'ambient',
             color: '#ddb8f2', // neon-retrowave-dark-violet
@@ -166,8 +166,8 @@ export default function Playground() {
             decay: 2,
           }}
           position={{ x: 0, y: 15, z: 0 }}
-        /> */}
-        {/* <Entity
+        />
+        <Entity
           environment={{
             preset: "dream",
             seed: 1,
@@ -183,7 +183,7 @@ export default function Playground() {
             grid: "1x1",
             gridColor: "#5605f7",
           }}
-        /> */}
+        />
         {/* <Entity
           environment={{
             preset: "dream",
