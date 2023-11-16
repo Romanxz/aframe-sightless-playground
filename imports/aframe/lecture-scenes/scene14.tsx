@@ -1,6 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
-import BlockDiagram from "./block-diagram";
+import BlockDiagram from "../../react/components/block-diagram";
 
 const sceneContent = [
   {
@@ -8,7 +8,7 @@ const sceneContent = [
     type: "node",
     playbackQue: 1,
     sound: "cylinder",
-    voiceover: "scene1/storage",
+    voiceover: "scene14/storage",
     geometry: { primitive: "cylinder", radius: 0.15, height: 0.3 },
     position: { x: 1.5, y: 1.2, z: -2 }
   },
@@ -25,7 +25,7 @@ const sceneContent = [
     type: "node",
     playbackQue: 3,
     sound: "sphere",
-    voiceover: "scene1/businesslogic",
+    voiceover: "scene14/businesslogic",
     geometry: { primitive: "sphere", radius: 0.15 },
     position: { x: 0, y: 1.2, z: -2 }
   },
@@ -42,7 +42,7 @@ const sceneContent = [
     type: "node",
     playbackQue: 5,
     sound: "sphere",
-    voiceover: "scene1/presentation",
+    voiceover: "scene14/presentation",
     geometry: { primitive: "sphere", radius: 0.15 },
     position: { x: -1.3, y: 1.2, z: -2 }
   },
@@ -58,7 +58,7 @@ const sceneContent = [
     id: 7,
     type: "node",
     sound: "box",
-    voiceover: "scene1/computer",
+    voiceover: "scene14/computer",
     playbackQue: 7,
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 2, z: -2 }
@@ -75,7 +75,7 @@ const sceneContent = [
     id: 9,
     type: "node",
     sound: "box",
-    voiceover: "scene1/smartphone",
+    voiceover: "scene14/smartphone",
     playbackQue: 8,
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 1.2, z: -2 }
@@ -93,12 +93,12 @@ const sceneContent = [
     type: "node",
     playbackQue: 9,
     sound: "box",
-    voiceover: "scene1/notebook",
+    voiceover: "scene14/notebook",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 0.4, z: -2 }
   },
 ]
 
-export default function Scene1() {
+export default function Scene14() {
   return <BlockDiagram sceneContent={sceneContent} />
 }
