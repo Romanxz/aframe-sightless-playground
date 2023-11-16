@@ -6,7 +6,7 @@ const sceneContent = [
   {
     id: 1,
     type: "node",
-    sound: "scene2/item1",
+    sound: "basic/item1",
     voiceover: "scene2/socialnets",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 0, y: 1.6, z: -2 }
@@ -14,7 +14,7 @@ const sceneContent = [
   {
     id: 2,
     type: "node",
-    sound: "scene2/item2",
+    sound: "basic/item2",
     voiceover: "scene2/datastorage",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 1.2, y: 2, z: -2 }
@@ -22,7 +22,7 @@ const sceneContent = [
   {
     id: 3,
     type: "node",
-    sound: "scene2/item3",
+    sound: "basic/item3",
     voiceover: "scene2/shoppingcart",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 0, y: 2.4, z: -2 }
@@ -30,7 +30,7 @@ const sceneContent = [
   {
     id: 4,
     type: "node",
-    sound: "scene2/item4",
+    sound: "basic/item4",
     voiceover: "scene2/statistics",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -1.2, y: 2, z: -2 }
@@ -38,7 +38,7 @@ const sceneContent = [
   {
     id: 5,
     type: "node",
-    sound: "scene2/item5",
+    sound: "basic/item5",
     voiceover: "scene2/bankdeposit",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -1.2, y: 1, z: -2 }
@@ -46,7 +46,7 @@ const sceneContent = [
   {
     id: 6,
     type: "node",
-    sound: "scene2/item6",
+    sound: "basic/item6",
     voiceover: "scene2/mediacontent",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 0, y: 0.8, z: -2 }
@@ -54,7 +54,7 @@ const sceneContent = [
   {
     id: 7,
     type: "node",
-    sound: "scene2/item7",
+    sound: "basic/item7",
     voiceover: "scene2/trips",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 1.2, y: 1, z: -2 }

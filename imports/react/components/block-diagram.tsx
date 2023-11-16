@@ -62,7 +62,7 @@ export default function BlockDiagram({sceneContent}) {
           <Entity
             // id={el.id}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}edgecut.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}basic/edgecut.wav`,
               autoplay: false,
               // loop: true,
               volume: 0.8,

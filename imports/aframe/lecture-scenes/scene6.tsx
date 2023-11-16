@@ -6,26 +6,26 @@ const sceneContent = [
   {
     id: 1,
     type: "node",
-    sound: "basic/sphere",
-    voiceover: "scene1/storage",
-    geometry: { primitive: "cylinder", radius: 0.8, height: 0.3 },
+    sound: "basic/item3",
+    voiceover: "scene6/reliability",
+    geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
     position: { x: 0, y: 2, z: -2 }
   },
   {
     id: 2,
     type: "node",
-    sound: "basic/cylinder",
-    voiceover: "scene1/storage",
-    geometry: { primitive: "cylinder", radius: 0.8, height: 0.3 },
-    position: { x: 0, y: 1.6, z: -2 }
+    sound: "basic/item2",
+    voiceover: "scene6/scalability",
+    geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
+    position: { x: 0, y: 1.5, z: -2 }
   },
   {
     id: 3,
     type: "node",
-    sound: "basic/box",
-    voiceover: "scene1/storage",
-    geometry: { primitive: "cylinder", radius: 0.8, height: 0.3 },
-    position: { x: 0, y: 1.2, z: -2 }
+    sound: "basic/item1",
+    voiceover: "scene6/convenience",
+    geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
+    position: { x: 0, y: 1, z: -2 }
   }
 ]
 
