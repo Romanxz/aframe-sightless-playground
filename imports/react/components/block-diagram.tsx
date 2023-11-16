@@ -37,7 +37,7 @@ export default function BlockDiagram({sceneContent}) {
               autoplay: false,
               // loop: true,
               volume: 1,
-              refDistance: 0.2,
+              refDistance: el.refDistance || 0.2,
               maxDistance: 60,
               rolloffFactor: 3,
             }}

@@ -113,7 +113,7 @@ export default function Playground() {
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        <Scene8 />
+        <Scene2 />
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
