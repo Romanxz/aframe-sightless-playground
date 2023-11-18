@@ -8,9 +8,11 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   init: function () {
-    this.sceneContent = document.getElementById("content");
+    const leftController = document.getElementById("left");
     this.soundIndex = 0;
     this.playSound = this.playSound.bind(this);
+    leftController.addEventListener("xbuttondown", this.startSequence.bind(this));
+    leftController.addEventListener("ybuttondown", this.stopSequence.bind(this));
   },
 
   playSound: function () {
@@ -59,12 +61,8 @@ AFRAME.registerComponent('sound-sequence', {
 
   // Stop the current sound and end the sequence
   stopSequence: function () {
-    let soundEl;
     const currentObj = this.data.sounds[this.soundIndex];
-
-    if (currentObj.type === "edge") {
-      soundEl = document.getElementById(`${currentObj.id}`).children[0];
-    } else soundEl = document.getElementById(`${currentObj.id}`);
+    const soundEl = document.getElementById(`${currentObj.id}`);
 
     soundEl.components.sound.stopSound();
 

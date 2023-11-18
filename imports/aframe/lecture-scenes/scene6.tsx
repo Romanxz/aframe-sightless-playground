@@ -6,7 +6,7 @@ const sceneContent = [
   {
     id: 1,
     type: "node",
-    sound: "basic/item3",
+    sound: "sounds/item3",
     voiceover: "scene6/reliability",
     geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
     position: { x: 0, y: 2, z: -2 }
@@ -14,7 +14,7 @@ const sceneContent = [
   {
     id: 2,
     type: "node",
-    sound: "basic/item2",
+    sound: "sounds/item2",
     voiceover: "scene6/scalability",
     geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
     position: { x: 0, y: 1.5, z: -2 }
@@ -22,7 +22,7 @@ const sceneContent = [
   {
     id: 3,
     type: "node",
-    sound: "basic/item1",
+    sound: "sounds/item1",
     voiceover: "scene6/convenience",
     geometry: { primitive: "cylinder", radius: 0.8, height: 0.4 },
     position: { x: 0, y: 1, z: -2 }

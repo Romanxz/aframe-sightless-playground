@@ -6,7 +6,7 @@ const sceneContent = [
   {
     id: 1,
     type: "node",
-    sound: "basic/cylinder",
+    sound: "sounds/cylinder",
     voiceover: "scene14/storage",
     geometry: { primitive: "cylinder", radius: 0.15, height: 0.3 },
     position: { x: 1.5, y: 1.2, z: -2 }
@@ -21,7 +21,7 @@ const sceneContent = [
   {
     id: 3,
     type: "node",
-    sound: "basic/sphere",
+    sound: "sounds/sphere",
     voiceover: "scene14/businesslogic",
     geometry: { primitive: "sphere", radius: 0.15 },
     position: { x: 0, y: 1.2, z: -2 }
@@ -36,7 +36,7 @@ const sceneContent = [
   {
     id: 5,
     type: "node",
-    sound: "basic/sphere",
+    sound: "sounds/sphere",
     voiceover: "scene14/presentation",
     geometry: { primitive: "sphere", radius: 0.15 },
     position: { x: -1.3, y: 1.2, z: -2 }
@@ -51,7 +51,7 @@ const sceneContent = [
   {
     id: 7,
     type: "node",
-    sound: "basic/box",
+    sound: "sounds/box",
     voiceover: "scene14/computer",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 2, z: -2 }
@@ -66,7 +66,7 @@ const sceneContent = [
   {
     id: 9,
     type: "node",
-    sound: "basic/box",
+    sound: "sounds/box",
     voiceover: "scene14/smartphone",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 1.2, z: -2 }
@@ -81,13 +81,13 @@ const sceneContent = [
   {
     id: 11,
     type: "node",
-    sound: "basic/box",
+    sound: "sounds/box",
     voiceover: "scene14/notebook",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -2.5, y: 0.4, z: -2 }
   },
 ]
 
-export default function Scene14() {
+export default function Scene13() {
   return <BlockDiagram sceneContent={sceneContent} />
 }

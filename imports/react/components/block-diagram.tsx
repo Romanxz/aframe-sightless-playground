@@ -22,7 +22,7 @@ export default function BlockDiagram({sceneContent}) {
             autoplay: false,
             // loop: true,
             volume: 0.8,
-            refDistance: 0.2,
+            refDistance: el.refDistance || 0.2,
             maxDistance: 60,
             rolloffFactor: 3,
             on: "raycaster-intersected"
@@ -62,11 +62,11 @@ export default function BlockDiagram({sceneContent}) {
           <Entity
             // id={el.id}
             sound={{
-              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}basic/edgecut.wav`,
+              src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sounds/edgecut.wav`,
               autoplay: false,
               // loop: true,
               volume: 0.8,
-              refDistance: 0.2,
+              refDistance: 0.1,
               maxDistance: 60,
               rolloffFactor: 3,
             }}

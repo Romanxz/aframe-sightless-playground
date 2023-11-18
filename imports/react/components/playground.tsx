@@ -17,10 +17,12 @@ import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 import BoxGeometry from "./box";
 
 import Scene1 from "../../aframe/lecture-scenes/scene1";
-import Scene14 from "../../aframe/lecture-scenes/scene14";
 import Scene2 from "../../aframe/lecture-scenes/scene2";
 import Scene6 from "../../aframe/lecture-scenes/scene6";
 import Scene8 from "../../aframe/lecture-scenes/scene8";
+import Scene9 from "../../aframe/lecture-scenes/scene9";
+import Scene10 from "../../aframe/lecture-scenes/scene10";
+import Scene13 from "../../aframe/lecture-scenes/scene13";
 
 
 export default function Playground() {
@@ -113,7 +115,7 @@ export default function Playground() {
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        <Scene8 />
+        <Scene10 />
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
