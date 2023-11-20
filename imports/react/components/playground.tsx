@@ -18,7 +18,11 @@ import BoxGeometry from "./box";
 
 import Scene1 from "../../aframe/lecture-scenes/scene1";
 import Scene2 from "../../aframe/lecture-scenes/scene2";
+import Scene3 from "../../aframe/lecture-scenes/scene3";
+import Scene4 from "../../aframe/lecture-scenes/scene4";
+import Scene5 from "../../aframe/lecture-scenes/scene5";
 import Scene6 from "../../aframe/lecture-scenes/scene6";
+import Scene7 from "../../aframe/lecture-scenes/scene7";
 import Scene8 from "../../aframe/lecture-scenes/scene8";
 import Scene9 from "../../aframe/lecture-scenes/scene9";
 import Scene10 from "../../aframe/lecture-scenes/scene10";
@@ -29,6 +33,9 @@ import Scene14 from "../../aframe/lecture-scenes/scene14";
 import Scene15 from "../../aframe/lecture-scenes/scene15";
 import Scene16 from "../../aframe/lecture-scenes/scene16";
 import Scene17 from "../../aframe/lecture-scenes/scene17";
+import Scene18 from "../../aframe/lecture-scenes/scene18";
+import Scene19 from "../../aframe/lecture-scenes/scene19";
+import Scene20 from "../../aframe/lecture-scenes/scene20";
 
 
 export default function Playground() {
@@ -121,7 +128,7 @@ export default function Playground() {
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        <Scene17 />
+        <Scene5 />
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
