@@ -86,7 +86,7 @@ const sceneContent = [
     {
       id: 11,
       type: "node",
-      sound: "sounds/item3",
+      sound: "sounds/win-error",
       voiceover: "scene8/error343",
       geometry: { primitive: "box", height: 0.3, width: 0.6, depth: 0.2 },
       position: { x: 0.4, y: 1.6, z: -2 }
@@ -150,7 +150,7 @@ const sceneContent = [
     {
       id: 19,
       type: "node",
-      sound: "sounds/item3",
+      sound: "sounds/win-error",
       voiceover: "scene8/errorngu",
       geometry: { primitive: "box", height: 0.3, width: 0.6, depth: 0.2 },
       position: { x: 0.4, y: 0.8, z: -2 }
@@ -158,7 +158,7 @@ const sceneContent = [
     {
       id: 20,
       type: "node",
-      sound: "sounds/item4",
+      sound: "sounds/win-error",
       voiceover: "scene8/error901",
       geometry: { primitive: "box", height: 0.3, width: 0.6, depth: 0.2 },
       position: { x: 1.2, y: 0.8, z: -2 }

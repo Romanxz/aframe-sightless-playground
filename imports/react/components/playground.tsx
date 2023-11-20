@@ -22,7 +22,13 @@ import Scene6 from "../../aframe/lecture-scenes/scene6";
 import Scene8 from "../../aframe/lecture-scenes/scene8";
 import Scene9 from "../../aframe/lecture-scenes/scene9";
 import Scene10 from "../../aframe/lecture-scenes/scene10";
+import Scene11 from "../../aframe/lecture-scenes/scene11";
+import Scene12 from "../../aframe/lecture-scenes/scene12";
 import Scene13 from "../../aframe/lecture-scenes/scene13";
+import Scene14 from "../../aframe/lecture-scenes/scene14";
+import Scene15 from "../../aframe/lecture-scenes/scene15";
+import Scene16 from "../../aframe/lecture-scenes/scene16";
+import Scene17 from "../../aframe/lecture-scenes/scene17";
 
 
 export default function Playground() {
@@ -115,7 +121,7 @@ export default function Playground() {
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        <Scene10 />
+        <Scene17 />
         <Entity id="cameraRig"
           movement-controls={{
             camera: "#camera",
