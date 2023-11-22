@@ -5,7 +5,7 @@ import randomInteger from "random-int";
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 
 export default function BoxGeometry() {
-
+  const boxColor = getColorFromId(randomInteger(0, 10000))
   return (<>
     <Entity id="box"
       className="draggable"
@@ -37,7 +37,7 @@ export default function BoxGeometry() {
       position={{ x: 1, y: 1.2, z: -1 }}
       material={{
         shader: "standard",
-        color: getColorFromId(randomInteger(0, 10000))
+        color: boxColor
       }}
     >
     </Entity>

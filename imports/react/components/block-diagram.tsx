@@ -29,7 +29,7 @@ export default function BlockDiagram({sceneContent}) {
           }}
           geometry={el.geometry}
           position={el.position}
-          material={{ shader: "standard", color: getColorFromId(randomInteger(0, 10000)) }}
+          material={{ shader: "standard", color: getColorFromId(el.id) }}
         >
           <Entity
             sound={{
@@ -57,7 +57,7 @@ export default function BlockDiagram({sceneContent}) {
           //   rolloffFactor: 3,
           // }}
           geometry={{ primitive: "cylinder", radius: 0.005, segmentsHeight: 3, openEnded: true, height: 1 }}
-          material={{ shader: "standard", color: getColorFromId(randomInteger(0, 10000)), }}
+          material={{ shader: "standard", color: getColorFromId(el.id), }}
         >
           <Entity
             // id={el.id}

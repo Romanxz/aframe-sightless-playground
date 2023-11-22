@@ -16,6 +16,8 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   playSound: function () {
+    if (this.data.sounds.length === 0) return;
+
     let soundEl;
     const currentObj = this.data.sounds[this.soundIndex];
 

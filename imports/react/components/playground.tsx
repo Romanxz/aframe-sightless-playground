@@ -1,12 +1,7 @@
 import "aframe";
-import "aframe-extras";
 import "aframe-environment-component";
-import "aframe-haptics-component";
 // import "networked-aframe";
-import "../../aframe/components/drag";
 import "../../aframe/components/scene-dragger";
-import "../../aframe/components/geometry-generator";
-import "../../aframe/components/geometry-connector";
 // import "../../aframe/components/sound-playback";
 // import "../../aframe/components/reverb";
 import React, { useEffect, useState } from 'react';
@@ -15,7 +10,7 @@ import { Entity, Scene } from "aframe-react";
 
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 import BoxGeometry from "./box";
-
+import CameraRig from "./camera-rig";
 import Scene1 from "../../aframe/lecture-scenes/scene1";
 import Scene2 from "../../aframe/lecture-scenes/scene2";
 import Scene3 from "../../aframe/lecture-scenes/scene3";
@@ -36,6 +31,8 @@ import Scene17 from "../../aframe/lecture-scenes/scene17";
 import Scene18 from "../../aframe/lecture-scenes/scene18";
 import Scene19 from "../../aframe/lecture-scenes/scene19";
 import Scene20 from "../../aframe/lecture-scenes/scene20";
+import SpatialAudioTestRig from "./spatial-audio-test-rig";
+
 
 
 export default function Playground() {
@@ -128,53 +125,10 @@ export default function Playground() {
         }}
       >
         {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        <Scene5 />
-        <Entity id="cameraRig"
-          movement-controls={{
-            camera: "#camera",
-            controls: "gamepad",
-            speed: 0.2
-          }}
-          gamepad-controls={{ rotationSensitivity: 0 }}
-        >
-          <Entity id="camera"
-            camera={{ active: true }}
-            look-controls={{ pointerLockEnabled: false }}
-            wasd-controls={{ enabled: true, fly: false }}
-            position={{ x: 0, y: 1.6, z: 0 }}
-          >
-          </Entity>
-          <Entity id="left"
-            drag
-            hand-tracking-controls={{ hand: 'left' }}
-            oculus-touch-controls={{ hand: 'left' }}
-            haptics={{ enabled: true }}
-            raycaster={{
-              origin: { x: 0.0065, y: -0.0186, z: -0.05 },
-              direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
-              showLine: true,
-              lineColor: "red",
-              lineOpacity: 0.85,
-              objects: ".draggable"
-            }}
-          />
-          <Entity id="right"
-            drag
-            geometry-connector
-            geometry-generator
-            hand-tracking-controls={{ hand: 'right' }}
-            oculus-touch-controls={{ hand: 'right' }}
-            haptics={{ enabled: true }}
-            raycaster={{
-              origin: { x: -0.0065, y: -0.0186, z: -0.05 },
-              direction: { x: 0, y: -0.5944043672340157, z: -0.7945567170519814 },
-              showLine: true,
-              lineColor: "red",
-              lineOpacity: 0.85,
-              objects: ".draggable"
-            }}
-          />
-        </Entity>
+        {/* <Scene5 /> */}
+        <CameraRig>
+          <SpatialAudioTestRig />
+        </CameraRig>
         <Entity
           light={{
             type: 'ambient',
