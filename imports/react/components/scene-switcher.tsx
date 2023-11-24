@@ -47,7 +47,7 @@ export default function SceneSwitcher(props) {
       rightController.removeEventListener('triggerup', () => { isTriggerDown.current = false; });
       rightController.removeEventListener('thumbstickmoved', onThumbStickMoved);
     };
-  }, [nextScene, prevScene]);
+  }, []);
 
   return scenes[currentScene];
 };

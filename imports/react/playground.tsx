@@ -38,14 +38,6 @@ import Scene20 from "../aframe/lecture-scenes/scene20";
 
 export default function Playground() {
   const [startSounds, setStartSounds] = useState(false);
-  const [currentScene, setCurrentScene] = useState(0);
-
-  const scenes = [<Scene1 />, <Scene2 />, <Scene3 />, <Scene4 />, <Scene5 />, <Scene6 />, <Scene7 />, <Scene8 />, <Scene9 />, <Scene10 />, <Scene11 />, <Scene12 />, <Scene13 />, <Scene14 />, <Scene15 />, <Scene16 />, <Scene17 />, <Scene18 />, <Scene19 />, <Scene20 />];
-
-  const forward = () => setCurrentScene((currentScene + 1) % scenes.length);
-
-  const backward = () => setCurrentScene((currentScene - 1 + scenes.length) % scenes.length);
-
 
   // useEffect(() => {
   //   if (startSounds) {

@@ -15,6 +15,10 @@ AFRAME.registerComponent('sound-sequence', {
     leftController.addEventListener("ybuttondown", this.stopSequence.bind(this));
   },
 
+  // update: function() {
+  //   this.
+  // },
+
   playSound: function () {
     if (this.data === undefined) return;
 
