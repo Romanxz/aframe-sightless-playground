@@ -16,7 +16,7 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   playSound: function () {
-    if (this.data.sounds.length === 0) return;
+    if (this.data === undefined) return;
 
     let soundEl;
     const currentObj = this.data.sounds[this.soundIndex];
@@ -63,12 +63,14 @@ AFRAME.registerComponent('sound-sequence', {
 
   // Stop the current sound and end the sequence
   stopSequence: function () {
-    const currentObj = this.data.sounds[this.soundIndex];
-    const soundEl = document.getElementById(`${currentObj.id}`);
-
-    soundEl.components.sound.stopSound();
-
-    soundEl.removeEventListener("sound-ended", this.endListener);
+    for (let i = 0; i < this.data.sounds.length; i++) {
+      const currentObj = this.data.sounds[i];
+      const soundEl = document.getElementById(`${currentObj.id}`).children[0];
+      if (soundEl && soundEl.components.sound) {
+        soundEl.components.sound.stopSound();
+        soundEl.removeEventListener("sound-ended", this.endListener);
+      }
+    }
     this.soundIndex = 0;
   }
 });

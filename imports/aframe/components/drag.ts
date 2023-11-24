@@ -4,6 +4,7 @@ export { };
 AFRAME.registerComponent('drag', {
   init: function () {
     this.sceneContent = document.getElementById("content");
+    console.log(this.sceneContent)
     this.intersectedObject = null; // Reference to the intersected object
     this.distanceToTarget = 0.1; // Distance from controller to the intersected object
     this.speedFactor = 0.05; // Adjust fishing rod extension speed factor to taste
@@ -84,7 +85,8 @@ AFRAME.registerComponent('drag', {
       // Rotate the local offset to match the controller's current rotation
       raduisOffset.applyQuaternion(controllerRotation);
       // Compute the new position of the target entity inside parent's local space by adding the rotated offset to the current controller's position
-      const newPosition = this.sceneContent.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
+      const parentEl = this.intersectedObject.parentEl;
+      const newPosition = parentEl.object3D.worldToLocal(controllerPosition.add(raduisOffset), new THREE.Vector3());
       // Update the position of the target entity
       this.intersectedObject.object3D.position.copy(newPosition);
     };

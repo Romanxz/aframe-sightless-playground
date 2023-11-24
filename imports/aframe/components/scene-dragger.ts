@@ -10,7 +10,6 @@ AFRAME.registerComponent("scene-dragger", {
     this.sceneContent = document.getElementById("content");
     // Flags and variables
     this.dragDisabled = false; // Set true when both grips are pressed or both pinches are started
-    this.childEntities = null;
     this.lGripActive = false;
     this.rGripActive = false;
     this.lPinchActive = false;
@@ -39,7 +38,6 @@ AFRAME.registerComponent("scene-dragger", {
   onLeftGripDown: function (evt) {
     this.lGripActive = true;
     this.lGripPos.copy(evt.target.object3D.position); // Store position of left grip
-    this.childEntities = Array.from(document.querySelectorAll(".draggable")); // Get child entities
     this.leftController.components.haptics.pulse(0.6, 200);
     if (this.rGripActive) {
       this.dragDisabled = true; // Disable drag when both grips are pressed
@@ -48,7 +46,6 @@ AFRAME.registerComponent("scene-dragger", {
   // Left grip button is released
   onLeftGripUp: function (evt) {
     this.lGripActive = false;
-    this.childEntities = null;
     this.leftController.components.haptics.pulse(0.6, 200);
     if (!this.rGripActive) {
       this.dragDisabled = false; // Enable drag when both grips are released
@@ -72,7 +69,6 @@ AFRAME.registerComponent("scene-dragger", {
   onLeftPinchStart: function (evt) {
     this.lPinchActive = true;
     this.lPinchPos.copy(evt.detail.position); // Store position of left pinch gesture
-    this.childEntities = Array.from(document.querySelectorAll(".draggable")); // Get child entities
     this.leftController.components.haptics.pulse(0.6, 200);
     if (this.rPinchActive) {
       this.dragDisabled = true; // Disable drag when both pinches are started
@@ -81,7 +77,6 @@ AFRAME.registerComponent("scene-dragger", {
   // Left pinch gesture ended
   onLeftPinchEnd: function (evt) {
     this.lPinchActive = false;
-    this.childEntities = null;
     this.leftController.components.haptics.pulse(0.6, 200);
     if (!this.rPinchActive) {
       this.dragDisabled = false; // Enable drag when both pinches are ended
@@ -102,10 +97,11 @@ AFRAME.registerComponent("scene-dragger", {
     }
   },
   tick: function () {
+    if (this.rGripActive || this.rPinchActive || this.dragDisabled) return;
     // Controller drag
-    if (this.rGripActive || this.dragDisabled) return;
     if (this.lGripActive) {
-      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const sceneContent = document.getElementById("content");
+      const { x, y, z } = sceneContent.object3D.position; // Current position of the scene content
       const { x: currentX, y: currentY, z: currentZ } = this.leftController.object3D.position; // Current position of the controller
       const { x: gripX, y: gripY, z: gripZ } = this.lGripPos; // Start position of the left controller
       // Calculate the distance moved
@@ -114,14 +110,14 @@ AFRAME.registerComponent("scene-dragger", {
       const deltaZ = gripZ - currentZ;
       // Calculate the new position by subtracting the distance moved
       const newPosition = new THREE.Vector3(x - deltaX * 5, y - deltaY * 5, z - deltaZ * 5);
-      this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+      sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
       // Update the position of the left grip
       this.lGripPos.copy(this.leftController.object3D.position);
     }
     // Hand tracking drag
-    if (this.rPinchActive || this.dragDisabled) return;
     if (this.lPinchActive) {
-      const { x, y, z } = this.sceneContent.object3D.position; // Current position of the scene content
+      const sceneContent = document.getElementById("content");
+      const { x, y, z } = sceneContent.object3D.position; // Current position of the scene content
       const { x: currentX, y: currentY, z: currentZ } = this.leftController.object3D.position; // Current position of the controller
       const { x: pinchX, y: pinchY, z: pinchZ } = this.lPinchPos; // Start position of the left pinch gesture
       // Calculate the distance moved
@@ -130,8 +126,8 @@ AFRAME.registerComponent("scene-dragger", {
       const deltaZ = pinchZ - currentZ;
       // Calculate the new position by subtracting the distance moved
       const newPosition = new THREE.Vector3(x - deltaX * 5, y - deltaY * 5, z - deltaZ * 5);
-      this.sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
-      this.sceneContent.object3D.updateMatrixWorld(force = true);
+      sceneContent.object3D.position.copy(newPosition); // Update the position of the scene content
+      sceneContent.object3D.updateMatrixWorld(force = true);
       // Update the position of the left pinch gesture
       this.lPinchPos.copy(this.leftController.object3D.position);
     }

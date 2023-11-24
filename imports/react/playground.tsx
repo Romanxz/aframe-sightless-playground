@@ -1,42 +1,51 @@
 import "aframe";
 import "aframe-environment-component";
-// import "networked-aframe";
-import "../../aframe/components/scene-dragger";
+import "../aframe/components/scene-dragger";
 // import "../../aframe/components/sound-playback";
-// import "../../aframe/components/reverb";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
 
-import { getColorFromId } from "../../aframe/methods/get-color-from-id";
-import BoxGeometry from "./box";
-import CameraRig from "./camera-rig";
-import Scene1 from "../../aframe/lecture-scenes/scene1";
-import Scene2 from "../../aframe/lecture-scenes/scene2";
-import Scene3 from "../../aframe/lecture-scenes/scene3";
-import Scene4 from "../../aframe/lecture-scenes/scene4";
-import Scene5 from "../../aframe/lecture-scenes/scene5";
-import Scene6 from "../../aframe/lecture-scenes/scene6";
-import Scene7 from "../../aframe/lecture-scenes/scene7";
-import Scene8 from "../../aframe/lecture-scenes/scene8";
-import Scene9 from "../../aframe/lecture-scenes/scene9";
-import Scene10 from "../../aframe/lecture-scenes/scene10";
-import Scene11 from "../../aframe/lecture-scenes/scene11";
-import Scene12 from "../../aframe/lecture-scenes/scene12";
-import Scene13 from "../../aframe/lecture-scenes/scene13";
-import Scene14 from "../../aframe/lecture-scenes/scene14";
-import Scene15 from "../../aframe/lecture-scenes/scene15";
-import Scene16 from "../../aframe/lecture-scenes/scene16";
-import Scene17 from "../../aframe/lecture-scenes/scene17";
-import Scene18 from "../../aframe/lecture-scenes/scene18";
-import Scene19 from "../../aframe/lecture-scenes/scene19";
-import Scene20 from "../../aframe/lecture-scenes/scene20";
-import SpatialAudioTestRig from "./spatial-audio-test-rig";
+import BoxGeometry from "./components/box";
+import SpatialAudioTestRig from "./components/spatial-audio-test-rig";
+import CameraRig from "./components/camera-rig";
+import SceneSwitcher from "./components/scene-switcher";
+
+import Scene1 from "../aframe/lecture-scenes/scene1";
+import Scene2 from "../aframe/lecture-scenes/scene2";
+import Scene3 from "../aframe/lecture-scenes/scene3";
+import Scene4 from "../aframe/lecture-scenes/scene4";
+import Scene5 from "../aframe/lecture-scenes/scene5";
+import Scene6 from "../aframe/lecture-scenes/scene6";
+import Scene7 from "../aframe/lecture-scenes/scene7";
+import Scene8 from "../aframe/lecture-scenes/scene8";
+import Scene9 from "../aframe/lecture-scenes/scene9";
+import Scene10 from "../aframe/lecture-scenes/scene10";
+import Scene11 from "../aframe/lecture-scenes/scene11";
+import Scene12 from "../aframe/lecture-scenes/scene12";
+import Scene13 from "../aframe/lecture-scenes/scene13";
+import Scene14 from "../aframe/lecture-scenes/scene14";
+import Scene15 from "../aframe/lecture-scenes/scene15";
+import Scene16 from "../aframe/lecture-scenes/scene16";
+import Scene17 from "../aframe/lecture-scenes/scene17";
+import Scene18 from "../aframe/lecture-scenes/scene18";
+import Scene19 from "../aframe/lecture-scenes/scene19";
+import Scene20 from "../aframe/lecture-scenes/scene20";
+
+
 
 
 
 export default function Playground() {
   const [startSounds, setStartSounds] = useState(false);
+  const [currentScene, setCurrentScene] = useState(0);
+
+  const scenes = [<Scene1 />, <Scene2 />, <Scene3 />, <Scene4 />, <Scene5 />, <Scene6 />, <Scene7 />, <Scene8 />, <Scene9 />, <Scene10 />, <Scene11 />, <Scene12 />, <Scene13 />, <Scene14 />, <Scene15 />, <Scene16 />, <Scene17 />, <Scene18 />, <Scene19 />, <Scene20 />];
+
+  const forward = () => setCurrentScene((currentScene + 1) % scenes.length);
+
+  const backward = () => setCurrentScene((currentScene - 1 + scenes.length) % scenes.length);
+
 
   // useEffect(() => {
   //   if (startSounds) {
@@ -83,37 +92,11 @@ export default function Playground() {
         events={{
           // "enter-vr": () => { setVr(true); console.log("entered VR"); },
           // "exit-vr": () => setVr(false),
-          loaded: () => {
-            console.log("scene loaded");
-            // @ts-ignore
-            //   NAF.schemas.add({
-            //     template: '#avatar-template',
-            //     components: [
-            //       'position',
-            //       'rotation',
-            //       {
-            //         selector: '.head',
-            //         component: 'material',
-            //         property: 'color'
-            //       }
-            //     ]
-            //   });
-          }
+          loaded: () => { console.log("scene loaded"); }
         }}
         // use-engine-tick={{
         //   onEngineTick: () => { },
         //   throttle: 68
-        // }}
-        // networked-scene={{
-        //   serverURL: "https://8080-romanxz-aframesightless-r3l6wq0zpht.ws-eu105.gitpod.io",
-        //   app: "sightless-playground",
-        //   room: "playground",
-        //   connectOnLoad: true,
-        //   onConnect: () => { },
-        //   adapter: "socketio",
-        //   audio: false,
-        //   video: false,
-        //   debug: false,
         // }}
         // sound-playback={{ throttle: 34 }}
         scene-dragger
@@ -124,10 +107,29 @@ export default function Playground() {
           highRefreshRate: true
         }}
       >
-        {/* <Entity id="reverb" reverb geometry={{ primitive: "box", height: 4, width: 20, depth: 40 }} /> */}
-        {/* <Scene5 /> */}
+        <SceneSwitcher id="scene-content">
+          <Scene1 />
+          <Scene2 />
+          <Scene3 />
+          <Scene4 />
+          <Scene5 />
+          <Scene6 />
+          <Scene7 />
+          <Scene8 />
+          <Scene9 />
+          <Scene10 />
+          <Scene11 />
+          <Scene12 />
+          <Scene13 />
+          <Scene14 />
+          <Scene15 />
+          <Scene16 />
+          <Scene17 />
+          <Scene18 />
+          <Scene19 />
+          <Scene20 />
+        </SceneSwitcher>
         <CameraRig>
-          <SpatialAudioTestRig />
         </CameraRig>
         <Entity
           light={{
