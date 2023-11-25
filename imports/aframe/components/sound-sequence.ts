@@ -8,19 +8,28 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   init: function () {
-    const leftController = document.getElementById("left");
+    this.leftController = document.getElementById("left");
     this.soundIndex = 0;
     this.playSound = this.playSound.bind(this);
-    leftController.addEventListener("xbuttondown", this.startSequence.bind(this));
-    leftController.addEventListener("ybuttondown", this.stopSequence.bind(this));
+    this.leftController.addEventListener("xbuttondown", this.startSequence.bind(this));
+    this.leftController.addEventListener("ybuttondown", this.stopSequence.bind(this));
+    console.log("[sound-sequence] initialized")
   },
 
-  // update: function() {
-  //   this.
-  // },
+  update: function() {
+    console.log("[sound-sequence] updated")
+  },
+
+  remove: function() {
+    this.stopSequence();
+    this.leftController.removeEventListener("xbuttondown", this.startSequence.bind(this));
+    this.leftController.removeEventListener("ybuttondown", this.stopSequence.bind(this));
+    this.data.sounds = [];
+    console.log("[sound-sequence] removed")
+  },
 
   playSound: function () {
-    if (this.data === undefined) return;
+    if (this.data === undefined || this.data.sounds.length === 0) return;
 
     let soundEl;
     const currentObj = this.data.sounds[this.soundIndex];
@@ -69,7 +78,7 @@ AFRAME.registerComponent('sound-sequence', {
   stopSequence: function () {
     for (let i = 0; i < this.data.sounds.length; i++) {
       const currentObj = this.data.sounds[i];
-      const soundEl = document.getElementById(`${currentObj.id}`).children[0];
+      const soundEl = document.getElementById(`${currentObj.id}`)?.children?.[0];
       if (soundEl && soundEl.components.sound) {
         soundEl.components.sound.stopSound();
         soundEl.removeEventListener("sound-ended", this.endListener);

@@ -99,7 +99,7 @@ export default function Playground() {
           highRefreshRate: true
         }}
       >
-        <SceneSwitcher id="scene-content">
+        <SceneSwitcher>
           <Scene1 />
           <Scene2 />
           <Scene3 />

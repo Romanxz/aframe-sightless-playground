@@ -1,16 +1,20 @@
 import "../../aframe/components/edge-positioner";
 import "../../aframe/components/sound-sequence";
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Entity } from "aframe-react";
 import randomInteger from "random-int";
 
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 
-export default function BlockDiagram({sceneContent}) {
+export default function BlockDiagram({ sceneContent }) {
+
+  useMemo(() => {
+    
+  }, [])
 
   return <Entity id="content"
     sound-sequence={{ sounds: sceneContent, edgeSoundSpeed: 2000 }}
-    edge-positioner={{ edges: sceneContent.filter((el) => el.type === "edge") }}> 
+    edge-positioner={{ edges: sceneContent.filter((el) => el.type === "edge") }}>
     {sceneContent.map((el) => {
       if (el.type === "node") {
         return <Entity

@@ -6,6 +6,7 @@ export default function SceneSwitcher(props) {
   const [currentScene, setCurrentScene] = useState(0);
 
   const scenes = props.children;
+  console.log(scenes)
 
   const isTriggerDown = useRef(false);
   const isThumbstickReleased = useRef(true);
@@ -47,7 +48,7 @@ export default function SceneSwitcher(props) {
       rightController.removeEventListener('triggerup', () => { isTriggerDown.current = false; });
       rightController.removeEventListener('thumbstickmoved', onThumbStickMoved);
     };
-  }, []);
+  }, [nextScene, prevScene]);
 
   return scenes[currentScene];
 };
