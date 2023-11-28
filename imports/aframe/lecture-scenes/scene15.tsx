@@ -8,8 +8,8 @@ const sceneContent = [
     type: "node",
     sound: "sounds/sphere",
     voiceover: "scene6/reliability",
-    geometry: { primitive: "cylinder", radius: 0.2, height: 0.4},
-    position: { x: -1, y: 1.2, z: -2 }
+    geometry: { primitive: "sphere", radius: 0.2 },
+    position: { x: -0.8, y: 1.4, z: -2 }
   },
   {
     id: 2,
@@ -22,40 +22,10 @@ const sceneContent = [
     id: 3,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene14/computer",
-    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
-    position: { x: 1, y: 1.8, z: -2 }
+    voiceover: "scene6/scalability",
+    geometry: { primitive: "box", height: 0.4, width: 0.3, depth: 0.3 },
+    position: { x: 0.8, y: 1.4, z: -2 }
   },
-  {
-    id: 4,
-    soundId: uuid(),
-    type: "edge",
-    sourceId: 1,
-    targetId: 5,
-  },
-  {
-    id: 5,
-    type: "node",
-    sound: "sounds/box",
-    voiceover: "scene14/smartphone",
-    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
-    position: { x: 1, y: 1.2, z: -2 }
-  },
-  {
-    id: 6,
-    soundId: uuid(),
-    type: "edge",
-    sourceId: 1,
-    targetId: 7,
-  },
-  {
-    id: 7,
-    type: "node",
-    sound: "sounds/box",
-    voiceover: "scene14/notebook",
-    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
-    position: { x: 1, y: 0.6, z: -2 }
-  }
 ]
 
 export default function Scene15() {

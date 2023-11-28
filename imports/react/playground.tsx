@@ -5,11 +5,12 @@ import "../aframe/components/scene-dragger";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
+import ReactPlayer from 'react-player';
 
 import BoxGeometry from "./components/box";
 import SpatialAudioTestRig from "./components/spatial-audio-test-rig";
 import CameraRig from "./components/camera-rig";
-import SceneSwitcher from "./components/scene-switcher";
+import LecturePlayer from "./components/lecture-player";
 
 import Scene1 from "../aframe/lecture-scenes/scene1";
 import Scene2 from "../aframe/lecture-scenes/scene2";
@@ -31,6 +32,8 @@ import Scene17 from "../aframe/lecture-scenes/scene17";
 import Scene18 from "../aframe/lecture-scenes/scene18";
 import Scene19 from "../aframe/lecture-scenes/scene19";
 import Scene20 from "../aframe/lecture-scenes/scene20";
+import Scene21 from "../aframe/lecture-scenes/scene20";
+import Scene22 from "../aframe/lecture-scenes/scene20";
 
 
 
@@ -50,6 +53,8 @@ export default function Playground() {
   useEffect(() => {
     if (startSounds) {
       const sceneContent = document.getElementById("content");
+      // @ts-ignore
+      sceneContent.components["sound-sequence"].stopSequence();
       // @ts-ignore
       sceneContent.components["sound-sequence"].startSequence();
     }
@@ -99,7 +104,7 @@ export default function Playground() {
           highRefreshRate: true
         }}
       >
-        <SceneSwitcher>
+        <LecturePlayer startSounds={startSounds}>
           <Scene1 />
           <Scene2 />
           <Scene3 />
@@ -120,7 +125,9 @@ export default function Playground() {
           <Scene18 />
           <Scene19 />
           <Scene20 />
-        </SceneSwitcher>
+          <Scene21 />
+          <Scene22 />
+        </LecturePlayer>
         <CameraRig>
         </CameraRig>
         <Entity

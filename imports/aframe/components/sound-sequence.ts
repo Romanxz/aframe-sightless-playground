@@ -53,10 +53,10 @@ AFRAME.registerComponent('sound-sequence', {
       setTimeout(() => {
         soundEl.removeAttribute("animation");
       }, this.data.edgeSoundSpeed + 3 || 1003)
-      console.log("EdgeEl: ", { soundEl })
+      // console.log("[sound-sequence] EdgeEl: ", { soundEl })
     } else {
       soundEl = document.getElementById(`${currentObj.id}`).children[0];
-      console.log("NodeEl: ", { soundEl })
+      // console.log("[sound-sequence] NodeEl: ", { soundEl })
     }
 
     soundEl.components.sound.playSound();

@@ -6,58 +6,45 @@ const sceneContent = [
   {
     id: 1,
     type: "node",
-    sound: "sounds/box",
-    voiceover: "scene6/scalability",
+    sound: "sounds/item1",
+    voiceover: "scene2/shoppingcart",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
-    position: { x: 0, y: 2, z: -2 }
+    position: { x: 0.6, y: 2, z: -2 }
   },
   {
     id: 2,
-    soundId: uuid(),
-    type: "edge",
-    sourceId: 1,
-    targetId: 3,
+    type: "node",
+    sound: "sounds/item2",
+    voiceover: "scene2/statistics",
+    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
+    position: { x: -0.6, y: 2, z: -2 }
   },
   {
     id: 3,
     type: "node",
-    sound: "sounds/box",
-    voiceover: "scene6/convenience",
+    sound: "sounds/item3",
+    voiceover: "scene2/bankdeposit",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
-    position: { x: -1, y: 2, z: -2 }
+    position: { x: -1.2, y: 1.2, z: -2 }
   },
   {
     id: 4,
-    soundId: uuid(),
-    type: "edge",
-    sourceId: 1,
-    targetId: 5,
+    type: "node",
+    sound: "sounds/item4",
+    voiceover: "scene2/mediacontent",
+    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
+    position: { x: 0, y: 1, z: -2 }
   },
   {
     id: 5,
     type: "node",
-    sound: "sounds/sphere",
-    voiceover: "scene6/reliability",
-    geometry: { primitive: "sphere", radius: 0.2 },
-    position: { x: 1, y: 1.4, z: -2 }
-  },
-  {
-    id: 6,
-    type: "node",
-    sound: "sounds/cylinder",
-    voiceover: "scene6/reliability",
-    geometry: { primitive: "cylinder", radius: 0.2, height: 0.3 },
-    position: { x: 0, y: 1, z: -2 }
-  },
-  {
-    id: 7,
-    soundId: uuid(),
-    type: "edge",
-    sourceId: 6,
-    targetId: 5,
-  },
+    sound: "sounds/item5",
+    voiceover: "scene2/trips",
+    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
+    position: { x: 1.2, y: 1.2, z: -2 }
+  }
 ]
 
 export default function Scene20() {
-  return <BlockDiagram sceneContent={sceneContent} />
-}
+    return <BlockDiagram sceneContent={sceneContent} />
+  }

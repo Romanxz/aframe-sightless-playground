@@ -8,13 +8,13 @@ import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 
 export default function BlockDiagram({ sceneContent }) {
 
-  useMemo(() => {
-    
-  }, [])
-
   return <Entity id="content"
     sound-sequence={{ sounds: sceneContent, edgeSoundSpeed: 2000 }}
-    edge-positioner={{ edges: sceneContent.filter((el) => el.type === "edge") }}>
+    edge-positioner={{ edges: sceneContent.filter((el) => el.type === "edge") }}
+    events={{
+      loaded: (e) => { e.target.components["sound-sequence"].startSequence(); }
+    }}
+  >
     {sceneContent.map((el) => {
       if (el.type === "node") {
         return <Entity
@@ -25,9 +25,9 @@ export default function BlockDiagram({ sceneContent }) {
             src: `${process.env.GH_PAGES_PATH_PREFIX || ""}${el.voiceover}.wav`,
             autoplay: false,
             // loop: true,
-            volume: 0.8,
-            refDistance: el.refDistance || 0.2,
-            maxDistance: 60,
+            volume: 1,
+            refDistance: 0.6,
+            maxDistance: 200,
             rolloffFactor: 3,
             on: "raycaster-intersected"
           }}

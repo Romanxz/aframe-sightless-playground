@@ -7,7 +7,7 @@ const sceneContent = [
     id: 1,
     type: "node",
     sound: "sounds/large-square",
-    refDistance: 0.4,
+    refDistance: 0.2,
     voiceover: "scene1/information-systems",
     geometry: { primitive: "box", height: 1, width: 2, depth: 0.3 },
     position: { x: 0, y: 1.6, z: -2 }
