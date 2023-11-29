@@ -7,9 +7,9 @@ const sceneContent = [
     id: 1,
     type: "node",
     sound: "sounds/sphere",
-    voiceover: "scene6/reliability",
+    voiceover: "scene13/businesslogic",
     geometry: { primitive: "sphere", radius: 0.2 },
-    position: { x: -0.8, y: 1.4, z: -2 }
+    position: { x: 0, y: 2, z: -2 }
   },
   {
     id: 2,
@@ -22,9 +22,24 @@ const sceneContent = [
     id: 3,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene6/scalability",
-    geometry: { primitive: "box", height: 0.4, width: 0.3, depth: 0.3 },
-    position: { x: 0.8, y: 1.4, z: -2 }
+    voiceover: "scene6/algorithm",
+    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
+    position: { x: -0.8, y: 1.2, z: -1.4 }
+  },
+  {
+    id: 4,
+    soundId: uuid(),
+    type: "edge",
+    sourceId: 1,
+    targetId: 5,
+  },
+  {
+    id: 5,
+    type: "node",
+    sound: "sounds/box",
+    voiceover: "scene6/rating",
+    geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
+    position: { x: 0.8, y: 1.2, z: -1.4 }
   },
 ]
 

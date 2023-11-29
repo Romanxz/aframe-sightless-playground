@@ -13,7 +13,6 @@ const audioNodes = [
     sound: "sounds/rotor",
     geometry: { primitive: "sphere", radius: 0.1 },
     position: { x: 0, y: 0, z: -1 },
-    color: getColorFromId(randomInteger(0, 10000))
   },
   // {
   //   id: 2,
@@ -21,7 +20,6 @@ const audioNodes = [
   //   sound: "sounds/cylinder",
   //   geometry: { primitive: "sphere", radius: 0.1 },
   //   position: { x: 0, y: -0.8, z: -1 },
-  //   color: getColorFromId(randomInteger(0, 10000))
   // },
   // {
   //   id: 3,
@@ -29,7 +27,6 @@ const audioNodes = [
   //   sound: "sounds/cylinder",
   //   geometry: { primitive: "sphere", radius: 0.1 },
   //   position: { x: 0, y: 0.8, z: 1 },
-  //   color: getColorFromId(randomInteger(0, 10000))
   // },
   // {
   //   id: 4,
@@ -37,7 +34,6 @@ const audioNodes = [
   //   sound: "sounds/cylinder",
   //   geometry: { primitive: "sphere", radius: 0.1 },
   //   position: { x: 0, y: 0.8, z: 1, },
-  //   color: getColorFromId(randomInteger(0, 10000))
   // },
   // {
   //   id: 5,
@@ -45,7 +41,6 @@ const audioNodes = [
   //   sound: "sounds/cylinder",
   //   geometry: { primitive: "sphere", radius: 0.1 },
   //   position: { x: 0, y: 0, z: -1 },
-  //   color: getColorFromId(randomInteger(0, 10000))
   // },
   // {
   //   id: 6,
@@ -53,7 +48,6 @@ const audioNodes = [
   //   sound: "sounds/cylinder",
   //   geometry: { primitive: "sphere", radius: 0.1 },
   //   position: { x: 0, y: 0, z: 1 },
-  //   color: getColorFromId(randomInteger(0, 10000))
   // }
 ]
 
@@ -69,7 +63,6 @@ export default function SpatialAudioTestRig() {
           className="draggable"
           // geometry={node.geometry}
           // position={node.position}
-          material={{ shader: "standard", color: node.color }}
           animation={{
             property: 'rotation',
             to: '360 0 0',

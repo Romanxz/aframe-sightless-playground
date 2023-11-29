@@ -73,6 +73,14 @@ AFRAME.registerComponent('drag', {
     };
   },
 
+  play: function () {
+    // this.isDrag = true
+  },
+  
+  pause: function () {
+    // this.isDrag = false
+  },
+
   tick: function () {
     if (this.intersectedObject !== null && this.isDrag) {
       // Get the position and rotation of the controller

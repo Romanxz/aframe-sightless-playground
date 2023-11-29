@@ -7,7 +7,7 @@ const sceneContent = [
     id: 1,
     type: "node",
     sound: "sounds/sphere",
-    voiceover: "scene6/reliability",
+    voiceover: "scene6/presentation",
     geometry: { primitive: "sphere", radius: 0.2 },
     position: { x: -0.8, y: 1.4, z: -2 }
   },
@@ -22,7 +22,7 @@ const sceneContent = [
     id: 3,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene6/scalability",
+    voiceover: "scene6/ui",
     geometry: { primitive: "box", height: 0.4, width: 0.3, depth: 0.3 },
     position: { x: 0.8, y: 1.4, z: -2 }
   },

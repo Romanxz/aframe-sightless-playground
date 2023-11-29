@@ -28,7 +28,6 @@ export default function CameraRig(props) {
         {props.children}
       </Entity>
       <Entity id="left"
-        drag
         hand-tracking-controls={{ hand: 'left' }}
         oculus-touch-controls={{ hand: 'left' }}
         haptics={{ enabled: true }}

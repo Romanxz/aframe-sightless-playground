@@ -5,9 +5,11 @@ import ReactPlayer from 'react-player';
 
 export default function LecturePlayer(props) {
   const [currentScene, setCurrentScene] = useState(0);
+  const [isLecturePlaying, setLecturePlayback] = useState(true);
   const scenes = props.children;
 
-  const isTriggerDown = useRef(false);
+  const isRightTriggerDown = useRef(false);
+  const isLeftTriggerDown = useRef(false);
   const isThumbstickReleased = useRef(true);
   const playerRef = useRef(null);
 
@@ -16,8 +18,8 @@ export default function LecturePlayer(props) {
     { start: 11, end: 21 },
     { start: 22, end: 30 },
     { start: 31, end: 38 },
-    { start: 39, end: 45 },
-    { start: 46, end: 61 },
+    { start: 39, end: 46 },
+    { start: 47, end: 61 },
     { start: 62, end: 70 },
     { start: 71, end: 93 },
     { start: 94, end: 115 },
@@ -43,26 +45,52 @@ export default function LecturePlayer(props) {
     playerRef.current.seekTo(newTime, "seconds");
   };
 
+  const pauseDragAction = () => {
+    const rightController = document.getElementById("right");
+    // @ts-ignore
+    rightController.components['drag'].pause();
+  };
+
+  const stopAllSounds = () => {
+    const allSoundsNodeList = document.querySelectorAll('a-entity[sound]');
+    const allSounds = [...allSoundsNodeList];
+    console.log("[sound-sequence] allSounds:", allSounds)
+    for (const soundEl of allSounds) {
+      // @ts-ignore
+      if (soundEl && soundEl.components.sound) {
+        // @ts-ignore
+        soundEl.components.sound.stopSound();
+      }
+    };
+  }
+
   const nextScene = () => {
     const next = (currentScene + 1) % scenes.length;
+    pauseDragAction();
     setCurrentScene(next);
     changePlayerProgress(next);
   };
 
   const prevScene = () => {
     const prev = (currentScene - 1 + scenes.length) % scenes.length;
+    pauseDragAction();
     setCurrentScene(prev);
     changePlayerProgress(prev);
   };
 
   useEffect(() => {
+    const leftController = document.getElementById('left');
     const rightController = document.getElementById('right');
-    if (!rightController) return;
-    rightController.addEventListener('triggerdown', () => { isTriggerDown.current = true; });
-    rightController.addEventListener('triggerup', () => { isTriggerDown.current = false; });
+    if (!rightController || !leftController) return;
+    rightController.addEventListener('triggerdown', () => { isRightTriggerDown.current = true; });
+    rightController.addEventListener('triggerup', () => { isRightTriggerDown.current = false; });
+    leftController.addEventListener('triggerdown', () => { isLeftTriggerDown.current = true; });
+    leftController.addEventListener('triggerup', () => { isLeftTriggerDown.current = false; });
+    leftController.addEventListener('xbuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(true); });
+    leftController.addEventListener('ybuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(false); });
 
     function onThumbStickMoved(evt) {
-      if (!isTriggerDown.current) {
+      if (!isRightTriggerDown.current) {
         const direction = evt.detail.x;
         if (direction < -0.4) {
           if (isThumbstickReleased.current) {
@@ -83,9 +111,14 @@ export default function LecturePlayer(props) {
     rightController.addEventListener('thumbstickmoved', onThumbStickMoved);
 
     return () => {
-      rightController.removeEventListener('triggerdown', () => { isTriggerDown.current = true; });
-      rightController.removeEventListener('triggerup', () => { isTriggerDown.current = false; });
       rightController.removeEventListener('thumbstickmoved', onThumbStickMoved);
+      rightController.removeEventListener('triggerdown', () => { isRightTriggerDown.current = true; });
+      rightController.removeEventListener('triggerup', () => { isRightTriggerDown.current = false; });
+      leftController.removeEventListener('triggerdown', () => { isLeftTriggerDown.current = true; });
+      leftController.removeEventListener('triggerup', () => { isLeftTriggerDown.current = false; });
+      leftController.removeEventListener('xbuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(true); });
+      leftController.removeEventListener('ybuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(false); });
+      // stopAllSounds();
     };
   }, [nextScene, prevScene]);
 
@@ -93,7 +126,7 @@ export default function LecturePlayer(props) {
     <ReactPlayer
       ref={playerRef}
       url={`${process.env.GH_PAGES_PATH_PREFIX || ""}Lecture.mp3`}
-      playing={props.startSounds}
+      playing={props.startSounds && isLecturePlaying}
       onProgress={({ playedSeconds }) => {
         if (playedSeconds > timecodes[currentScene].end) {
           nextScene();

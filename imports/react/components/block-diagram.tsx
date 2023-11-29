@@ -2,9 +2,6 @@ import "../../aframe/components/edge-positioner";
 import "../../aframe/components/sound-sequence";
 import React, { useMemo } from 'react';
 import { Entity } from "aframe-react";
-import randomInteger from "random-int";
-
-import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 
 export default function BlockDiagram({ sceneContent }) {
 
@@ -26,14 +23,13 @@ export default function BlockDiagram({ sceneContent }) {
             autoplay: false,
             // loop: true,
             volume: 1,
-            refDistance: 0.6,
-            maxDistance: 200,
+            refDistance: 0.4,
+            maxDistance: 500,
             rolloffFactor: 3,
             on: "raycaster-intersected"
           }}
           geometry={el.geometry}
           position={el.position}
-          material={{ shader: "standard", color: getColorFromId(el.id) }}
         >
           <Entity
             sound={{
@@ -41,7 +37,7 @@ export default function BlockDiagram({ sceneContent }) {
               autoplay: false,
               // loop: true,
               volume: 1,
-              refDistance: el.refDistance || 0.2,
+              refDistance: 0.2,
               maxDistance: 60,
               rolloffFactor: 3,
             }}
@@ -61,10 +57,8 @@ export default function BlockDiagram({ sceneContent }) {
           //   rolloffFactor: 3,
           // }}
           geometry={{ primitive: "cylinder", radius: 0.005, segmentsHeight: 3, openEnded: true, height: 1 }}
-          material={{ shader: "standard", color: getColorFromId(el.id), }}
         >
           <Entity
-            // id={el.id}
             sound={{
               src: `${process.env.GH_PAGES_PATH_PREFIX || ""}sounds/edgecut.wav`,
               autoplay: false,
@@ -75,6 +69,9 @@ export default function BlockDiagram({ sceneContent }) {
               rolloffFactor: 3,
             }}
           // geometry={{ primitive: "sphere", radius: 0.1 }}
+          />
+          <Entity
+            geometry={{ primitive: "cone", radiusBottom: 0.04, radiusTop: 0.0001, height: 0.2 }}
           />
         </Entity>
       }

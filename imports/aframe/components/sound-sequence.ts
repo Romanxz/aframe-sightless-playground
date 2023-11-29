@@ -3,29 +3,38 @@ export { };
 
 AFRAME.registerComponent('sound-sequence', {
   schema: {
-    sounds: { type: 'array' },
+    sounds: { type: 'array', default: [] },
     edgeSoundSpeed: { type: "number" }
   },
 
   init: function () {
     this.leftController = document.getElementById("left");
     this.soundIndex = 0;
+    this.isTriggerDown = false;
     this.playSound = this.playSound.bind(this);
-    this.leftController.addEventListener("xbuttondown", this.startSequence.bind(this));
-    this.leftController.addEventListener("ybuttondown", this.stopSequence.bind(this));
+    this.leftController.addEventListener("xbuttondown", this.xButtonDown.bind(this));
+    this.leftController.addEventListener("ybuttondown", this.yButtonDown.bind(this));
+    this.leftController.addEventListener("triggerdown", this.triggerDown.bind(this));
+    this.leftController.addEventListener("triggerup", this.triggerUp.bind(this));
     console.log("[sound-sequence] initialized")
   },
 
-  update: function() {
-    console.log("[sound-sequence] updated")
+  triggerDown: function () {
+    this.isTriggerDown = true;
   },
 
-  remove: function() {
+  triggerUp: function () {
+    this.isTriggerDown = false;
+  },
+
+  xButtonDown: function () {
+    if (!this.isTriggerDown) return;
+    this.startSequence();
+  },
+
+  yButtonDown: function () {
+    if (!this.isTriggerDown) return;
     this.stopSequence();
-    this.leftController.removeEventListener("xbuttondown", this.startSequence.bind(this));
-    this.leftController.removeEventListener("ybuttondown", this.stopSequence.bind(this));
-    this.data.sounds = [];
-    console.log("[sound-sequence] removed")
   },
 
   playSound: function () {
@@ -76,14 +85,34 @@ AFRAME.registerComponent('sound-sequence', {
 
   // Stop the current sound and end the sequence
   stopSequence: function () {
-    for (let i = 0; i < this.data.sounds.length; i++) {
-      const currentObj = this.data.sounds[i];
+    for (const currentObj of this.data.sounds) {
       const soundEl = document.getElementById(`${currentObj.id}`)?.children?.[0];
+      console.log("[sound-sequence] soundEl:", soundEl)
       if (soundEl && soundEl.components.sound) {
         soundEl.components.sound.stopSound();
         soundEl.removeEventListener("sound-ended", this.endListener);
       }
-    }
+    };
     this.soundIndex = 0;
+  },
+
+  update: function () {
+    console.log("[sound-sequence] updated")
+  },
+
+  remove: function () {
+    const allSounds = document.querySelectorAll('a-entity[sound]');
+    console.log("[sound-sequence] allSounds:", allSounds)
+    for (const soundEl of allSounds) {
+      if (soundEl && soundEl.components.sound) {
+        soundEl.components.sound.stopSound();
+        soundEl.removeEventListener("sound-ended", this.endListener);
+      }
+    };
+    this.soundIndex = 0;
+    this.data.sounds = [];
+    this.leftController.removeEventListener("xbuttondown", this.startSequence.bind(this));
+    this.leftController.removeEventListener("ybuttondown", this.stopSequence.bind(this));
+    console.log("[sound-sequence] removed")
   }
 });

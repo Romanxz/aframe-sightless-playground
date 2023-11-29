@@ -32,8 +32,8 @@ import Scene17 from "../aframe/lecture-scenes/scene17";
 import Scene18 from "../aframe/lecture-scenes/scene18";
 import Scene19 from "../aframe/lecture-scenes/scene19";
 import Scene20 from "../aframe/lecture-scenes/scene20";
-import Scene21 from "../aframe/lecture-scenes/scene20";
-import Scene22 from "../aframe/lecture-scenes/scene20";
+import Scene21 from "../aframe/lecture-scenes/scene21";
+import Scene22 from "../aframe/lecture-scenes/scene22";
 
 
 

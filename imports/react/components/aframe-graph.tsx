@@ -124,11 +124,11 @@ return (<div style={{ height: "100wv", width: "100wh", }}>
           events={{ loaded: () => { initializeNodeHover(node); } }}
           sound={{ src: "/node.mp3", on: "raycaster-intersected", volume: 0.4 }}
           geometry={{ primitive: "sphere", radius: 0.2, segmentsWidth: 16, segmentsHeight: 9 }}
-          material={{
-            shader: "standard",
-            color: getColorFromId(node.type_id),
-            // opacity: 0.3,
-          }}
+          // material={{
+          //   shader: "standard",
+          //   color: getColorFromId(node.type_id),
+          //   // opacity: 0.3,
+          // }}
           node-sound={{
             id: node.type_id,
             wave: ['sine', 'square', 'sawtooth', 'triangle'][node.type_id % 4],
@@ -195,10 +195,10 @@ return (<div style={{ height: "100wv", width: "100wh", }}>
           id={edge.id}
           key={md5(edge.id)}
           geometry={{ primitive: "cylinder", radius: 0.005, segmentsHeight: 3, openEnded: true, height: 1 }}
-          material={{
-            shader: "standard",
-            color: getColorFromId(edge.type),
-          }}
+          // material={{
+          //   shader: "standard",
+          //   color: getColorFromId(edge.type),
+          // }}
         />
       )}
     </Entity>
