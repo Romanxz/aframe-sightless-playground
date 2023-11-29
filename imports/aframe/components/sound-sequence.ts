@@ -96,9 +96,9 @@ AFRAME.registerComponent('sound-sequence', {
     this.soundIndex = 0;
   },
 
-  update: function () {
-    console.log("[sound-sequence] updated")
-  },
+  // update: function () {
+  //   console.log("[sound-sequence] updated")
+  // },
 
   remove: function () {
     const allSounds = document.querySelectorAll('a-entity[sound]');
@@ -111,8 +111,10 @@ AFRAME.registerComponent('sound-sequence', {
     };
     this.soundIndex = 0;
     this.data.sounds = [];
-    this.leftController.removeEventListener("xbuttondown", this.startSequence.bind(this));
-    this.leftController.removeEventListener("ybuttondown", this.stopSequence.bind(this));
+    this.leftController.removeEventListener("xbuttondown", this.xButtonDown.bind(this));
+    this.leftController.removeEventListener("ybuttondown", this.yButtonDown.bind(this));
+    this.leftController.removeEventListener("triggerdown", this.triggerDown.bind(this));
+    this.leftController.removeEventListener("triggerup", this.triggerUp.bind(this));
     console.log("[sound-sequence] removed")
   }
 });

@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Box, Button } from '@chakra-ui/react';
-import { Entity, Scene } from "aframe-react";
 import ReactPlayer from 'react-player';
 
 export default function LecturePlayer(props) {
@@ -54,7 +52,7 @@ export default function LecturePlayer(props) {
   const stopAllSounds = () => {
     const allSoundsNodeList = document.querySelectorAll('a-entity[sound]');
     const allSounds = [...allSoundsNodeList];
-    console.log("[sound-sequence] allSounds:", allSounds)
+    console.log("[useEffect] allSounds:", allSounds)
     for (const soundEl of allSounds) {
       // @ts-ignore
       if (soundEl && soundEl.components.sound) {
@@ -82,6 +80,9 @@ export default function LecturePlayer(props) {
     const leftController = document.getElementById('left');
     const rightController = document.getElementById('right');
     if (!rightController || !leftController) return;
+    // @ts-ignore
+    rightController.components['drag'].play();
+    
     rightController.addEventListener('triggerdown', () => { isRightTriggerDown.current = true; });
     rightController.addEventListener('triggerup', () => { isRightTriggerDown.current = false; });
     leftController.addEventListener('triggerdown', () => { isLeftTriggerDown.current = true; });
@@ -118,7 +119,7 @@ export default function LecturePlayer(props) {
       leftController.removeEventListener('triggerup', () => { isLeftTriggerDown.current = false; });
       leftController.removeEventListener('xbuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(true); });
       leftController.removeEventListener('ybuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(false); });
-      // stopAllSounds();
+      stopAllSounds();
     };
   }, [nextScene, prevScene]);
 
@@ -129,6 +130,7 @@ export default function LecturePlayer(props) {
       playing={props.startSounds && isLecturePlaying}
       onProgress={({ playedSeconds }) => {
         if (playedSeconds > timecodes[currentScene].end) {
+          pauseDragAction();
           nextScene();
         }
       }}

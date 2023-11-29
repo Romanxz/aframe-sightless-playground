@@ -72,13 +72,9 @@ AFRAME.registerComponent('drag', {
       this.distanceToTarget = 0.3;
     };
   },
-
-  play: function () {
-    // this.isDrag = true
-  },
   
   pause: function () {
-    // this.isDrag = false
+    this.isDrag = false
   },
 
   tick: function () {
