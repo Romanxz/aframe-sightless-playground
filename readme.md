@@ -10,29 +10,32 @@ Welcome to **A-Frame 3D WebXR Sightless Playground**, an immersive environment w
 
 ## Environment
 
-Current setup includes a virtual arena with three geometric elements: a sphere, a cylinder, and a box. Each of these elements has original pulse-like spatial sound, can be interactively created, manipulated, and placed anywhere within the environment.
+Current setup includes a virtual area with various scenes. Each scene consists of block-diagrams created with geometry primitives such as sphere, box and cylinder, sometimes connected with directional edges. 
 
-### Creating New Elements
+## Using lecture player
 
-- To create new elements, press the `A` button on your Oculus Touch's right controller. 
+- Click "Run" button at the center of the screen to start the lecture. 
+- Click AR/VR button at the right bottom corner of the screen to start webVR experience.
 
-- A semi-transparent sphere will appear bound to the position of the controller. 
+While the lecture is playing, scenes will change automatically related to certain timecodes. 
+You can cycle through scenes in a carousel-like manner by turning your right thumbstick left or right. 
+When scene is switched, lecture audio will also jump to the related timecode.
 
-- In that state, you can cycle between the sphere, cylinder, and box geometries. This can be done by moving your right thumbstick left/right on the x-axis. 
+There is 3 audio layers in each scene. Toggle "Run" button at the center of the screen to start the lecture.
 
-- As you do this, the transparent geometry in front of the controller will change. 
+- First - part of the lecture, related to the current scene and handled by simple audio player with no spatialness. Use left controller's Y button to pause the lecture, X button to resume.
+- Second - spatial ping sounds representing the location of each object in the block-diagram. Play/pause controls are the same but with left trigger modifier. LT + Y to pause, LT + X to resume.
+- Third - each geometry node has its uniqie vioceover which describes the meaning of the node. This voiceover plays as spatial audio when its geometry node is targeted by controller's raycaster.
 
-- Confirm your desired geometry type by pressing the `B` button on the right controller. 
-
-- The geometry will then become solid and stay at the position where it was when the B button was pressed.
-
-## Scene Navigation and Manipulation
+## Space Navigation and Manipulation
 
 - You can interact with the virtual environment using the controller. 
 
 - If you press down the left grip button, you can drag the entire scene relative to the left controller's position changes. 
 
 - Once you release the grip, the scene will stay at the last known position.
+
+Finally, you can navigate the virtual environment in a typical fashion using the left thumbstick. Move it in any direction to smoothly traverse through the scene.
 
 ## Object Interaction
 
@@ -55,9 +58,5 @@ Haptic Feedback provides physical sensations to communicate information to the u
 - During the process of geometry selection.
 - While interacting with objects in the scene (dragging, rotating, etc).
 - When snapping an object to a closer distance.
-
-## Navigation
-
-Finally, you can navigate the virtual environment in a typical fashion using the left thumbstick. Move it in any direction to smoothly traverse through the scene.
 
 We hope that you enjoy interacting with our **A-Frame 3D WebXR Playground** and look forward to any feedback or suggestions. Happy virtual exploring!
