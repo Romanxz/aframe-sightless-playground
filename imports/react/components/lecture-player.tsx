@@ -119,7 +119,7 @@ export default function LecturePlayer(props) {
       leftController.removeEventListener('triggerup', () => { isLeftTriggerDown.current = false; });
       leftController.removeEventListener('xbuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(true); });
       leftController.removeEventListener('ybuttondown', () => { if (isLeftTriggerDown.current) return; setLecturePlayback(false); });
-      stopAllSounds();
+      // stopAllSounds();
     };
   }, [nextScene, prevScene]);
 
