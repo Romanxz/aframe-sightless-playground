@@ -23,7 +23,7 @@ export default function BlockDiagram({ sceneContent }) {
             autoplay: false,
             // loop: true,
             volume: 1,
-            refDistance: 1,
+            refDistance: 0.8,
             maxDistance: 500,
             rolloffFactor: 3,
             on: "raycaster-intersected"

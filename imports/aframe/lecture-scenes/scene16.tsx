@@ -7,7 +7,7 @@ const sceneContent = [
     id: 1,
     type: "node",
     sound: "sounds/sphere",
-    voiceover: "scene6/reliability",
+    voiceover: "scene13/storage",
     geometry: { primitive: "cylinder", radius: 0.2, height: 0.4},
     position: { x: -1, y: 1.2, z: -2 }
   },
@@ -22,7 +22,7 @@ const sceneContent = [
     id: 3,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene14/computer",
+    voiceover: "scene13/computer",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 1, y: 1.8, z: -2 }
   },
@@ -37,7 +37,7 @@ const sceneContent = [
     id: 5,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene14/smartphone",
+    voiceover: "scene13/smartphone",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 1, y: 1.2, z: -2 }
   },
@@ -52,7 +52,7 @@ const sceneContent = [
     id: 7,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene14/notebook",
+    voiceover: "scene13/notebook",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 1, y: 0.6, z: -2 }
   }

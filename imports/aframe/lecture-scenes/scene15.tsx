@@ -22,7 +22,7 @@ const sceneContent = [
     id: 3,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene6/algorithm",
+    voiceover: "scene15/algorithm",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: -0.8, y: 1.2, z: -1.4 }
   },
@@ -37,7 +37,7 @@ const sceneContent = [
     id: 5,
     type: "node",
     sound: "sounds/box",
-    voiceover: "scene6/rating",
+    voiceover: "scene15/rating",
     geometry: { primitive: "box", height: 0.3, width: 0.3, depth: 0.3 },
     position: { x: 0.8, y: 1.2, z: -1.4 }
   },
