@@ -10,7 +10,7 @@ module.exports = withNextEnv({
   reactStrictMode: false,
   basePath: process.env.GH_PAGES_PATH_PREFIX || undefined,
   assetPrefix: process.env.GH_PAGES_PATH_PREFIX || undefined,
-  
+
   webpack: (config) => {
     config.resolve.fallback = {
       "buffer": require.resolve('buffer/'),
@@ -26,6 +26,12 @@ module.exports = withNextEnv({
       "stream": false,
       "crypto": false,
     };
+
+    // Add the new rule to the configuration
+    config.module.rules.push({
+      test: /\.glsl$/,
+      loader: 'webpack-glsl-loader'
+    });
 
     return config;
   },

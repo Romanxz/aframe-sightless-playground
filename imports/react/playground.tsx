@@ -1,13 +1,14 @@
 import "aframe";
 import "aframe-environment-component";
 import "../aframe/components/scene-dragger";
+import "../aframe/components/megashader";
 // import "../../aframe/components/sound-playback";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
 import ReactPlayer from 'react-player';
 
-import BoxGeometry from "./components/box";
+import MorphingSphere from "./components/morphing-sphere";
 import SpatialAudioTestRig from "./components/spatial-audio-test-rig";
 import CameraRig from "./components/camera-rig";
 import LecturePlayer from "./components/lecture-player";
@@ -53,6 +54,7 @@ export default function Playground() {
   useEffect(() => {
     if (startSounds) {
       const sceneContent = document.getElementById("content");
+      if (!sceneContent) return;
       // @ts-ignore
       sceneContent.components["sound-sequence"].stopSequence();
       // @ts-ignore
@@ -99,11 +101,12 @@ export default function Playground() {
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
-          // colorManagement: true,
+          colorManagement: true,
           foveationLevel: 0,
           highRefreshRate: true
         }}
       >
+        {/* <MorphingSphere /> */}
         <LecturePlayer startSounds={startSounds}>
           <Scene1 />
           <Scene2 />

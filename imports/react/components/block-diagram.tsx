@@ -3,6 +3,7 @@ import "../../aframe/components/sound-sequence";
 import React, { useMemo } from 'react';
 import { Entity } from "aframe-react";
 
+
 export default function BlockDiagram({ sceneContent }) {
 
   return <Entity id="content"
