@@ -5,6 +5,9 @@ import { v4 as uuid } from 'uuid';
 // graph parcing algorhytm
 
 AFRAME.registerComponent("geometry-connector", {
+  schema: {
+    edges: { type: "object", default: {} }
+  },
   init: function () {
     this.sceneContent = document.getElementById("content");
     this.distanceToTarget = 0.3 // Distance between the controller and the sphere entity
@@ -40,8 +43,8 @@ AFRAME.registerComponent("geometry-connector", {
   },
 
   onRaycasterIntersectionCleared: function (event) {
-      this.intersectedObject = null; // Clear the intersected object
-      console.log("raycaster-intersection-cleared: ", event);
+    this.intersectedObject = null; // Clear the intersected object
+    console.log("raycaster-intersection-cleared: ", event);
   },
 
   onThumbStickDown: function (event) {

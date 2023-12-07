@@ -12,28 +12,28 @@ export default function LecturePlayer(props) {
   const playerRef = useRef(null);
 
   const timecodes = [
-    { start: 0, end: 10 },
-    { start: 11, end: 21 },
-    { start: 22, end: 30 },
-    { start: 31, end: 38 },
-    { start: 39, end: 46 },
-    { start: 47, end: 61 },
-    { start: 62, end: 70 },
-    { start: 71, end: 93 },
-    { start: 94, end: 115 },
-    { start: 116, end: 155 },
-    { start: 156, end: 227 },
-    { start: 228, end: 257 },
-    { start: 258, end: 281 },
-    { start: 282, end: 294 },
-    { start: 295, end: 318 },
-    { start: 319, end: 337 },
-    { start: 338, end: 389 },
-    { start: 390, end: 425 },
-    { start: 426, end: 434 },
-    { start: 435, end: 464 },
-    { start: 465, end: 480 },
-    { start: 481, end: 529 }
+    { start: 0, end: 10 }, // 1
+    { start: 11, end: 21.930 }, // 2
+    { start: 22.1, end: 32.1 }, // 3
+    { start: 32.2, end: 38.9 }, // 4
+    { start: 39, end: 46 }, // 5
+    { start: 47, end: 61 }, // 6
+    { start: 62, end: 70 }, // 7
+    { start: 71, end: 93 }, // 8
+    { start: 94, end: 115 }, // 9
+    { start: 116, end: 155 }, // 10
+    { start: 156, end: 227 }, // 11
+    { start: 228, end: 257 }, // 12
+    { start: 258, end: 281 }, // 13
+    { start: 282, end: 294 }, // 14
+    { start: 295, end: 318 }, // 15
+    { start: 319, end: 337 }, // 16
+    { start: 338, end: 389 }, // 17
+    { start: 390, end: 425 }, // 18
+    { start: 426, end: 434 }, // 19
+    { start: 435, end: 464 }, // 20
+    { start: 465, end: 480 }, // 21
+    { start: 481, end: 529 } // 22
   ];  // The new timecodes array in seconds
 
   // method to change player progress
