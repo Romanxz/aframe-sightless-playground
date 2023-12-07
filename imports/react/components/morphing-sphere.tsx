@@ -4,11 +4,9 @@ import "../../aframe/components/megashader";
 
 import { getColorFromId } from "../../aframe/methods/get-color-from-id";
 
-export default function MorphingSphere({children, id, sound, position, ...props}) {
+export default function MorphingSphere(props) {
   return (<Entity
-    id={id}
-    sound={sound}
-    position={position}
+    props={...props}
     className="draggable"
     events={{
       // loaded: () => {
@@ -25,10 +23,11 @@ export default function MorphingSphere({children, id, sound, position, ...props}
       //   });
       // }
     }}
-    geometry={{ primitive: "icosahedron", radius: 0.2, detail: 300 }}
+    position={{ x: 0, y: 1.5, z: -2 }}
+    geometry={{ primitive: "icosahedron", radius: 0.6, detail: 300 }}
     megashader={{ color: "#6432a8" }}
   >
-    {children}
+    {props.children}
   </Entity>
   )
 }
