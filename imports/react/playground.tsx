@@ -6,7 +6,6 @@ import "../aframe/components/megashader";
 import React, { useEffect, useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Entity, Scene } from "aframe-react";
-import ReactPlayer from 'react-player';
 
 import MorphingSphere from "./components/morphing-sphere";
 import SpatialAudioTestRig from "./components/spatial-audio-test-rig";
@@ -35,8 +34,6 @@ import Scene19 from "../aframe/lecture-scenes/scene19";
 import Scene20 from "../aframe/lecture-scenes/scene20";
 import Scene21 from "../aframe/lecture-scenes/scene21";
 import Scene22 from "../aframe/lecture-scenes/scene22";
-
-
 
 
 
@@ -101,7 +98,7 @@ export default function Playground() {
         scene-dragger
         renderer={{
           logarithmicDepthBuffer: true,
-          colorManagement: true,
+          // colorManagement: true,
           foveationLevel: 0,
           highRefreshRate: true
         }}

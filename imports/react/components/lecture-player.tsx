@@ -11,12 +11,12 @@ export default function LecturePlayer(props) {
   const isThumbstickReleased = useRef(true);
   const playerRef = useRef(null);
 
-  const timecodes = [
+  const old_timecodes = [
     { start: 0, end: 10 }, // 1
-    { start: 11, end: 21.930 }, // 2
+    { start: 11, end: 21.999 }, // 2
     { start: 22.1, end: 32.1 }, // 3
     { start: 32.2, end: 38.9 }, // 4
-    { start: 39, end: 46 }, // 5
+    { start: 39, end: 46 }, // 5 
     { start: 47, end: 61 }, // 6
     { start: 62, end: 70 }, // 7
     { start: 71, end: 93 }, // 8
@@ -35,6 +35,31 @@ export default function LecturePlayer(props) {
     { start: 465, end: 480 }, // 21
     { start: 481, end: 529 } // 22
   ];  // The new timecodes array in seconds
+  
+  const timecodes = [
+    { start: 0, end: 10 }, // 1
+    { start: 11, end: 22 }, // 2
+    { start: 23, end: 30 }, // 3
+    { start: 31, end: 41 }, // 4
+    { start: 42, end: 49 }, // 5
+    { start: 50, end: 65 }, // 6
+    { start: 66, end: 75 }, // 7
+    { start: 76, end: 99 }, // 8
+    { start: 100, end: 122 }, // 9
+    { start: 123, end: 162 }, // 10
+    { start: 163, end: 236 }, // 11
+    { start: 237, end: 266 }, // 12
+    { start: 267, end: 284 }, // 13
+    { start: 285, end: 305 }, // 14
+    { start: 306, end: 330 }, // 15
+    { start: 331, end: 350 }, // 16
+    { start: 351, end: 403 }, // 17
+    { start: 404, end: 440 }, // 18
+    { start: 441, end: 450 }, // 19
+    { start: 451, end: 480 }, // 20
+    { start: 481, end: 498 }, // 21
+    { start: 499, end: 544 } // 22
+  ];  // The new timecodes array in seconds
 
   // method to change player progress
   const changePlayerProgress = (i) => {
@@ -52,7 +77,7 @@ export default function LecturePlayer(props) {
   const stopAllSounds = () => {
     const allSoundsNodeList = document.querySelectorAll('a-entity[sound]');
     const allSounds = [...allSoundsNodeList];
-    console.log("[useEffect] allSounds:", allSounds)
+    // console.log("[useEffect] stopAllSounds:", allSounds)
     for (const soundEl of allSounds) {
       // @ts-ignore
       if (soundEl && soundEl.components.sound) {
@@ -64,6 +89,7 @@ export default function LecturePlayer(props) {
 
   const nextScene = () => {
     const next = (currentScene + 1) % scenes.length;
+    stopAllSounds();
     pauseDragAction();
     setCurrentScene(next);
     changePlayerProgress(next);
@@ -71,6 +97,7 @@ export default function LecturePlayer(props) {
 
   const prevScene = () => {
     const prev = (currentScene - 1 + scenes.length) % scenes.length;
+    stopAllSounds();
     pauseDragAction();
     setCurrentScene(prev);
     changePlayerProgress(prev);
@@ -126,7 +153,7 @@ export default function LecturePlayer(props) {
   return (<>
     <ReactPlayer
       ref={playerRef}
-      url={`${process.env.GH_PAGES_PATH_PREFIX || ""}Lecture.mp3`}
+      url={`${process.env.GH_PAGES_PATH_PREFIX || ""}sightless-lecture.mp3`}
       playing={props.startSounds && isLecturePlaying}
       onProgress={({ playedSeconds }) => {
         if (playedSeconds > timecodes[currentScene].end) {
