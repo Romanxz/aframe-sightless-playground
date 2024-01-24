@@ -27,15 +27,17 @@ export default function BlockDiagram({ sceneContent }) {
             refDistance: 0.8,
             maxDistance: 500,
             rolloffFactor: 3,
-            on: "raycaster-intersected"
+            // on: "raycaster-intersected"
           }}
           events={{
             'raycaster-intersected': () => {
-              const soundEls = document.getElementsByClassName("draggable");
-              console.log(soundEls)
-              for (const soundEl in soundEls) {
+              const voiceoverEls = document.getElementsByClassName("draggable");
+              for (const voiceoverEl of voiceoverEls) {
                 // @ts-ignore
-                soundEl.components.sound.stopSound();
+                if (parseInt(voiceoverEl.id) === el.id) { voiceoverEl.components.sound.playSound(); } else {
+                  // @ts-ignore
+                  voiceoverEl.components.sound.stopSound();
+                }
               }
             }
           }}
