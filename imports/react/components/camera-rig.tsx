@@ -28,6 +28,7 @@ export default function CameraRig(props) {
         {props.children}
       </Entity>
       <Entity id="left"
+        drag={{ enabled: false }}
         hand-tracking-controls={{ hand: 'left' }}
         oculus-touch-controls={{ hand: 'left' }}
         haptics={{ enabled: true }}
@@ -41,7 +42,7 @@ export default function CameraRig(props) {
         }}
       />
       <Entity id="right"
-        drag
+        drag={{ enabled: true }}
         geometry-connector
         geometry-generator
         hand-tracking-controls={{ hand: 'right' }}

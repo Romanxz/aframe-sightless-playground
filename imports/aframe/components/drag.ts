@@ -2,6 +2,9 @@
 export { };
 
 AFRAME.registerComponent('drag', {
+  schema: {
+    enabled: { type: "boolean", default: true }
+  },
   init: function () {
     this.sceneContent = document.getElementById("content");
     console.log(this.sceneContent)
@@ -72,13 +75,13 @@ AFRAME.registerComponent('drag', {
       this.distanceToTarget = 0.3;
     };
   },
-  
+
   pause: function () {
     this.isDrag = false
   },
 
   tick: function () {
-    if (this.intersectedObject !== null && this.isDrag) {
+    if (this.intersectedObject !== null && this.isDrag && this.data.enabled) {
       // Get the position and rotation of the controller
       const controllerPosition = this.el.object3D.getWorldPosition(new THREE.Vector3());
       const controllerRotation = this.el.object3D.getWorldQuaternion(new THREE.Quaternion());

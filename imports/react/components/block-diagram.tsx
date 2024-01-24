@@ -29,6 +29,16 @@ export default function BlockDiagram({ sceneContent }) {
             rolloffFactor: 3,
             on: "raycaster-intersected"
           }}
+          events={{
+            'raycaster-intersected': () => {
+              const soundEls = document.getElementsByClassName("draggable");
+              console.log(soundEls)
+              for (const soundEl in soundEls) {
+                // @ts-ignore
+                soundEl.components.sound.stopSound();
+              }
+            }
+          }}
           geometry={el.geometry}
           position={el.position}
         >

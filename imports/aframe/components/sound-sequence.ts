@@ -8,33 +8,19 @@ AFRAME.registerComponent('sound-sequence', {
   },
 
   init: function () {
+    this.isPlaying - false;
     this.leftController = document.getElementById("left");
     this.soundIndex = 0;
     this.isTriggerDown = false;
     this.playSound = this.playSound.bind(this);
-    this.leftController.addEventListener("xbuttondown", this.xButtonDown.bind(this));
     this.leftController.addEventListener("ybuttondown", this.yButtonDown.bind(this));
-    this.leftController.addEventListener("triggerdown", this.triggerDown.bind(this));
-    this.leftController.addEventListener("triggerup", this.triggerUp.bind(this));
     console.log("[sound-sequence] initialized")
   },
 
-  triggerDown: function () {
-    this.isTriggerDown = true;
-  },
-
-  triggerUp: function () {
-    this.isTriggerDown = false;
-  },
-
-  xButtonDown: function () {
-    if (!this.isTriggerDown) return;
-    this.startSequence();
-  },
-
   yButtonDown: function () {
-    if (!this.isTriggerDown) return;
-    this.stopSequence();
+    if (this.isPlaying) {
+      this.stopSequence();
+    } else this.startSequence();
   },
 
   playSound: function () {
@@ -81,6 +67,7 @@ AFRAME.registerComponent('sound-sequence', {
   // Start the sound sequence
   startSequence: function () {
     this.playSound();
+    this.isPlaying = true;
   },
 
   // Stop the current sound and end the sequence
@@ -93,6 +80,7 @@ AFRAME.registerComponent('sound-sequence', {
         soundEl.removeEventListener("sound-ended", this.endListener);
       }
     };
+    this.isPlaying = false;
     this.soundIndex = 0;
   },
 
@@ -111,10 +99,7 @@ AFRAME.registerComponent('sound-sequence', {
     };
     this.soundIndex = 0;
     this.data.sounds = [];
-    this.leftController.removeEventListener("xbuttondown", this.xButtonDown.bind(this));
     this.leftController.removeEventListener("ybuttondown", this.yButtonDown.bind(this));
-    this.leftController.removeEventListener("triggerdown", this.triggerDown.bind(this));
-    this.leftController.removeEventListener("triggerup", this.triggerUp.bind(this));
     console.log("[sound-sequence] removed")
   }
 });
